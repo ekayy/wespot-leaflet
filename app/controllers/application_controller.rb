@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  # Devise sessions: redirect to specific page after sign in
+  def after_sign_in_path_for(resource)
+	 	admin_path
+	end
 end
