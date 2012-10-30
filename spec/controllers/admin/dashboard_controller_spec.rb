@@ -5,20 +5,16 @@ describe Admin::DashboardController do
   describe 'user access' do
 
   	describe "GET 'index" do
+
+      before (:each) do
+        @user = FactoryGirl.create(:user)
+        sign_in @user
+      end
+
   		it "returns http success" do
-  			user = User.create(
-  				email: 'admin@example.com',
-  				password: 'secret',
-  				password_confirmation: 'secret'
-  			)
-  			visit root_path
-		    click_link 'Login'
-		    fill_in 'Email', with: 'admin@example.com'
-		    fill_in 'Password', with: 'secret'
-		    click_button 'Sign in'
 
   			get 'index'
-  			response.should == 1
+  			response.should be_success
   		end
   	end
   end

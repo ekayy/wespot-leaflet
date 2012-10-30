@@ -1,10 +1,10 @@
 module LoginMacros
 
-    def sign_in(user)
-      visit root_path
-      click_link 'Login'
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-      click_button 'Sign in'
-    end
+  def sign_in(user)
+    post_via_redirect user_session_path, 'user[email]' => user.email, 'user[password]' => user.password
   end
+end
+
+RSpec.configure do |config|
+  config.include LoginMacros, :type => :request
+end

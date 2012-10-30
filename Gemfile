@@ -16,10 +16,10 @@ group :assets do
 end
 
 group :test do
-  gem 'capybara', '1.1.2'
-  gem 'factory_girl_rails', '4.1.0'
-  gem 'rb-inotify', '0.8.8'
-  gem 'libnotify', '0.5.9'
+  gem 'capybara', ">= 1.1.2"
+  gem 'factory_girl_rails', ">= 4.1.0"
+  gem 'rb-inotify', ">= 0.8.8"
+  gem 'libnotify', ">= 0.5.9"
   gem "email_spec", ">= 1.2.1"
   gem "cucumber-rails", ">= 1.3.0", :require => false
   gem "database_cleaner", ">= 0.8.0"
@@ -27,10 +27,10 @@ group :test do
 end
 group :development, :test do
   # gem 'sqlite3'
-  gem 'rspec-rails', '2.11.0'
-  gem 'guard-rspec', '0.5.5'
-  gem 'guard-spork', '0.3.2'
-  gem 'spork', '0.9.0'
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'spork'
 end
 
 gem "quiet_assets", ">= 1.0.1", :group => :development

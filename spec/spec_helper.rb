@@ -12,7 +12,7 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
-  require 'email_spec'
+  # require 'email_spec'
   require 'rspec/autorun'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
@@ -29,6 +29,12 @@ Spork.prefork do
     # config.mock_with :mocha
     # config.mock_with :flexmock
     # config.mock_with :rr
+
+    config.include Devise::TestHelpers, :type => :controller
+    config.include LoginMacros, :type => :request
+    config.include ControllerMacros, :type => :controller
+
+
     config.mock_with :rspec
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -50,15 +56,15 @@ Spork.prefork do
     #     --seed 1234
     config.order = "random"
     
-  #   config.before(:suite) do
-  #     DatabaseCleaner.strategy = :truncation
-  #   end
-  #   config.before(:each) do
-  #     DatabaseCleaner.start
-  #   end
-  #   config.after(:each) do
-  #     DatabaseCleaner.clean
-  #   end
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
   end
 end
 
