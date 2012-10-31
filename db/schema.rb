@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031105724) do
+ActiveRecord::Schema.define(:version => 20121031112034) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20121031105724) do
     t.string   "phone"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "coverphoto"
   end
 
   create_table "roles", :force => true do |t|

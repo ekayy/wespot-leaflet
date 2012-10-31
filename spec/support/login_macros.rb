@@ -5,6 +5,3 @@ module LoginMacros
   end
 end
 
-RSpec.configure do |config|
-  config.include LoginMacros, :type => :request
-end

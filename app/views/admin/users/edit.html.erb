@@ -4,22 +4,25 @@
 
 <% @user.place ||= Place.new %>
 
-<%= simple_form_for([:admin,@user]) do |f| %>
+<%= simple_form_for([:admin,@user], :html => {:multipart => true}) do |f| %>
     <%= f.error_notification %>
 
     <%= f.input :name, :autofocus => true, :label => 'Username' %> 
     <%= f.input :email, :required => true %>
     <%= f.input :password %>
 
-    <%= f.simple_fields_for :place do |place_form| %>
+    <%= f.simple_fields_for :place do |p| %>
 
-      <%= place_form.input :business_name %>
-      <%= place_form.input :street, :label => 'Address' %>
-      <%= place_form.input :city %>
-      <%= place_form.input :state %>
-      <%= place_form.input :zip %>
+    <p><%= p.label "Cover Photo" %>
+      <%= p.file_field :coverphoto %></p>
 
-      <%= place_form.input :tag_list, :label => "Tags (separated by commas)" %>
+      <%= p.input :business_name %>
+      <%= p.input :street, :label => 'Address' %>
+      <%= p.input :city %>
+      <%= p.input :state %>
+      <%= p.input :zip %>
+
+      <%= p.input :tag_list, :label => "Tags (separated by commas)" %>
     <% end %>
 
     <%= f.button :submit, 'Update', :class => 'btn-primary' %>

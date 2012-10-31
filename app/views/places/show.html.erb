@@ -1,4 +1,7 @@
+<% provide(:title, @place.business_name) %>
+
 <h1><%= @place.business_name %></h1>
 
+<body style="<%= show_user_bg %>">
 
 <p><%= link_to "Comments", place_comments_path(@place) %></p>

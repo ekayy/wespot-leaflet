@@ -9,6 +9,11 @@ gem "rolify", ">= 3.2.0"
 gem "simple_form", ">= 2.0.3"
 gem 'pg'
 gem 'acts-as-taggable-on', '~> 2.3.1'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+# gem 'carrierwave_direct'
+# gem 'sidekiq'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
