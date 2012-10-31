@@ -1,0 +1,12 @@
+<h2><%= @place.business_name %></h2>
+
+<%= simple_format @comment.content %>
+
+<p><%= link_to "Back to Place", places_path %></p>
+
+<h2>Comments</h2>
+
+<%= render "comments" %>
+<%= render "form" %>
+
+<p><%= link_to "New Comment", [:new, @commentable, :comment] %></p>

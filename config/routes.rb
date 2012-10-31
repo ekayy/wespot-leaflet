@@ -1,4 +1,12 @@
 Wespot::Application.routes.draw do
+  get "places/index"
+
+  get "places/show"
+
+  get "comments/index"
+
+  get "comments/new"
+
   # authenticated :user do
   #   root :to => 'home#index'
   # end
@@ -11,5 +19,8 @@ Wespot::Application.routes.draw do
   	resources :users
 	end
 
-	
+	resources :places do
+		resources :comments
+	end
+
 end
