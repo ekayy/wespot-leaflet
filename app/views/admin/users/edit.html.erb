@@ -12,11 +12,14 @@
     <%= f.input :password %>
 
     <%= f.simple_fields_for :place do |place_form| %>
+
       <%= place_form.input :business_name %>
       <%= place_form.input :street, :label => 'Address' %>
       <%= place_form.input :city %>
       <%= place_form.input :state %>
       <%= place_form.input :zip %>
+
+      <%= place_form.input :tag_list, :label => "Tags (separated by commas)" %>
     <% end %>
 
     <%= f.button :submit, 'Update', :class => 'btn-primary' %>
