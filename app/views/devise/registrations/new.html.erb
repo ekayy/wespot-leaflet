@@ -1,12 +1,40 @@
 <% provide(:title, 'Sign up') %>
 
+<div class="register">
+
 <h2>Sign up</h2>
+
+<% resource.build_place %>
+
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
   <%= f.error_notification %>
-  <%= f.input :name, :autofocus => true %> 
+  <%= f.input :name, :autofocus => true, :label => 'Username' %> 
   <%= f.input :email, :required => true %>
   <%= f.input :password, :required => true %>
   <%= f.input :password_confirmation, :required => true %>
+
+
+  <%# f.fields_for :place do |place_form| %>
+    <%# place_form.label :business_name %>
+    <%# place_form.text_field :business_name %>
+
+    <%# place_form.label :address %>
+    <%# place_form.text_field :street %>
+
+    <%# place_form.label :city %>
+    <%# place_form.text_field :city %>
+
+    <%# place_form.label :state %>
+    <%# place_form.text_field :state %>
+
+    <%# place_form.label :zip %>
+    <%# place_form.text_field :zip %>
+
+  <%# end %>
+
+
+
   <%= f.button :submit, 'Sign up', :class => 'btn-primary' %>
 <% end %>
 <%= render "devise/shared/links" %>
+</div>

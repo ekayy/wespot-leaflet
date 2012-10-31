@@ -1,0 +1,35 @@
+ <div>
+
+ <h1>New user</h1>
+
+ <% @place.build %>
+
+  <%= simple_form_for([:admin,@user]) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= f.input :name, :autofocus => true, :label => 'Username' %> 
+    <%= f.input :email, :required => true %>
+    <%= f.input :password, :required => true %>
+    <%= f.input :password_confirmation, :required => true %>
+
+    <%= f.simple_fields_for :place do |place_form| %>
+      <%= place_form.input :business_name %>
+      <%= place_form.input :street, :label => 'Address' %>
+      <%= place_form.input :city %>
+      <%= place_form.input :state %>
+      <%= place_form.input :zip %>
+    <% end %>
+
+    <%= f.button :submit, 'Sign up', :class => 'btn-primary' %>
+  <% end %>
+</div>

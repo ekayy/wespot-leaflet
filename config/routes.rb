@@ -10,4 +10,6 @@ Wespot::Application.routes.draw do
   	get '', to: 'dashboard#index', as: '/'
   	resources :users
 	end
+
+	
 end

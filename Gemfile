@@ -30,7 +30,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'guard-spork'
-  gem 'spork'
+  gem 'spork', '~> 0.9.0.rc'
 end
 
 gem "quiet_assets", ">= 1.0.1", :group => :development
