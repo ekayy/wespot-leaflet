@@ -25,28 +25,28 @@ $color: #8c7e7e;
   float: left;
   padding: 5px;
   margin: 0 7px 15px;
-  font-size: 12px;
-  background: black;
+  font-size: 13px;
+  background: white;
   box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   line-height: 1.5;
   h2 {
     padding: 0;
-    font-size:12px;
+    font-size:13px;
     line-height: 20px;
   }
   .comments {
     color: $color;
-    padding-bottom: 15px;
+    padding: 5px 0 0 5px;
   }
   .chat {
-    background: #f2f0f0;
-    margin: 0 -15px;
+    background: white;
+    margin: 0 0px;
   }
   .chatbox {
     border-top: 1px solid white;
     border-bottom: 1px solid rgba(#000,.1);
     padding: 5px 5px;
-    padding-left:30px;
+    padding-left:10px;
     // @include pie-clearfix;
     &:last-child {
       border-bottom: none;
@@ -75,6 +75,7 @@ $color: #8c7e7e;
   text-align: center;
   h2 {
     color:white;
+    margin: 2px 0px;
   }
 }
 
@@ -83,3 +84,9 @@ $color: #8c7e7e;
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
+
+
+
+.center {
+	text-align: center;
+}

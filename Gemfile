@@ -14,6 +14,7 @@ gem 'mini_magick'
 gem 'fog'
 # gem 'carrierwave_direct'
 # gem 'sidekiq'
+gem 'gmaps4rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

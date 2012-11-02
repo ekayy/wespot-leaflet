@@ -7,7 +7,7 @@ class PlacesController < ApplicationController
     # else
     #   @places = Place.text_search(params[:query])
     # end
-
+    @json = Place.all.to_gmaps4rails
   end
 
   def show

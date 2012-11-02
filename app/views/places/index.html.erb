@@ -10,6 +10,12 @@
 	</div>
 </div>
 
+<%= gmaps4rails(@json) %>
+<%# gmaps("markers" => {"data" => @json}) %> 
+
+<% 
+=begin %>
+
 <% content_for :container do %>
 <div id="container" class="centered clearfix masonry">
 	<div id="masonry">
@@ -22,7 +28,9 @@
 				<h2><%= place.business_name %></h2>
 			</div>
 		</div>
-
+			<div class="comments">
+				<%= link_to pluralize(place.comments.count, "Comments"), place_comments_path(place) %>
+			</div>
 			<div class="chat">
 			<% place.comments.each do |comment| %>
 				<div class="chatbox">
@@ -37,4 +45,6 @@
 	</div>
 </div>
 <% end %>
-<%# gmaps("markers" => {"data" => @json}) %> 
+
+<%
+=end %>
