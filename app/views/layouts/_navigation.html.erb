@@ -5,10 +5,10 @@
         <ul class="nav pull-left">
           <% if user_signed_in? %>
           <li><%= link_to "WeSpot", root_path %></li>
-          <li><%= link_to "Search", '#' %></li>
+          <li><%= link_to "Search", places_path %></li>
           <% else %>
           <li><%= link_to "WeSpot", root_path %></li>
-          <li><%= link_to "Search", '#' %></li>
+          <li><%= link_to "Search", places_path %></li>
           <% end %>
         </ul>
 

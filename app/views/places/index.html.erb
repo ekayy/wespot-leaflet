@@ -1,2 +1,40 @@
-<h1>Places#index</h1>
-<p>Find me in app/views/places/index.html.erb</p>
+<%= provide(:title, 'Search') %>
+ 
+<div class="container">
+	<div class="center">
+	<%= form_tag places_path, :method => 'get', :class =>  "form-inline form-search" do %>
+		<%= text_field_tag :query, params[:query], :placeholder => "Search", :class => "search-query" %>
+		<%# text_field_tag :query_location, params[:query_location], :placeholder => "Location", :class => "search-query", :id => "addresspicker" %>
+		<%= submit_tag "Search", :name => nil, :class => "btn" %>
+	<% end %>
+	</div>
+</div>
+
+<% content_for :container do %>
+<div id="container" class="centered clearfix masonry">
+	<div id="masonry">
+	
+	<% @places.each do |place| %>
+		<div class="box">
+			<div class="image">
+			<%= link_to image_tag(place.coverphoto_url(:thumb).to_s), place_path(place) %>
+				<div class="moreInfo">
+				<h2><%= place.business_name %></h2>
+			</div>
+		</div>
+
+			<div class="chat">
+			<% place.comments.each do |comment| %>
+				<div class="chatbox">
+					<%= comment.content %>
+				</div>
+			<% end %>	
+			</div>
+
+		</div>
+	<% end %>
+
+	</div>
+</div>
+<% end %>
+<%# gmaps("markers" => {"data" => @json}) %> 

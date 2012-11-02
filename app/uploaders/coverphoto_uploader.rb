@@ -44,8 +44,13 @@ class CoverphotoUploader < CarrierWave::Uploader::Base
   #   process :scale => [50, 50]
   # end
 
-  # process :resize_to_limit => [-1,1050]
-  # process :convert => 'jpg'
+  process :resize_to_limit => [-1,1050]
+  process :convert => 'jpg'
+
+  version :thumb do
+    process :resize_to_fill => [300, 200]
+    process :convert => 'jpg'
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
