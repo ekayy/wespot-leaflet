@@ -10,10 +10,24 @@
 	</div>
 </div>
 
+<button> Map </button>
+
 
 <% content_for :container do %>
-<div id="container" class="centered clearfix masonry">
-	<div id="masonry">
+<div id="map_toggler" >
+<%= gmaps("map_options" => { "auto_zoom" => false, "zoom" => 17},"markers" => { "data" => @json }) %>
+</div>
+<% end %>
+
+
+
+
+
+
+<% content_for :container do %>
+<div id="container" class="centered infinte-scroll clearfix masonry">
+
+	<% paginate @places %>
 	
 	<% @places.each do |place| %>
 		<div class="box">
@@ -37,6 +51,12 @@
 		</div>
 	<% end %>
 
-	</div>
+	
 </div>
 <% end %>
+
+
+<% 
+=begin %>
+<%
+=end %>

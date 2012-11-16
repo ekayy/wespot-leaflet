@@ -9,14 +9,23 @@ class Place < ActiveRecord::Base
   acts_as_gmappable
   mount_uploader :coverphoto, CoverphotoUploader
 
+ 
+  # def self.text_search(query)
+  #   if query.present?
+  #     where("business_name @@ :q", q: query) | tagged_with(query)
+  #   else
+  #     scoped
+  #   end
+  # end
 
   def self.text_search(query)
     if query.present?
-      where("business_name @@ :q", q: query) | tagged_with(query) 
+      where("business_name @@ :q", q: query) | tagged_with(query)
     else
       scoped
     end
   end
+
   def gmaps4rails_address
     "#{self.street}, #{self.city}, #{self.state}, #{self.zip}"
   end

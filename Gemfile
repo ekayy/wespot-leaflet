@@ -15,6 +15,7 @@ gem 'fog'
 # gem 'carrierwave_direct'
 # gem 'sidekiq'
 gem 'gmaps4rails'
+gem 'kaminari'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

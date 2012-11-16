@@ -87,6 +87,7 @@ class @Gmaps4Rails
       @findUserLocation(this)
     #resets sidebar if needed
     @resetSidebarContent()
+    
 
   findUserLocation : (map_object) ->
     if (navigator.geolocation)
