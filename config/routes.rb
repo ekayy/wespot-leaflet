@@ -1,5 +1,4 @@
 Wespot::Application.routes.draw do
-
   # authenticated :user do
   #   root :to => 'home#index'
   # end
@@ -13,6 +12,7 @@ Wespot::Application.routes.draw do
 	end
 
 	resources :places do
+    member { post :vote }
 		resources :comments
 	end
 

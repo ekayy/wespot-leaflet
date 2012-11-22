@@ -27,6 +27,8 @@
             </ul>
           <% else %>
 
+            <li><%= link_to "Sign in with Instagram", 'https://api.instagram.com/oauth/authorize/?client_id=4b659559dbc04558b93d75e24b5cc231&redirect_uri=http://localhost:3000&response_type=code' %>
+
             <li><%= link_to "Sign up", new_user_registration_path %></li>
             <li><%= link_to "Login", new_user_session_path %></li>
           <% end %>
@@ -43,11 +45,11 @@
 <ul class="nav">
   <% if user_signed_in? %>
     <li>
-    <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>        
+    <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
     </li>
   <% else %>
     <li>
-    <%= link_to 'Login', new_user_session_path %>  
+    <%= link_to 'Login', new_user_session_path %>
     </li>
   <% end %>
   <% if user_signed_in? %>

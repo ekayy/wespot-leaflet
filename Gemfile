@@ -16,6 +16,7 @@ gem 'fog'
 # gem 'sidekiq'
 gem 'gmaps4rails'
 gem 'kaminari'
+gem 'activerecord-reputation-system', require: 'reputation_system'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

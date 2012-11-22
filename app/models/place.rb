@@ -4,19 +4,13 @@ class Place < ActiveRecord::Base
   belongs_to :user
   has_many :comments, as: :commentable
 
+  has_reputation :votes, source: :user, aggregated_by: :sum
+
   validates_presence_of :business_name
   acts_as_taggable
   acts_as_gmappable
   mount_uploader :coverphoto, CoverphotoUploader
 
- 
-  # def self.text_search(query)
-  #   if query.present?
-  #     where("business_name @@ :q", q: query) | tagged_with(query)
-  #   else
-  #     scoped
-  #   end
-  # end
 
   def self.text_search(query)
     if query.present?

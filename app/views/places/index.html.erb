@@ -1,5 +1,5 @@
 <%= provide(:title, 'Search') %>
- 
+
 <div class="container">
 	<div class="center">
 	<%= form_tag places_path, :method => 'get', :class =>  "form-inline form-search" do %>
@@ -14,49 +14,66 @@
 
 
 <% content_for :container do %>
-<div id="map_toggler" >
-<%= gmaps("map_options" => { "auto_zoom" => false, "zoom" => 17},"markers" => { "data" => @json }) %>
-</div>
+	<%= render 'gmaps' %>
 <% end %>
-
-
-
-
-
 
 <% content_for :container do %>
 <div id="container" class="centered infinte-scroll clearfix masonry">
 
-	<% paginate @places %>
-	
+	<%= paginate @places %>
+
 	<% @places.each do |place| %>
 		<div class="box">
+
 			<div class="image">
-			<%= link_to image_tag(place.coverphoto_url(:thumb).to_s), place_path(place) %>
+			<%= link_to image_tag(place.coverphoto_url(:thumb).to_s), place.coverphoto_url(:thumb), class: "various" %>
 				<div class="moreInfo">
-				<h2><%= place.business_name %></h2>
+					<h2><%= place.business_name %></h2>
+				</div>
 			</div>
-		</div>
+
 			<div class="comments">
-				<%= link_to pluralize(place.comments.count, "Comments"), place_comments_path(place) %>
+
+				<div class="fl">
+					<em>
+				    <%= pluralize place.reputation_for(:votes).to_i, "vote" %>
+				    | <%= link_to "up", vote_place_path(place, type: "up"), method: "post" %>
+				    | <%= link_to "down", vote_place_path(place, type: "down"), method: "post" %>
+				  </em>
+			  </div>
+
+			  <div class="fr">
+					<%= link_to pluralize(place.comments.count, "Comments"), place_comments_path(place) %>
+				</div>
 			</div>
+
 			<div class="chat">
 			<% place.comments.each do |comment| %>
 				<div class="chatbox">
 					<%= comment.content %>
 				</div>
-			<% end %>	
+			<% end %>
 			</div>
+
+			<!-- <div class="fancybox" rel="gallery1">
+				<div class="lc">
+					<%= link_to image_tag(place.coverphoto_url(:thumb).to_s), place_path(place) %>
+				</div>
+				<div class="rc">
+
+				</div>
+			</div> -->
+
 
 		</div>
 	<% end %>
 
-	
+
 </div>
 <% end %>
 
 
-<% 
+<%
 =begin %>
 <%
 =end %>
