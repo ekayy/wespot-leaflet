@@ -3,7 +3,7 @@
 class CoverphotoUploader < CarrierWave::Uploader::Base
 
   # include CarrierWaveDirect::Uploader
-  
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -52,6 +52,11 @@ class CoverphotoUploader < CarrierWave::Uploader::Base
     process :convert => 'jpg'
   end
 
+  version :medium do
+    process :resize_to_fill => [600, 400]
+    process :convert => 'jpg'
+  end
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
@@ -63,5 +68,6 @@ class CoverphotoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
 
 end

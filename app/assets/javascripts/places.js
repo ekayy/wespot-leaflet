@@ -1,11 +1,20 @@
 
 $(function(){
+  /** Index Instance **/
     var $container = $('#container');
 
     $container.imagesLoaded( function(){
       $container.masonry({
         itemSelector : '.box',
         isFitWidth: true
+      });
+    });
+
+    var $container1 = $('.profile-left');
+
+    $container1.imagesLoaded( function(){
+      $container1.masonry({
+        itemSelector : '.singlegram'
       });
     });
 
@@ -31,9 +40,9 @@ $(function(){
   });
 
 
-
 $(document).ready(function(){
   $('button').click(function(){
+    $('#container').hide();
     $('.map_container').show('slow', function() {
       google.maps.event.trigger(map, 'resize');
     });
@@ -43,9 +52,14 @@ $(document).ready(function(){
 $(document).ready(function(){
 
    $(".various").fancybox({
-      type: 'iframe'
-    // fancybox API options here
-
-   }); // fancybox
+      minWidth:  700,
+      minHeight: 300,
+      margin: [50,150,50,150]
+   });
 
 }); // ready
+
+
+$(document).ready(function(){
+  $(".coverphoto").backstretch("http://dl.dropbox.com/u/515046/www/garfield-interior.jpg");
+});

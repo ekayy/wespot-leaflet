@@ -3,9 +3,9 @@ class PlacesController < ApplicationController
   def index
     if params[:query]
       @places = Place.where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query])
-    	@places = Kaminari.paginate_array(@places).page(params[:page]).per(20)
+    	@places = Kaminari.paginate_array(@places).page(params[:page]).per(15)
     else
-      @places = Place.order("created_at ASC").page(params[:page]).per(20)
+      @places = Place.order("created_at ASC").page(params[:page]).per(15)
     end
 
     # if params[:query_location].present?
@@ -22,6 +22,12 @@ class PlacesController < ApplicationController
   	@commentable = @place
   	@comments = @commentable.comments
   	@comment = Comment.new
+    @twitter = Twitter.user_timeline(213747670)
+    if @place.latitude.nil?
+      @instagram  = Instagram.media_search(20, 32)
+    else
+      @instagram = Instagram.media_search(@place.latitude, @place.longitude, { :distance => 10 })
+    end
   end
 
   def vote

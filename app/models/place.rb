@@ -1,5 +1,5 @@
 class Place < ActiveRecord::Base
-  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes
+  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo
 
   belongs_to :user
   has_many :comments, as: :commentable
@@ -22,6 +22,14 @@ class Place < ActiveRecord::Base
 
   def gmaps4rails_address
     "#{self.street}, #{self.city}, #{self.state}, #{self.zip}"
+  end
+
+  # FriendlyID
+  extend FriendlyId
+  friendly_id :business_name, use: :slugged
+
+  def should_generate_new_friendly_id?
+    new_record?
   end
 
   # private

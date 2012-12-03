@@ -8,9 +8,10 @@
 		<%= submit_tag "Search", :name => nil, :class => "btn" %>
 	<% end %>
 	</div>
+	<button> Map </button>
 </div>
 
-<button> Map </button>
+
 
 
 <% content_for :container do %>
@@ -18,17 +19,22 @@
 <% end %>
 
 <% content_for :container do %>
-<div id="container" class="centered infinte-scroll clearfix masonry">
+<div id="container" class="centered infinite-scroll clearfix masonry">
 
 	<%= paginate @places %>
 
 	<% @places.each do |place| %>
 		<div class="box">
 
-			<div class="image">
-			<%= link_to image_tag(place.coverphoto_url(:thumb).to_s), place.coverphoto_url(:thumb), class: "various" %>
+			<div class="imageContainer">
+			<!-- <a href="#inline" class="various"><%= image_tag(place.coverphoto_url(:thumb).to_s) %> </a> -->
+				<div class="image">
+				<%# link_to image_tag(place.coverphoto_url(:medium).to_s), "#inline#{place.id}", class: "various" %>
+				<%= link_to image_tag(place.coverphoto_url(:thumb).to_s), "#{place.coverphoto_url(:medium).to_s}", class: "various" %>
+				</div>
+
 				<div class="moreInfo">
-					<h2><%= place.business_name %></h2>
+					<h2><%= link_to place.business_name, place_path(place) %></h2>
 				</div>
 			</div>
 
@@ -55,25 +61,50 @@
 			<% end %>
 			</div>
 
-			<!-- <div class="fancybox" rel="gallery1">
-				<div class="lc">
-					<%= link_to image_tag(place.coverphoto_url(:thumb).to_s), place_path(place) %>
-				</div>
-				<div class="rc">
-
-				</div>
-			</div> -->
 
 
 		</div>
 	<% end %>
 
 
+<% if false %>
+
+
+<% @places.each do |place| %>
+ <!-- LIGHTBOX CONTENT -->
+ <div style="display:none;">
+		<div id='<%= "inline#{place.id}" %>'>
+			<div class="lightboxContainer">
+			<script>
+			$(document).ready(function(){
+		    $(".lc").backstretch('<%= raw place.coverphoto_url(:medium).to_s %>');
+		  });
+			</script>
+
+				<div class="lc">
+					<%# link_to image_tag(place.coverphoto_url(:thumb).to_s), place_path(place) %>
+				</div>
+				<div class="rc">
+					<h2><%= link_to place.business_name, place_path(place) %>
+					<h3>Highlights</h3>
+					<ul>
+
+					<% place.comments.each do |comment| %>
+						<li>
+							<%= comment.content %>
+						</li>
+					<% end %>
+					</ul>
+				</div>
+				<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{place.latitude}%2C#{place.longitude}" %>
+				<%= place.gmaps4rails_address %>
+			</div>
+		</div>
+	</div>
+<% end %>
 </div>
 <% end %>
 
 
-<%
-=begin %>
-<%
-=end %>
+
+<% end %>

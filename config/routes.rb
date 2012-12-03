@@ -15,5 +15,4 @@ Wespot::Application.routes.draw do
     member { post :vote }
 		resources :comments
 	end
-
 end

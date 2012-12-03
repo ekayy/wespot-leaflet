@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116233610) do
+ActiveRecord::Schema.define(:version => 20121203060352) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -38,7 +38,11 @@ ActiveRecord::Schema.define(:version => 20121116233610) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "gmaps"
+    t.text     "promo"
+    t.string   "slug"
   end
+
+  add_index "places", ["slug"], :name => "index_places_on_slug"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
