@@ -3,8 +3,7 @@ Wespot::Application.routes.draw do
   #   root :to => 'home#index'
   # end
   root :to => "home#index"
-  devise_for :users, :path => 'accounts', path_names: {sign_in: "login", sign_out: "logout"}
-  resources :users
+  devise_for :users, :path => 'accounts', path_names: {sign_in: "login", sign_out: "logout"}, controllers: {omniauth_callbacks: "omniauth_callbacks", path: "accounts"}
 
   namespace :admin do
   	get '', to: 'dashboard#index', as: '/'

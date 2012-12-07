@@ -3,12 +3,12 @@ $(function(){
   /** Index Instance **/
     var $container = $('#container');
 
-    $container.imagesLoaded( function(){
+
       $container.masonry({
         itemSelector : '.box',
         isFitWidth: true
       });
-    });
+
 
     var $container1 = $('.profile-left');
 

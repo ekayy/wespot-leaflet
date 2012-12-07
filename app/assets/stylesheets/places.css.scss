@@ -13,7 +13,7 @@ $color: #8c7e7e;
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
-  max-width: 1220px; /* or 950px */
+  max-width: 1240px; /* or 950px */
 }
 
 .main {
@@ -183,8 +183,8 @@ $color: #8c7e7e;
 }
 
 .col2 {
-  padding: 5px;
-  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  // padding: 5px;
+  // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   margin: 0 auto;
   overflow:auto;
 }
@@ -196,11 +196,11 @@ $color: #8c7e7e;
 
 .singlegram {
   float: left;
-  // padding: 5px;
+  padding: 3px;
   margin: 0 5px 10px 5px;
   font-size: 13px;
   background: white;
-  // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   line-height: 1.5;
 }
 
