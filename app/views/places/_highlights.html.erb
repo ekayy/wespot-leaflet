@@ -1,0 +1,23 @@
+<h2 style="font-size:24px;">Highlights</h2>
+
+
+            <!-- <em>
+              <%= pluralize @place.reputation_for(:votes).to_i, "vote" %>
+              | <%= link_to "up", vote_place_path(@place, type: "up"), method: "post" %>
+              | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
+            </em> -->
+
+
+      <div class="chat">
+        <ol>
+          <% @comments.each do |comment| %>
+            <!-- <div class="blockContainer"> -->
+
+
+              <li><%= comment.content %><li>
+
+            <!-- </div> -->
+          <% end %>
+          <ol>
+          </div>
+      <p><%= link_to "Comments", place_comments_path(@place) %></p>

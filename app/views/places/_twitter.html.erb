@@ -1,0 +1,9 @@
+<% @twitter.each do |twitter| %>
+      <ul>
+        <span class="avatar"><%= image_tag twitter.user.profile_image_url %>
+        <strong><%= twitter.user.name %></strong></span>
+      </br>
+        <%= twitter.text %>
+        <%= twitter.created_at %>
+      </ul>
+      <% end %>

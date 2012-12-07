@@ -13,6 +13,11 @@ Wespot::Application.routes.draw do
 
 	resources :places do
     member { post :vote }
+    collection do
+      get :feed
+    end
 		resources :comments
 	end
+
+
 end

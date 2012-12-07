@@ -52,14 +52,10 @@ $(document).ready(function(){
 $(document).ready(function(){
 
    $(".various").fancybox({
-      minWidth:  700,
-      minHeight: 300,
+
       margin: [50,150,50,150]
    });
 
 }); // ready
 
 
-$(document).ready(function(){
-  $(".coverphoto").backstretch("http://dl.dropbox.com/u/515046/www/garfield-interior.jpg");
-});

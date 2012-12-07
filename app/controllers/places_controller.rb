@@ -22,7 +22,7 @@ class PlacesController < ApplicationController
   	@commentable = @place
   	@comments = @commentable.comments
   	@comment = Comment.new
-    @twitter = Twitter.user_timeline(213747670)
+    @twitter = Twitter.user_timeline(@place.business_name, :count => 2)
     if @place.latitude.nil?
       @instagram  = Instagram.media_search(20, 32)
     else
@@ -35,5 +35,8 @@ class PlacesController < ApplicationController
     @place = Place.find(params[:id])
     @place.add_or_update_evaluation(:votes, value, current_user)
     redirect_to :back, notice: "Thank you for voting!"
+  end
+
+  def feed
   end
 end

@@ -1,0 +1,33 @@
+<h3>Top Dishes</h3>
+  <ol>
+    <li>Fish <em>
+        <%= link_to "up", vote_place_path(@place, type: "up"), method: "post" %>
+        | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
+        | 337 votes
+      </em></li>
+    <li>Chips <em>
+        <%= link_to "up", vote_place_path(@place, type: "up"), method: "post" %>
+        | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
+        | 219 votes
+      </em></li>
+    <li>Omelette <em>
+        <%= link_to "up", vote_place_path(@place, type: "up"), method: "post" %>
+        | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
+        | <%= pluralize @place.reputation_for(:votes).to_i, "vote" %>
+      </em></li>
+      <li>Steak <em>
+        <%= link_to "up", vote_place_path(@place, type: "up"), method: "post" %>
+        | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
+        | <%= pluralize @place.reputation_for(:votes).to_i, "vote" %>
+      </em></li>
+      <li>Potatoes <em>
+        <%= link_to "up", vote_place_path(@place, type: "up"), method: "post" %>
+        | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
+        | <%= pluralize @place.reputation_for(:votes).to_i, "vote" %>
+      </em></li>
+      <li>Macaroni <em>
+        <%= link_to "up", vote_place_path(@place, type: "up"), method: "post" %>
+        | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
+        | <%= pluralize @place.reputation_for(:votes).to_i, "vote" %>
+      </em></li>
+  </ol>

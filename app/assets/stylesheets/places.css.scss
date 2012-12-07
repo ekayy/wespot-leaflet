@@ -2,19 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// @media (min-width: 600px) { #wrapper { width: 615px;margin:0 auto;} }
-// @media (min-width: 900px) { #wrapper { width: 920px;margin:0 auto;} }
-// @media (min-width: 1200px) { #wrapper { width: 1225px;margin:0 auto;} }
-// @media (min-width: 1600px) { #wrapper { width: 1530px;margin:0 auto;} }
+
 
 $bg: #faf7f7;
 $color: #8c7e7e;
 
-.wrapper {
-  width: 960px;
-  margin: 0 auto;
-  position: relative;
+
+.show {
 }
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1220px; /* or 950px */
+}
+
+.main {
+
+}
+
 
 .pagination {
   position:absolute;
@@ -157,61 +162,45 @@ $color: #8c7e7e;
 
 /** Profiles **/
 
-.coverphoto {
-
-  display:block;
-  height:200px;
+.color {
+  background: #DBD9D9;
+  padding: 5px;
 }
 
-.profile-nav {
-   float: left;
-   display:block;
-    padding: 20px;
-    width:100%;
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      overflow:hidden;
-      li {
-        float: left;
-        padding-right: 20px;
-      }
-    }
-  }
-.promo {
-
-  float: left;
-  padding: 5px;
-  margin: 0 7px 15px;
-  font-size: 14px;
-  background: white;
+.coverphoto2 {
   box-shadow:  0 1px 3px rgba(34,25,25,0.4);
-  line-height: 1.5;
-  }
+  display:block;
+  height:100px;
+}
 
-.profile-left {
-
-
-
-  width:100%;
-
-  .singlegram {
-
+.col1 {
   float: left;
   padding: 5px;
-  margin: 0 7px 15px;
+  margin: 10px 0 0 0;
+
+  line-height: 1.5;
+  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+}
+
+.col2 {
+  padding: 5px;
+  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  margin: 0 auto;
+  overflow:auto;
+}
+
+.col3 {
+  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  padding: 10px 10px 10px 20px;
+}
+
+.singlegram {
+  float: left;
+  // padding: 5px;
+  margin: 0 5px 10px 5px;
   font-size: 13px;
   background: white;
-  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   line-height: 1.5;
-  }
 }
-.sidebar {
-  display:inline;
 
-  float:left;
-  position:relative;
-
-
-}

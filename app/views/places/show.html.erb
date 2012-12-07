@@ -1,75 +1,36 @@
 <% provide(:title, @place.business_name) %>
+<!--   <body style="<%= show_user_bg %>"> -->
 
-<script>
-  $(document).ready(function(){
-    $(".coverphoto").backstretch('<%= raw @place.coverphoto.url %>');
-  });
-</script>
+  <script>
+    $(document).ready(function(){
+      $(".coverphoto2").backstretch('<%= raw @place.coverphoto_url(:thumb).to_s %>');
+    });
+  </script>
 
-<div class="coverphoto"></div>
+  <h1 style="font-size:24px;"><%= @place.business_name %></h1>
 
-<h1><%= @place.business_name %></h1>
-<!-- <div class="profile-nav">
-  <ul>
-    <li>Menu</li>
-    <li>Contact</li>
-    <li>Links</li>
-  </ul>
-</div> -->
+<div class="row-fluid">
 
-<div class="promo">
-<em>Bring your coworkers out for happy hour. Parties of 8 or more will receive a special appetizer on the house.</em>
-  <% @twitter.each do |twitter| %>
-  <ul>
-    <li><%= twitter.text %></li>
-  </ul>
-  <% end %>
-</div>
+  <div class="span4">
 
+    <div class="coverphoto2"></div>
+      <div class="col1">
+        <%= render 'twitter' %>
+        <%= render 'highlights' %>
+      </div>
+  </div>
 
-<!-- <body style="<%= show_user_bg %>"> -->
-
-
- <div class="row">
-        <div class="span8">
-<div class="profile-left">
-  <% for instagram in @instagram.data %>
-    <div class="singlegram">
-
-         <a href="<%= instagram.images.standard_resolution.url %>">
-         <%= link_to image_tag(instagram.images.thumbnail.url), "#{instagram.images.standard_resolution.url}", class: 'various' %></a>
-
+  <div class="span5">
+    <div class="col2">
+      <%= render 'instagram' %>
     </div>
-  <% end %>
-
-</div>
-</div>
-
-<div class="span4">
-  <div class="sidebar">
-    <h2>Highlights</h2>
-
-
-          <em>
-            <%= pluralize @place.reputation_for(:votes).to_i, "vote" %>
-            | <%= link_to "up", vote_place_path(@place, type: "up"), method: "post" %>
-            | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
-          </em>
-
-
-    <div class="chat">
-        <% @comments.each do |comment| %>
-          <div class="blockContainer">
-
-            <%= comment.content %>
-
-          </div>
-        <% end %>
-        </div>
-    <p><%= link_to "Comments", place_comments_path(@place) %></p>
   </div>
 
-  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}" %>
-        <%= @place.gmaps4rails_address %>
+  <div class="span3">
+    <div class="col3">
+      <%= render 'dishes' %>
+      <%= render 'staticmap' %>
+    </div>
   </div>
+
 </div>
