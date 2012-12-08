@@ -4,7 +4,7 @@ gem 'thin'
 gem 'jquery-rails'
 gem "bootstrap-sass", ">= 2.1.0.0"
 
-gem 'devise', :git => "git://github.com/plataformatec/devise.git"
+gem 'devise'
 gem 'omniauth-facebook', '1.4.0'
 
 gem "cancan", ">= 1.6.8"
