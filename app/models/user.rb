@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   has_one :place, :dependent => :destroy
   accepts_nested_attributes_for :place
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
 
   # Omniauth with Facebook
   def self.from_omniauth(auth)
