@@ -1,5 +1,5 @@
 $(document).ready(function(){
-$(function(){
+
   /** Index Instance **/
     var $container = $('#container');
 
