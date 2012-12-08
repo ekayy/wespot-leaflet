@@ -7,7 +7,7 @@
 <%= simple_form_for([:admin,@user], :html => {:multipart => true}) do |f| %>
     <%= f.error_notification %>
 
-    <%= f.input :name, :autofocus => true, :label => 'Username' %> 
+    <%= f.input :name, :autofocus => true, :label => 'Username' %>
     <%= f.input :email, :required => true %>
     <%= f.input :password %>
 
@@ -17,10 +17,13 @@
       <%= p.file_field :coverphoto %></p>
 
       <%= p.input :business_name %>
+      <%= p.input :twitterid %>
+
       <%= p.input :street, :label => 'Address' %>
       <%= p.input :city %>
       <%= p.input :state %>
       <%= p.input :zip %>
+
 
       <%= p.input :tag_list, :label => "Tags (separated by commas)" %>
     <% end %>

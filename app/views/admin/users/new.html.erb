@@ -17,17 +17,20 @@
       </div>
     <% end %>
 
-    <%= f.input :name, :autofocus => true, :label => 'Username' %> 
+    <%= f.input :name, :autofocus => true, :label => 'Username' %>
     <%= f.input :email, :required => true %>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
+    <%= f.input :twitterid %>
 
     <%= f.simple_fields_for :place do |p| %>
-      
+
       <p><%= p.label "Cover Photo" %>
       <%= p.file_field :coverphoto %></p>
 
       <%= p.input :business_name %>
+      <%= p.input :twitterid %>
+
       <%= p.input :street, :label => 'Address' %>
       <%= p.input :city %>
       <%= p.input :state %>

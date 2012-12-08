@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207062730) do
+ActiveRecord::Schema.define(:version => 20121208020218) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20121207062730) do
     t.boolean  "gmaps"
     t.text     "promo"
     t.string   "slug"
+    t.string   "twitterid"
   end
 
   add_index "places", ["slug"], :name => "index_places_on_slug"
