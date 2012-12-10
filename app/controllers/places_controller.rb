@@ -22,7 +22,7 @@ class PlacesController < ApplicationController
   	@commentable = @place
   	@comments = @commentable.comments
   	@comment = Comment.new
-    @twitter = Twitter.user_timeline(@place.business_name, :count => 2)
+    @twitter = Twitter.user_timeline(@place.twitterid, :count => 2)
     if @place.latitude.nil?
       @instagram  = Instagram.media_search(20, 32)
     else
