@@ -21,7 +21,7 @@
 <% content_for :container do %>
 <div id="container" class="centered infinite-scroll clearfix masonry">
 
-	<%= will_paginate @places %>
+	<%# paginate @places %>
 
 	<% @places.each do |place| %>
 		<div class="box">

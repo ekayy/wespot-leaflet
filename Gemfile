@@ -18,7 +18,7 @@ gem 'fog'
 # gem 'carrierwave_direct'
 # gem 'sidekiq'
 gem 'gmaps4rails'
-gem 'will_paginate'
+gem 'kaminari'
 gem 'activerecord-reputation-system', require: 'reputation_system'
 
 gem 'instagram'
