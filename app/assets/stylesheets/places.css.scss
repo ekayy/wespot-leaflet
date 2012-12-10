@@ -20,11 +20,19 @@ $color: #8c7e7e;
 
 }
 
+/* miscellaneous */
 
-// .pagination {
-//   position:absolute;
-//   left: -9999px;
-// }
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+}
+
+.pagination {
+  position:absolute;
+  left: -9999px;
+}
 
 .box {
   width: 300px;

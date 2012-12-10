@@ -1,5 +1,5 @@
 class Place < ActiveRecord::Base
-  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo
+  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo, :twitterid
 
   belongs_to :user
   has_many :comments, as: :commentable

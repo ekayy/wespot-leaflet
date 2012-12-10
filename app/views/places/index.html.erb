@@ -30,8 +30,11 @@
 			<!-- <a href="#inline" class="various"><%= image_tag(place.coverphoto_url(:thumb).to_s) %> </a> -->
 				<div class="image">
 				<%# link_to image_tag(place.coverphoto_url(:medium).to_s), "#inline#{place.id}", class: "various" %>
+				<% if place.coverphoto.present? %>
+					<%= link_to image_tag(place.coverphoto_url(:thumb).to_s), "#{place.coverphoto_url(:medium).to_s}", class: "various" %>
+				<% else %>
 
-				<%= link_to image_tag(place.coverphoto_url(:thumb).to_s), "#{place.coverphoto_url(:medium).to_s}", class: "various" %>
+				<% end %>
 				</div>
 
 				<div class="moreInfo">
