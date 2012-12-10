@@ -5,8 +5,7 @@ class PlacesController < ApplicationController
       @places = Place.where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query])
     	@places = Kaminari.paginate_array(@places).page(params[:page]).per(15)
     else
-      # @places = Place.order("created_at ASC").page(params[:page]).per(15)
-      @places = Place.all
+      @places = Place.order("created_at ASC").page(params[:page])
     end
 
     # if params[:query_location].present?
