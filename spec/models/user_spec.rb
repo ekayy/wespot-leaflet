@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'database_cleaner'
+DatabaseCleaner.strategy = :truncation
 
 describe User do
 
@@ -12,16 +14,22 @@ describe User do
   end
 
   before do
-    @user = User.new(name: "Example User", email: "user@example.com")
+   @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
   end
 
   subject { @user }
+
   it { should respond_to(:name) }
   it { should respond_to(:email) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
-  it { should respond_to(:feed) }
   it { should respond_to(:relationships) }
+  it { should respond_to(:followed_places) }
+  it { should respond_to(:reverse_relationships) }
+  it { should respond_to(:followers) }
+  it { should respond_to(:following?) }
+  it { should respond_to(:follow!) }
+  it { should respond_to(:unfollow!) }
 
   it { should be_valid }
 
@@ -114,4 +122,28 @@ describe User do
 
   end
 
+  describe "following" do
+    let(:test_place) { FactoryGirl.create(:place) }
+    before do
+      @user.save
+      @user.follow!(test_place)
+    end
+
+    it { should be_following(test_place) }
+    its(:followed_places) { should include(test_place) }
+
+    describe "followed place" do
+      subject { test_place }
+      its(:followers) { should include(@user) }
+    end
+
+    describe "and unfollowing" do
+      before { @user.unfollow!(test_place) }
+
+      it { should_not be_following(test_place) }
+      its(:followed_places) { should_not include(test_place) }
+    end
+  end
+
+  DatabaseCleaner.clean
 end

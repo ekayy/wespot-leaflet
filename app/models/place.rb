@@ -4,6 +4,11 @@ class Place < ActiveRecord::Base
   belongs_to :user
   has_many :comments, as: :commentable
 
+  has_many :reverse_relationships, foreign_key: "followed_id",
+                                   class_name:  "Relationship",
+                                   dependent:   :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
+
   has_reputation :votes, source: :user, aggregated_by: :sum
 
   validates_presence_of :business_name

@@ -13,5 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require ../../../vendor/assets/javascripts/jquery.isotope.min
+//= require ../../../vendor/assets/javascripts/jquery.imagesloaded.min
+//= require ../../../vendor/assets/javascripts/jquery.infinitescroll.min
+//= require ../../../vendor/assets/javascripts/jquery.fancybox.pack
+//= require ../../../vendor/assets/javascripts/jquery.backstretch.min
+//= require ../../../vendor/assets/javascripts/jquery.mousewheel-3.0.6.pack
 //= require_tree .
-//= require_tree ../../../vendor/assets/javascripts/.
+
+
+
