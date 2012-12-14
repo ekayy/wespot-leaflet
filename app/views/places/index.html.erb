@@ -16,59 +16,10 @@
 
 <% content_for :container do %>
 	<%= render 'gmaps' %>
-<% end %>
 
-<% content_for :container do %>
-<div id="container" class="infinite-scrolling clearfix">
-
-	<%= paginate @places %>
-
-	<% @places.each do |place| %>
-		<div class="box">
-
-			<div class="imageContainer">
-				<div class="image">
-				<a href="<%= place.coverphoto_url(:medium) %>" class="various" data-fancybox-type="iframe"><%= image_tag(place.coverphoto_url(:thumb).to_s) %> </a>
-
-				<!-- inline -->
-					<%# link_to image_tag(place.coverphoto_url(:thumb).to_s), "#{place.coverphoto_url(:medium).to_s}", class: "various" %>
-
-				</div>
-
-				<div class="moreInfo">
-					<h2><%= link_to place.business_name, place_path(place) %></h2>
-				</div>
-			</div>
-
-			<div class="comments">
-
-				<div class="fl">
-					<em>
-				    <%= pluralize place.reputation_for(:votes).to_i, "vote" %>
-				    | <%= link_to "up", vote_place_path(place, type: "up"), method: "post" %>
-				    | <%= link_to "down", vote_place_path(place, type: "down"), method: "post" %>
-				  </em>
-			  </div>
-
-			  <div class="fr">
-					<%= link_to pluralize(place.comments.count, "Comments"), place_comments_path(place) %>
-				</div>
-			</div>
-
-			<div class="chat">
-			<% place.comments.each do |comment| %>
-				<div class="chatbox">
-					<%= comment.content %>
-				</div>
-			<% end %>
-			</div>
-
-
-
-		</div>
-	<% end %>
-
-
+	<div id="container" class="infinite-scrolling clearfix">
+		<%= paginate @places %>
+		<%= render 'box' %>
 <% if false %>
 
 

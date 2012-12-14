@@ -35,6 +35,7 @@ $color: #8c7e7e;
 }
 
 .box {
+  width:300px;
   float: left;
   padding: 5px;
   margin: 0 7px 15px;
@@ -182,24 +183,24 @@ $color: #8c7e7e;
 
 .col1 {
   float: left;
-  padding: 5px;
-  margin: 10px 0 0 0;
-  background: white;
+  background:none;
+  padding: 0;
+  margin: 0 auto;
   line-height: 1.5;
-  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  // background: black;
+  // color:white;
+  // opacity: .85;
+  // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
 }
 
 .col2 {
-  // padding: 5px;
-  // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
-  margin: 0 auto;
+  // margin: 0 auto;
   overflow:auto;
+  background:none
 }
 
 .col3 {
-  background: white;
-  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
-  padding: 10px 10px 10px 20px;
+  background:none
 }
 
 .singlegram {
@@ -207,10 +208,34 @@ $color: #8c7e7e;
   padding: 3px;
   margin: 0 5px 10px 5px;
   font-size: 13px;
-  background: white;
-  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   line-height: 1.5;
+  background:white;
+  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
 }
+
+#bizContainer {
+  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  padding: 5px;
+  background: black;
+  color:white;
+  opacity: .85;
+  margin-bottom:10px;
+}
+
+#bizInfo {
+  padding:5px;
+  overflow:hidden;
+  .wrap {
+    display: inline;
+    float: left;
+    overflow: hidden;
+    width:200px;
+  }
+  .map {
+    float:right;
+  }
+}
+
 
 
 /**** Isotope Filtering ****/

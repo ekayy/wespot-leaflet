@@ -58,29 +58,35 @@ $.Isotope.prototype._getCenteredMasonryColumns = function() {
 
 
 
-$(function(){
+$(document).ready(function(){
 
   var $container = $('#container');
 
-  $container.isotope({
-        itemSelector : '.box'
-      });
+  $container.imagesLoaded( function(){
+    $container.isotope({
+      itemSelector : '.box'
+    });
+  });
 
-      $container.infinitescroll({
-        navSelector  : '.pagination',    // selector for the paged navigation
-        nextSelector : '.pagination a',  // selector for the NEXT link (to page 2)
-        itemSelector : '.box',     // selector for all items you'll retrieve
-        loading: {
-            finishedMsg: 'No more pages to load.',
-            img: 'http://i.imgur.com/qkKy8.gif'
-          }
-        },
-        // call Isotope as a callback
-        function( newElements ) {
-          $container.isotope( 'appended', $( newElements ) );
-        }
-      );
+  $container.infinitescroll({
+    navSelector  : '.pagination',    // selector for the paged navigation
+    nextSelector : '.pagination a',  // selector for the NEXT link (to page 2)
+    itemSelector : '.box',     // selector for all items you'll retrieve
+    loading: {
+        finishedMsg: 'No more pages to load.',
+        img: 'http://i.imgur.com/qkKy8.gif'
+      }
+    },
+    // call Isotope as a callback
+    function(newElements) {
+      var $newElems = $(newElements);
+      $newElems.imagesLoaded(function(){
+        $container.isotope('appended', $newElems );
+      });
+    }
+  );
 });
+
   /** Index Instance **/
     // var $container = $('#container');
 

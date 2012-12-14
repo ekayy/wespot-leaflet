@@ -1,13 +1,18 @@
-<h3>Contact</h3>
-  <%= @place.gmaps4rails_address %>
-  <a href="#">Website</a>
-  <a href="#">Yelp</a>
-  <p>(415) 487-1600</p>
+<div id="bizContainer">
+<div id="bizInfo">
+  <div class="wrap">
+    <%= @place.gmaps4rails_address %>
+    <p>(415) 487-1600</p>
+    <p><a href="#">Website</a></p>
 
-  <p>Hours: Tuesday to Saturday</p>
-  <p>5:30pm to 12:30am</p>
-  <p>Price Range: $$</p>
+    <span>Category: Italian<br/>
+    Price: $$<br/>
+    Hours: Tuesday to Saturday<br/>
+    5:30pm to 12:30am</span>
+  </div>
 
-
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}" %>
-
+  <div class="map">
+    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=225x150&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}" %>
+  </div>
+</div>
+</div>
