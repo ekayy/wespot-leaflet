@@ -6,9 +6,9 @@ gem "bootstrap-sass"
 
 gem 'devise'
 gem 'omniauth-facebook', '1.4.0'
-
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
+
 gem "simple_form", ">= 2.0.3"
 gem 'pg'
 gem 'acts-as-taggable-on', '~> 2.3.1'
@@ -18,6 +18,7 @@ gem 'fog'
 # gem 'carrierwave_direct'
 # gem 'sidekiq'
 gem 'gmaps4rails'
+gem 'geocoder'
 gem 'kaminari'
 gem 'activerecord-reputation-system', require: 'reputation_system'
 

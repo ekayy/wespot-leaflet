@@ -25,6 +25,7 @@ class Place < ActiveRecord::Base
     end
   end
 
+  geocoded_by :gmaps4rails_address
   def gmaps4rails_address
     "#{self.street}, #{self.city}, #{self.state}, #{self.zip}"
   end

@@ -1,9 +1,11 @@
 class PlacesController < ApplicationController
 
   def index
-    if params[:query]
-      @places = Place.where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query])
+    if params[:query].present?
+      @places = Place.near(params[:query_location], 5, :order => :distance).where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query])
     	@places = Kaminari.paginate_array(@places).page(params[:page]).per(15)
+    elsif params[:query_location].present?
+      @places = Place.near(params[:query_location], 5, :order => :distance).page(params[:page]).per(15)
     else
       @places = Place.order("created_at ASC").page(params[:page]).per(15)
     end
