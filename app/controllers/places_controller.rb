@@ -19,6 +19,10 @@ class PlacesController < ApplicationController
     @json = Place.all.to_gmaps4rails
   end
 
+  def gmaps4rails_infowindow
+    "test"
+  end
+
   def show
   	@place = Place.find(params[:id])
   	@commentable = @place

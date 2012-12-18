@@ -1,6 +1,6 @@
 
 .map_container {
-  display:none;
+  /*display:none;*/
   border-width: 1px;
   /*border-style: solid;*/
   /*border-color: #ccc #ccc #999 #ccc;
@@ -10,6 +10,7 @@
   position: fixed;
   width: 100%;
   height: 85%;
+  display:block;
 }
 
 .gmaps4rails_map {
@@ -27,10 +28,10 @@
    border:#555555 2px solid;
 }
 
-#map img { 
+#map img {
   max-width: none;
   width: 100%;
 }
-#map label { 
-  width: auto; display:inline; 
+#map label {
+  width: auto; display:inline;
 }

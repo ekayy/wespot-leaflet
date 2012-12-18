@@ -125,14 +125,14 @@ $(document).ready(function(){
   // );
 
 
-$(document).ready(function(){
-  $('button').click(function(){
-    $('#container').hide();
-    $('.map_container').show('slow', function() {
-      google.maps.event.trigger(map, 'resize');
-    });
-  });
-});
+// $(document).ready(function(){
+//   $('button').click(function(){
+//     $('#container').hide();
+//     $('.map_container').show('slow', function() {
+//       google.maps.event.trigger(map, 'resize');
+//     });
+//   });
+// });
 
 $(document).ready(function(){
 
