@@ -1,5 +1,10 @@
 <div id="bizContainer">
 <div id="bizInfo">
+
+  <div class="map">
+    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=350x233&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}" %>
+  </div>
+
   <div class="wrap">
     <%= @place.gmaps4rails_address %>
     <p>(415) 487-1600</p>
@@ -11,8 +16,6 @@
     5:30pm to 12:30am</span>
   </div>
 
-  <div class="map">
-    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=225x150&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}" %>
-  </div>
+
 </div>
 </div>

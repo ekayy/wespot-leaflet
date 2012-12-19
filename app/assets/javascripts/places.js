@@ -58,7 +58,7 @@ $.Isotope.prototype._getCenteredMasonryColumns = function() {
 
 
 
-$(document).ready(function(){
+$(function(){
 
   var $container = $('#container');
 
@@ -142,5 +142,3 @@ $(document).ready(function(){
    });
 
 }); // ready
-
-

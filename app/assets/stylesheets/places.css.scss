@@ -18,6 +18,11 @@ $color: #8c7e7e;
 
 #container {
   margin: 0 auto;
+  top:20px;
+}
+
+.container {
+  width:960px;
 }
 
 /* miscellaneous */
@@ -178,7 +183,7 @@ $color: #8c7e7e;
 .coverphoto2 {
   box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   display:block;
-  height:100px;
+  height:200px;
 }
 
 .col1 {
@@ -216,9 +221,13 @@ $color: #8c7e7e;
 #bizContainer {
   box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   padding: 5px;
-  background: black;
-  color:white;
-  opacity: .85;
+  background: white;
+  color:black;
+  // opacity: .85;
+  margin-bottom:10px;
+}
+#instagramContainer {
+  overflow:hidden;
   margin-bottom:10px;
 }
 
@@ -286,4 +295,11 @@ $color: #8c7e7e;
       -ms-transition-duration: 0s;
        -o-transition-duration: 0s;
           transition-duration: 0s;
+}
+
+#twitter {
+
+  p {
+    margin:0;
+  }
 }

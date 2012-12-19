@@ -57,6 +57,11 @@ class CoverphotoUploader < CarrierWave::Uploader::Base
     process :convert => 'jpg'
   end
 
+  version :mini do
+    process :resize_to_fill => [32, 32]
+    process :convert => 'jpg'
+  end
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
@@ -68,6 +73,4 @@ class CoverphotoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
-
 end

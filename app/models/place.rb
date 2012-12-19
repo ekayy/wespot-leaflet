@@ -38,12 +38,20 @@ class Place < ActiveRecord::Base
     new_record?
   end
 
-  # private
-  # def reprocess_image
+  # private just uncomment
+  #reprocess_image:
   #   Place.all.each do |place|
-  #     place.coverphoto.recreate_versions!
+  #     place.coverphoto.recreate_versions!(:mini)
   #   end
-  # end
+  #
+
+  def gmaps4rails_marker_picture
+      {
+      "picture" => self.coverphoto_url(:mini).to_s, # image_path column has to contain something like '/assets/my_pic.jpg'.
+      "width" => 32, #beware to resize your pictures properly
+      "height" => 32 #beware to resize your pictures properly
+      }
+  end
 end
 
 

@@ -1,3 +1,7 @@
-<div id="map_toggler" >
-<%= gmaps("map_options" => { "auto_zoom" => false, "zoom" => 17},"markers" => { "data" => @json }) %>
-</div>
+
+<%= gmaps("map_options" => {
+                       "auto_zoom" => true,
+                       "auto_adjust" => true,
+                       "zoom" => 14},
+                        "markers" => { "data" => @json, "options" => {"rich_marker" => true} },
+                          "center_on_user" => true ) %>

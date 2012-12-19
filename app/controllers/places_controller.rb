@@ -7,7 +7,8 @@ class PlacesController < ApplicationController
     elsif params[:query_location].present?
       @places = Place.near(params[:query_location], 5, :order => :distance).page(params[:page]).per(15)
     else
-      @places = Place.order("created_at ASC").page(params[:page]).per(15)
+      @places = Place.near([37.7750, -122.4183]).page(params[:page]).per(15)
+      # @places = Place.order("created_at ASC").page(params[:page]).per(15)
     end
 
     # if params[:query_location].present?
@@ -16,11 +17,10 @@ class PlacesController < ApplicationController
     #   @places = Place.text_search(params[:query])
     # end
 
-    @json = Place.all.to_gmaps4rails
-  end
-
-  def gmaps4rails_infowindow
-    "test"
+    @json = @places.to_gmaps4rails do |place, marker|
+      marker.infowindow render_to_string(:partial => "/places/infowindow", :locals => { :object => place})
+      marker.title   "i'm the title"
+    end
   end
 
   def show

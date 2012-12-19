@@ -1,38 +1,45 @@
+
+
 <% provide(:title, @place.business_name) %>
- <body style="<%= show_user_bg %>">
+ <body style="<%# show_user_bg %>">
+
 
   <script>
     $(document).ready(function(){
-      $(".coverphoto2").backstretch('<%= raw @place.coverphoto_url(:thumb).to_s %>');
+      $(".coverphoto2").backstretch('<%= raw @place.coverphoto_url(:medium).to_s %>');
     });
   </script>
 
-  <h1 style="font-size:24px;"><%= @place.business_name %></h1>
 
-<div class="row-fluid">
 
-  <div class="span5">
+<div class="container">
 
-    <!-- <div class="coverphoto2"></div> -->
-      <div class="col1">
+    <div class="coverphoto2"></div>
+    <h1 style="font-size:24px;"><%= @place.business_name %></h1>
+
+    <div class="span8">
+
+
+        <div class="col1">
+          <%= render 'twitter' %>
+          <%= render 'instagram' %>
+          <%= render 'highlights' %>
+        </div>
+    </div>
+
+    <div class="span4">
+      <div class="col2">
+
         <%= render 'staticmap' %>
-        <%= render 'instagram' %>
+        <%= render 'dishes' %>
+
       </div>
-  </div>
-
-  <div class="span5">
-    <div class="col2">
-      <%= render 'twitter' %>
-      <%= render 'highlights' %>
     </div>
+
+<!--       <div class="col3">
+
+      </div> -->
+
+
   </div>
 
-  <div class="span2">
-    <div class="col3">
-      <%= render 'dishes' %>
-    </div>
-  </div>
-
-</div>
-
-<%= @place.twitterid %>

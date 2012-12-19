@@ -2,6 +2,7 @@
   <% @comments.each do |comment| %>
     <div class="comment">
       <%= simple_format comment.content %>
+      <%= link_to "Remove", [@commentable, comment], :method => :delete %>
     </div>
   <% end %>
 </div>

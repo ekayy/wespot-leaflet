@@ -10,18 +10,12 @@
             </em> -->
 
 
-      <div class="chat">
         <ol>
           <% @comments.each do |comment| %>
-            <!-- <div class="blockContainer"> -->
-
-
               <li><%= comment.content %><li>
-
-            <!-- </div> -->
           <% end %>
           <ol>
-          </div>
+          <%= render "comments/form" %>
       <p><%= link_to "Comments", place_comments_path(@place) %></p>
 
     </div>

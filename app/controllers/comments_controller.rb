@@ -16,9 +16,22 @@ class CommentsController < ApplicationController
   	@commentable = Place.find(params[:place_id])
 	  @comment = @commentable.comments.new(params[:comment])
 	  if @comment.save
-	    redirect_to @commentable, notice: "Comment created."
+	    respond_to do |format|
+        format.html { redirect_to place_comments_url }
+      end
 	  else
 	    render :new
 	  end
 	end
+
+  def destroy
+    @commentable = Place.find(params[:place_id])
+    @comment = @commentable.comments.find(params[:id])
+    if @comment.destroy
+      respond_to do |format|
+        format.html { redirect_to place_comments_url }
+      end
+    end
+  end
 end
+

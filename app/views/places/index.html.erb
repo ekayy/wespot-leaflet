@@ -8,14 +8,15 @@
 		<%= submit_tag "Search", :name => nil, :class => "btn" %>
 	<% end %>
 	</div>
-	<button> Map </button>
+	<!-- <button> Map </button> -->
+	<%= render 'gmaps' %>
 </div>
 
 
 
 
-<% content_for :container do %>
-	<%= render 'gmaps' %>
+<!-- <div class="container-fluid"> -->
+
 
 	<div id="container" class="infinite-scrolling clearfix">
 		<%= paginate @places %>
@@ -60,4 +61,3 @@
 
 
 
-<% end %>
