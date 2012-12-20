@@ -58,7 +58,7 @@ class CoverphotoUploader < CarrierWave::Uploader::Base
   end
 
   version :mini do
-    process :resize_to_fill => [32, 32]
+    process :resize_to_fill => [75, 50]
     process :convert => 'jpg'
   end
 

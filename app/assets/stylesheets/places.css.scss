@@ -13,16 +13,15 @@ $color: #8c7e7e;
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
-  max-width: 1240px; /* or 950px */
+
 }
 
 #container {
-  margin: 0 auto;
-  top:20px;
+  margin:0 auto;
 }
 
 .container {
-  width:960px;
+  width:980px;
 }
 
 /* miscellaneous */
@@ -221,9 +220,9 @@ $color: #8c7e7e;
 #bizContainer {
   box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   padding: 5px;
-  background: white;
-  color:black;
-  // opacity: .85;
+  background: black;
+  color:white;
+  opacity: .85;
   margin-bottom:10px;
 }
 #instagramContainer {
@@ -297,6 +296,15 @@ $color: #8c7e7e;
           transition-duration: 0s;
 }
 
+#infscr-loading {
+  position:absolute;
+  bottom:20px;
+}
+
+#follow_form {
+  float:right;
+  display:inline;
+  margin-top:10px;}
 #twitter {
 
   p {

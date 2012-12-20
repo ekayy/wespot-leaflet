@@ -1,6 +1,7 @@
 <%= provide(:title, 'Search') %>
 
 <div class="container">
+	<%= link_to 'Map', map_places_path %>
 	<div class="center">
 	<%= form_tag places_path, :method => 'get', :class =>  "form-inline form-search" do %>
 		<%= text_field_tag :query, params[:query], :placeholder => "Search", :class => "search-query" %>
@@ -8,55 +9,27 @@
 		<%= submit_tag "Search", :name => nil, :class => "btn" %>
 	<% end %>
 	</div>
-	<!-- <button> Map </button> -->
-	<%= render 'gmaps' %>
+
+	<%# select('place', 'id',
+            Place.order('business_name ASC').all.map{ |c| [c.business_name, c.id] }) %>
 </div>
 
 
+<div id="loading" class="center">
+	<img src="http://www.jesseyuen.com/loz/images/loading.gif" />
+</div>
+
+<% content_for :scripts do %>
+<div class="container-fluid">
 
 
-<!-- <div class="container-fluid"> -->
-
-
-	<div id="container" class="infinite-scrolling clearfix">
+	<div id="container" style="display:none;" class="infinite-scrolling clearfix">
 		<%= paginate @places %>
 		<%= render 'box' %>
-<% if false %>
-
-
-<% @places.each do |place| %>
- <!-- LIGHTBOX CONTENT
- <div style="display:none;">
-		<div id='<%# "inline#{place.id}" %>'>
-			<div class="lightboxContainer">
-			<script>
-			$(document).ready(function(){
-		    $(".lc").backstretch('<%# raw place.coverphoto_url(:medium).to_s %>');
-		  });
-			</script>-->
-
-				<div class="lc">
-					<%# link_to image_tag(place.coverphoto_url(:thumb).to_s), place_path(place) %>
-				</div>
-				<div class="rc">
-					<h2><%= link_to place.business_name, place_path(place) %>
-					<h3>Highlights</h3>
-					<ul>
-
-					<% place.comments.each do |comment| %>
-						<li>
-							<%= comment.content %>
-						</li>
-					<% end %>
-					</ul>
-				</div>
-				<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{place.latitude}%2C#{place.longitude}" %>
-				<%= place.gmaps4rails_address %>
-			</div>
-		</div>
 	</div>
-<% end %>
+
 </div>
+
 <% end %>
 
 

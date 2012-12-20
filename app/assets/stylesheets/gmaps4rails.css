@@ -1,18 +1,17 @@
 
 .map_container {
   /*display:none;*/
-  border-width: 1px;
+  /*border-width: 1px;
   border-style: solid;
   border-color: #ccc #ccc #999 #ccc;
   -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
   -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
-  box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
-  position: relative;
-  width: 900px;
-  height: 400px;
+  box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;*/
+
+  width: 80%;
   display:block;
-  margin: 0 auto;
-  padding:10px;
+  margin:0 10%;
+  position: absolute; top: 100px; bottom: 10%;
 }
 
 .gmaps4rails_map {
@@ -32,8 +31,14 @@
 
 #map img {
   max-width: none;
-  width: 100%;
 }
 #map label {
   width: auto; display:inline;
+}
+
+
+.mapwindow {  margin-top: 8px; background: white; padding: 5px; }
+
+.infowindow {
+
 }

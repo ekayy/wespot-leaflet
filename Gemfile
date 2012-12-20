@@ -22,6 +22,7 @@ gem 'activerecord-reputation-system', require: 'reputation_system'
 
 gem 'instagram'
 gem 'twitter'
+gem 'twitter-text'
 
 gem 'friendly_id'
 

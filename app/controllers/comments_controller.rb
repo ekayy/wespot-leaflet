@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 
   def new
   	@commentable = Place.find(params[:place_id])
-  	@comment = @commentable.comments.new(params[:comment])
+  	@comment = @commentable.comments.new
   end
 
   def create

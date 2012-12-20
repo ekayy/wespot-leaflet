@@ -1,23 +1,29 @@
 
 
 <% provide(:title, @place.business_name) %>
- <body style="<%# show_user_bg %>">
+ <body style="<%= show_user_bg %>">
 
 
   <script>
-    $(document).ready(function(){
-      $(".coverphoto2").backstretch('<%= raw @place.coverphoto_url(:medium).to_s %>');
-    });
-  </script>
+  //   $(document).ready(function(){
+  //     $(".coverphoto2").backstretch('<%= raw @place.coverphoto_url(:medium).to_s %>');
+  //   });
+  // </script>
 
 
 
 <div class="container">
 
-    <div class="coverphoto2"></div>
-    <h1 style="font-size:24px;"><%= @place.business_name %></h1>
+    <div class="span12">
+      <!-- <div class="coverphoto2"></div> -->
+      <%= render 'follow_form' if signed_in? %>
+        <h1 style="font-size:24px;width:200px;display:inline; color:white;"><%= @place.business_name %></h1>
 
-    <div class="span8">
+            <p style="color:white;"><strong><%= @place.followers.count %></strong> followers</p>
+    </div>
+
+
+    <div class="span9">
 
 
         <div class="col1">
@@ -27,7 +33,7 @@
         </div>
     </div>
 
-    <div class="span4">
+    <div class="span3">
       <div class="col2">
 
         <%= render 'staticmap' %>

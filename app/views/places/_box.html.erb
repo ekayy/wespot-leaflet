@@ -5,13 +5,11 @@
         <div class="image">
 
           <% if place.coverphoto.present? %>
-            <a href="<%= place.coverphoto_url(:medium) %>" class="various" data-fancybox-type="iframe"><%= image_tag(place.coverphoto_url(:thumb).to_s) %> </a>
+
+            <%= link_to image_tag(place.coverphoto_url(:thumb).to_s), lightbox_place_path(place), class: "various fancybox.ajax" %>
 
           <% else %>
-            <a href='https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/default/weSpot+splash+page+logo.jpg' class="various" data-fancybox-type="iframe"><%= image_tag('https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/default/weSpot+splash+page+logo.jpg') %> </a>
-
-          <!-- inline -->
-          <%# link_to image_tag(place.coverphoto_url(:thumb).to_s), "#{place.coverphoto_url(:medium).to_s}", class: "various" %>
+            <a href='https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/default/weSpot+splash+page+logo.jpg' class="various" data-fancybox-type="iframe"><%= image_tag('https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/default/weSpot+splash+page+logo.jpg', size: "300x200") %> </a>
           <% end %>
 
         </div>

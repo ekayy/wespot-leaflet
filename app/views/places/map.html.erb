@@ -1,0 +1,17 @@
+
+
+
+<% content_for :container do %>
+
+<div class="center">
+  <%= form_tag map_places_path, :method => 'get', :class =>  "form-inline form-search" do %>
+    <%= text_field_tag :query, params[:query], :placeholder => "Search", :class => "search-query" %>
+    <%= text_field_tag :query_location, params[:query_location], :placeholder => "Location", :class => "search-query" %>
+    <%= submit_tag "Search", :name => nil, :class => "btn" %>
+  <% end %>
+  </div>
+
+
+<%= render 'gmaps' %>
+
+<% end %>

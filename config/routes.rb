@@ -4,10 +4,17 @@ Wespot::Application.routes.draw do
     root :to => "admin/users#index"
   end
 
+  resources :relationships, only: [:create, :destroy]
+
   resources :places do
+    member do
+      get :lightbox
+      get :following, :followers
+    end
     member { post :vote }
     collection do
       get :feed
+      get :map
     end
     resources :comments
   end

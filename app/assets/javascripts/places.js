@@ -56,13 +56,13 @@ $.Isotope.prototype._getCenteredMasonryColumns = function() {
         };
   };
 
-
-
 $(function(){
 
   var $container = $('#container');
 
   $container.imagesLoaded( function(){
+    $('#container').show();
+    $('#loading').hide();
     $container.isotope({
       itemSelector : '.box'
     });
@@ -72,9 +72,12 @@ $(function(){
     navSelector  : '.pagination',    // selector for the paged navigation
     nextSelector : '.pagination a',  // selector for the NEXT link (to page 2)
     itemSelector : '.box',     // selector for all items you'll retrieve
+    extraScrollPx:50,
     loading: {
-        finishedMsg: 'No more pages to load.',
-        img: 'http://i.imgur.com/qkKy8.gif'
+
+        finishedMsg: 'This is the end of the line.',
+        img: 'http://i.imgur.com/qkKy8.gif',
+
       }
     },
     // call Isotope as a callback
@@ -86,43 +89,6 @@ $(function(){
     }
   );
 });
-
-  /** Index Instance **/
-    // var $container = $('#container');
-
-    // $container.imagesLoaded( function(){
-    //   $container.isotope({
-    //     itemSelector : '.box',
-    //     isFitWidth: true
-    //   });
-    // });
-
-    // var $container1 = $('.profile-left');
-
-    // $container1.imagesLoaded( function(){
-    //   $container1.isotope({
-    //     itemSelector : '.singlegram'
-    //   });
-    // });
-
-    // $container.infinitescroll({
-    // navSelector  : '.pagination',    // selector for the paged navigation
-    // nextSelector : '.pagination a',  // selector for the NEXT link (to page 2)
-    // itemSelector : '.box',     // selector for all items you'll retrieve
-    // loading: {
-    //     finishedMsg: 'No more pages to load.',
-    //     img: 'http://i.imgur.com/6RMhx.gif'
-    //   }
-    // },
-
-    // function( newElements ) {
-    //   var $newElems = $( newElements ).css({ opacity: 0 });
-    //   $newElems.imagesLoaded(function(){
-    //     $newElems.animate({ opacity: 1 });
-    //     $container.isotope( 'appended', $newElems, true );
-    //   });
-    // }
-  // );
 
 
 // $(document).ready(function(){
@@ -137,7 +103,17 @@ $(function(){
 $(document).ready(function(){
 
    $(".various").fancybox({
-
+      maxWidth  : 800,
+      maxHeight : 600,
+      fitToView : false,
+      width   : '70%',
+      height    : '70%',
+      autoSize  : false,
+     closeClick  : false,
+      openEffect  : 'none',
+      closeEffect : 'none'
+   });
+   $(".gram").fancybox({
       margin: [50,150,50,150]
    });
 

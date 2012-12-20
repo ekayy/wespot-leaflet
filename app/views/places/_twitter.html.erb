@@ -4,7 +4,7 @@
     <% cache "twitter#{Date.today}" do %>
       <% @twitter.each do |t| %>
         <%# image_tag t.user.profile_image_url, class: 'avatar' %>
-        <p><%= t.text %></p>
+        <p><%= raw auto_link(t.text, :username_include_symbol => true) %></p>
       <% end %>
     <% end %>
   </div>

@@ -1,4 +1,4 @@
-<div id="bizContainer">
+<div id="bizContainer" style="background:white;color:black;opacity:.90;">
 
 <h2 style="font-size:24px;">Highlights</h2>
 
@@ -10,11 +10,14 @@
             </em> -->
 
 
-        <ol>
+            <ol>
           <% @comments.each do |comment| %>
-              <li><%= comment.content %><li>
+
+              <li><%= comment.content %></li>
+
           <% end %>
-          <ol>
+            </ol>
+
           <%= render "comments/form" %>
       <p><%= link_to "Comments", place_comments_path(@place) %></p>
 
