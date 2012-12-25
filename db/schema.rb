@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208022819) do
+ActiveRecord::Schema.define(:version => 20121223214910) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -19,9 +19,20 @@ ActiveRecord::Schema.define(:version => 20121208022819) do
     t.string   "commentable_type"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.integer  "user_id"
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
+  add_index "comments", ["user_id", "created_at"], :name => "index_comments_on_user_id_and_created_at"
+
+  create_table "hours", :force => true do |t|
+    t.integer  "place_id"
+    t.integer  "day"
+    t.time     "open_time"
+    t.time     "close_time"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "places", :force => true do |t|
     t.integer  "user_id"
@@ -41,6 +52,9 @@ ActiveRecord::Schema.define(:version => 20121208022819) do
     t.text     "promo"
     t.string   "slug"
     t.string   "twitterid"
+    t.string   "cost_scale"
+    t.string   "website"
+    t.string   "instagramid"
   end
 
   add_index "places", ["slug"], :name => "index_places_on_slug"

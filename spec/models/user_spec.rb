@@ -25,11 +25,10 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:relationships) }
   it { should respond_to(:followed_places) }
-  it { should respond_to(:reverse_relationships) }
-  it { should respond_to(:followers) }
   it { should respond_to(:following?) }
   it { should respond_to(:follow!) }
   it { should respond_to(:unfollow!) }
+  it { should respond_to(:comments) }
 
   it { should be_valid }
 
@@ -142,6 +141,26 @@ describe User do
 
       it { should_not be_following(test_place) }
       its(:followed_places) { should_not include(test_place) }
+    end
+  end
+
+  describe "comment associations" do
+
+    before { @user.save }
+    let!(:older_comment) do
+      FactoryGirl.create(:comment, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_comment) do
+      FactoryGirl.create(:comment, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should destroy associated comments" do
+      comments = @user.comments.dup
+      @user.destroy
+      comments.should_not be_empty
+      comments.each do |comment|
+        Comment.find_by_id(comment.id).should be_nil
+      end
     end
   end
 

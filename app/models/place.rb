@@ -1,21 +1,19 @@
 class Place < ActiveRecord::Base
-  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo, :twitterid
+  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo, :twitterid, :instagramid, :website, :hours_attributes
 
   belongs_to :user
   has_many :comments, as: :commentable
-
   has_many :reverse_relationships, foreign_key: "followed_id",
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
-
   has_reputation :votes, source: :user, aggregated_by: :sum
-
   validates_presence_of :business_name
+  has_many :hours, dependent: :destroy
+  accepts_nested_attributes_for :hours, allow_destroy: true
   acts_as_taggable
   acts_as_gmappable
   mount_uploader :coverphoto, CoverphotoUploader
-
 
   def self.text_search(query)
     if query.present?
@@ -29,8 +27,6 @@ class Place < ActiveRecord::Base
   def gmaps4rails_address
     "#{self.street}, #{self.city}, #{self.state}, #{self.zip}"
   end
-
-  scope :followers, -> { where("follower = ?")}
 
   # FriendlyID
   extend FriendlyId
@@ -53,7 +49,6 @@ class Place < ActiveRecord::Base
     # Place.all.each do |place|
     #   place.coverphoto.recreate_versions!
     # end
-  #
 end
 
 

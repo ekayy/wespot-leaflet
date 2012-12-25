@@ -20,4 +20,9 @@
 	  	state "California"
 	  	zip "94122"
 	  end
+
+	  factory :comment do
+	  	content "Lorem ipsum"
+	  	user
+	  end
 	end

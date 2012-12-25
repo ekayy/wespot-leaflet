@@ -5,6 +5,6 @@
   <%= link_to object.business_name, place_path(object)  %>
 
   <% Twitter.user_timeline(object.twitterid, :count => 1).each do |t| %>
-    <p style="width:300px;height:200px;"><%= raw auto_link(t.text) %></p>
+    <p style="width:300px;height:200px;"><%= raw auto_link(t.text, :username_include_symbol => true) %></p>
   <% end %>
 </div>

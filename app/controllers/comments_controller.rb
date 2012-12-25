@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
   def create
   	@commentable = Place.find(params[:place_id])
 	  @comment = @commentable.comments.new(params[:comment])
+    @comment.user_id = current_user.id
 	  if @comment.save
 	    respond_to do |format|
         format.html { redirect_to place_comments_url }

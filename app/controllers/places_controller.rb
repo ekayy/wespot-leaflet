@@ -28,7 +28,8 @@ class PlacesController < ApplicationController
       @instagram  = Instagram.media_search(20, 32)
     else
       begin
-      @instagram = Instagram.media_search(@place.latitude, @place.longitude, { :distance => 10 })
+      # @instagram = Instagram.media_search(@place.latitude, @place.longitude, { :distance => 10 })
+      @instagram = Instagram.tag_recent_media(@place.instagramid)
       rescue
         @instagram = Instagram.tag_recent_media('wespot')
       end
@@ -49,7 +50,7 @@ class PlacesController < ApplicationController
     # @feed = [ Comment ].inject([ ]) do |a, with_class|
     #    a + with_class.find(:all, :limit => 10, :order => 'created_at DESC')end.sort_by(&:created_at).reverse[0, 10]
     @comments = Comment.all(:order => 'created_at DESC', :limit => 10)
-    @activities = (@comments).sort_by {|a| a.created_at}.reverse
+    @feed_items = current_user.feed
   end
 
   def map

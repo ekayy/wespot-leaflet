@@ -3,6 +3,7 @@
  <h1>New user</h1>
 
  <% @user.place ||= Place.new %>
+ <% @place.hours.build %>
 
   <%= simple_form_for([:admin,@user], :html => {:multipart => true}) do |f| %>
     <% if @user.errors.any? %>
@@ -29,6 +30,21 @@
 
       <%= p.input :business_name %>
       <%= p.input :twitterid %>
+      <%= p.input :instagramid %>
+      <%= p.input :website %>
+      <%= p.input :phone %>
+
+      <%= p.simple_fields_for :hours do |p| %>
+        <fieldset>
+        <%= p.select :day, Date::DAYNAMES.zip((0..6).to_a) %>
+        <%= p.select :open_time, options_for_hours_select %>
+        <%= p.select :close_time, options_for_hours_select %>
+        <%= p.hidden_field :_destroy %>
+        <%= link_to "remove", '#', class: "remove_fields" %>
+        </fieldset>
+      <% end %>
+      <%= link_to_add_fields "Add Hours", p, :hours %>
+
 
       <%= p.input :street, :label => 'Address' %>
       <%= p.input :city %>

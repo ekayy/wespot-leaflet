@@ -2,4 +2,8 @@
 
   <%# @instagram %>
 
-<%= @activities %>
+
+<% @feed_items.each do |f| %>
+  <%= f.content %>
+  <%= User.find(f.user_id).name %>
+<% end %>

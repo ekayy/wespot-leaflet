@@ -8,6 +8,12 @@
 		<%= text_field_tag :query_location, params[:query_location], :placeholder => "Location", :class => "search-query" %>
 		<%= submit_tag "Search", :name => nil, :class => "btn" %>
 	<% end %>
+
+	<!-- <form class="filter_form">
+    <%= select("test", "business_name", Place.all.collect(&:business_name)) %>
+    <input type="submit" value="Filter" />
+  </form> -->
+
 	</div>
 
 	<%# select('place', 'id',
@@ -19,7 +25,7 @@
 	<img src="http://www.jesseyuen.com/loz/images/loading.gif" />
 </div>
 
-<% content_for :scripts do %>
+<% content_for :container do %>
 <div class="container-fluid">
 
 

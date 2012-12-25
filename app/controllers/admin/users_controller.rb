@@ -1,12 +1,14 @@
 class Admin::UsersController < ApplicationController
 	before_filter :authenticate_user!
+  helper_method :sort_column, :sort_direction
 
   def index
-  	@users = User.all
+  	@users = User.order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
   end
 
   def new
   	@user = User.new
+    @place = @user.build_place
   end
 
   def create
@@ -45,6 +47,15 @@ class Admin::UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
     redirect_to users_url
+  end
+
+  private
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
   end
 end
 
