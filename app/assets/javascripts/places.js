@@ -75,7 +75,7 @@ $(function(){
     extraScrollPx:50,
     loading: {
 
-        finishedMsg: 'This is the end of the line.',
+
         img: 'http://i.imgur.com/qkKy8.gif',
 
       }
@@ -117,4 +117,17 @@ $(document).ready(function(){
       margin: [50,150,50,150]
    });
 
+// grid hover effect
+
+   $('.image').mouseover(function() {
+    $(this).find('.info').show();
+    }).mouseout(function() {
+    $(this).find('.info').hide();
+  });
+
+
 }); // ready
+
+
+
+

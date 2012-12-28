@@ -4,6 +4,7 @@
 
 <% @user.place ||= Place.new %>
 <% @place.hours.build %>
+<% @place.dishes.build %>
 
 <%= simple_form_for([:admin,@user], :html => {:multipart => true}) do |f| %>
     <%= f.error_notification %>
@@ -22,8 +23,12 @@
       <%= p.input :instagramid %>
       <%= p.input :website %>
       <%= p.input :phone %>
+      <%= p.label 'Price' %>
+      <%= p.select :cost_scale, (['$','$$','$$$']) %>
 
+      <%= p.label 'Opening hours' %>
       <%= p.simple_fields_for :hours do |p| %>
+
       <fieldset>
         <%= p.select :day, Date::DAYNAMES.zip((0..6).to_a) %>
         <%= p.select :open_time, options_for_hours_select %>
@@ -33,6 +38,7 @@
         </fieldset>
       <% end %>
       <%= link_to_add_fields "Add Hours", p, :hours %>
+    </br>
 
       <%= p.input :street, :label => 'Address' %>
       <%= p.input :city %>
@@ -41,6 +47,17 @@
 
 
       <%= p.input :tag_list, :label => "Tags (separated by commas)" %>
+
+   <h4>Dishes</h4>
+      <%= p.simple_fields_for :dishes do |p| %>
+        <fieldset>
+        <%= p.input :name, :label => 'Dish' %>
+        <%= p.hidden_field :_destroy %>
+        <%= link_to "remove", '#', class: "remove_fields" %>
+        </fieldset>
+      <% end %>
+      <p><%= link_to_add_fields "Add Dish", p, :dishes %></p>
+
     <% end %>
 
     <%= f.button :submit, 'Update', :class => 'btn-primary' %>

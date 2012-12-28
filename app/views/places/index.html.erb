@@ -1,19 +1,16 @@
 <%= provide(:title, 'Search') %>
 
 <div class="container">
-	<%= link_to 'Map', map_places_path %>
+	<%= link_to "$", :sort => "cost1" %>
+	<%= link_to "$$", :sort => "cost2" %>
+	<%= link_to "$$$", :sort => "cost3" %>
+	<%= link_to "Most Followed", :sort => "followers" %>
 	<div class="center">
 	<%= form_tag places_path, :method => 'get', :class =>  "form-inline form-search" do %>
 		<%= text_field_tag :query, params[:query], :placeholder => "Search", :class => "search-query" %>
 		<%= text_field_tag :query_location, params[:query_location], :placeholder => "Location", :class => "search-query" %>
 		<%= submit_tag "Search", :name => nil, :class => "btn" %>
 	<% end %>
-
-	<!-- <form class="filter_form">
-    <%= select("test", "business_name", Place.all.collect(&:business_name)) %>
-    <input type="submit" value="Filter" />
-  </form> -->
-
 	</div>
 
 	<%# select('place', 'id',
@@ -28,15 +25,20 @@
 <% content_for :container do %>
 <div class="container-fluid">
 
-
-	<div id="container" style="display:none;" class="infinite-scrolling clearfix">
-		<%= paginate @places %>
-		<%= render 'box' %>
+	<div class="gridWrapper">
+		<div id="container" style="display:none;" class="infinite-scrolling clearfix">
+			<%= paginate @places %>
+			<%= render 'box' %>
+		</div>
 	</div>
-
+	<div class="mapWrapper">
+		<%= render 'gmaps' %>
+	</div>
 </div>
 
 <% end %>
+
+
 
 
 

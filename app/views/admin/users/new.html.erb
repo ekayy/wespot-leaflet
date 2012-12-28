@@ -1,9 +1,10 @@
- <div>
+
 
  <h1>New user</h1>
 
  <% @user.place ||= Place.new %>
  <% @place.hours.build %>
+ <% @place.dishes.build %>
 
   <%= simple_form_for([:admin,@user], :html => {:multipart => true}) do |f| %>
     <% if @user.errors.any? %>
@@ -33,7 +34,10 @@
       <%= p.input :instagramid %>
       <%= p.input :website %>
       <%= p.input :phone %>
+      <%= p.label 'Price' %>
+      <%= p.select :cost_scale, (['$','$$','$$$']) %>
 
+      <%= p.label 'Opening hours' %>
       <%= p.simple_fields_for :hours do |p| %>
         <fieldset>
         <%= p.select :day, Date::DAYNAMES.zip((0..6).to_a) %>
@@ -52,6 +56,13 @@
       <%= p.input :zip %>
 
       <%= p.input :tag_list, :label => "Tags (separated by commas)" %>
+
+      <h4>Dishes</h4>
+      <%= p.simple_fields_for :dishes do |p| %>
+        <fieldset>
+        <%= p.input :name, :label => 'Dish' %>
+        </fieldset>
+      <% end %>
     <% end %>
 
     <%= f.button :submit, 'Sign up', :class => 'btn-primary' %>

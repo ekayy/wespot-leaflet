@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223214910) do
+ActiveRecord::Schema.define(:version => 20121228073249) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20121223214910) do
 
   add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
   add_index "comments", ["user_id", "created_at"], :name => "index_comments_on_user_id_and_created_at"
+
+  create_table "dishes", :force => true do |t|
+    t.integer  "place_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "hours", :force => true do |t|
     t.integer  "place_id"
@@ -43,8 +50,8 @@ ActiveRecord::Schema.define(:version => 20121223214910) do
     t.string   "state"
     t.string   "country"
     t.string   "phone"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "coverphoto"
     t.float    "latitude"
     t.float    "longitude"
@@ -55,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20121223214910) do
     t.string   "cost_scale"
     t.string   "website"
     t.string   "instagramid"
+    t.integer  "followers_count"
   end
 
   add_index "places", ["slug"], :name => "index_places_on_slug"

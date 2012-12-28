@@ -3,15 +3,19 @@
 
       <div class="imageContainer">
         <div class="image">
+          <div class="info">
+            <%= place.cost_scale %>
+          </div>
 
-          <% if place.coverphoto.present? %>
+          <!-- <%# if place.coverphoto.present? %>
 
-            <%= link_to image_tag(place.coverphoto_url(:thumb).to_s), lightbox_place_path(place), class: "various fancybox.ajax" %>
+            <%# link_to image_tag(place.coverphoto_url(:thumb).to_s), lightbox_place_path(place), class: "various fancybox.ajax" %>
 
-          <% else %>
-            <a href='https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/default/weSpot+splash+page+logo.jpg' class="various" data-fancybox-type="iframe"><%= image_tag('https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/default/weSpot+splash+page+logo.jpg', size: "300x200") %> </a>
-          <% end %>
-
+          <%# else %>
+            <a href='https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/default/weSpot+splash+page+logo.jpg' class="various" data-fancybox-type="iframe"><%# image_tag('https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/default/weSpot+splash+page+logo.jpg') %> </a>
+          <%# end %>
+ -->
+          <a href='http://robertsaluminum.com/wp-content/gallery/availablestrapcolors/thumbs/thumbs_219_grey.gif'><%= image_tag('http://robertsaluminum.com/wp-content/gallery/availablestrapcolors/thumbs/thumbs_219_grey.gif') %> </a>
         </div>
 
         <div class="moreInfo">
@@ -35,10 +39,10 @@
       </div>
 
       <div class="chat">
-      <% place.comments.each do |comment| %>
-        <div class="chatbox">
+      <% place.comments.first(1).each do |comment| %>
+
           <%= comment.content %>
-        </div>
+
       <% end %>
       </div>
 

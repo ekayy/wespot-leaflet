@@ -7,3 +7,9 @@
   <%= f.content %>
   <%= User.find(f.user_id).name %>
 <% end %>
+
+<%= check_box_tag :sort, "created_at", params[:sort] == 'created_at' ? true : false %>'
+<%= @test %>
+
+
+<%= @feeds %>

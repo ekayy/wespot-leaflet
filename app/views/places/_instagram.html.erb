@@ -1,9 +1,9 @@
 <div id="instagramContainer">
-  <%# cache "instagram#{Date.today}" do %>
+  <% cache "instagram#{Date.today}" do %>
     <% for instagram in @instagram.data %>
       <div class="singlegram">
         <%= link_to image_tag(instagram.images.thumbnail.url), "#{instagram.images.standard_resolution.url}", class: 'gram' %>
       </div>
     <% end %>
-  <%# end %>
+  <% end %>
 </div>

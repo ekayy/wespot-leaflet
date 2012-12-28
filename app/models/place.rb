@@ -1,5 +1,5 @@
 class Place < ActiveRecord::Base
-  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo, :twitterid, :instagramid, :website, :hours_attributes
+  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo, :twitterid, :instagramid, :cost_scale, :website, :hours_attributes, :dishes_attributes
 
   belongs_to :user
   has_many :comments, as: :commentable
@@ -11,6 +11,9 @@ class Place < ActiveRecord::Base
   validates_presence_of :business_name
   has_many :hours, dependent: :destroy
   accepts_nested_attributes_for :hours, allow_destroy: true
+  has_many :dishes, dependent: :destroy
+  accepts_nested_attributes_for :dishes, allow_destroy: true
+
   acts_as_taggable
   acts_as_gmappable
   mount_uploader :coverphoto, CoverphotoUploader
@@ -22,6 +25,23 @@ class Place < ActiveRecord::Base
       scoped
     end
   end
+
+  def self.filter(option)
+    case option.to_sym
+    when :cost1
+      where(:cost_scale => '$')
+    when :cost2
+      where(:cost_scale => '$$')
+    when :cost3
+      where(:cost_scale => '$$$')
+    when :followers
+      joins(:followers).order("followers_count DESC")
+    else
+      scope
+    end
+  end
+
+  scope :popular, all.sort { |a, b| a.followers.count <=> b.followers.count }
 
   geocoded_by :gmaps4rails_address
   def gmaps4rails_address
@@ -43,6 +63,10 @@ class Place < ActiveRecord::Base
   #     "height" => 50 #beware to resize your pictures properly
   #     }
   # end
+
+ #  def gmaps4rails_sidebar
+
+ # end
 
   # private just uncomment
   #reprocess_image:

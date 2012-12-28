@@ -7,17 +7,25 @@
 $bg: #faf7f7;
 $color: #8c7e7e;
 
-
+body {
+  background-color:#EEE;
+}
 .show {
 }
-.container-fluid {
-  margin-right: auto;
-  margin-left: auto;
-
+// .container-fluid {
+//   margin-right: auto;
+//   margin-left: auto;
+// }
+.gridWrapper {
+    width:75%;
+    display:inline-block;
 }
-
+.mapWrapper {
+  width:30%;
+  display:inline;
+}
 #container {
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .container {
@@ -53,7 +61,7 @@ th .desc {
 }
 
 .box {
-  width:300px;
+  width:200px;
   float: left;
   padding: 10px;
   margin: 0 7px 15px;
@@ -196,7 +204,7 @@ th .desc {
 .coverphoto2 {
   box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   display:block;
-  height:200px;
+  height:100px;
 }
 
 .col1 {
@@ -234,8 +242,8 @@ th .desc {
 #bizContainer {
   box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   padding: 5px;
-  background: black;
-  color:white;
+  background: white;
+  // color:white;
   opacity: .85;
   margin-bottom:10px;
 }
@@ -324,4 +332,9 @@ th .desc {
   p {
     margin:0;
   }
+}
+
+.info {
+  position: absolute;
+  right: 10px;
 }

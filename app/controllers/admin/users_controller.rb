@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-  	@users = User.order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
+  	@users = User.order(sort_column + ' ' + sort_direction).page(params[:page]).per(30)
   end
 
   def new

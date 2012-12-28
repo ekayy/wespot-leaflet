@@ -5,4 +5,6 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :content, :user_id
   validates_length_of :content, :maximum=>140
+
+
 end
