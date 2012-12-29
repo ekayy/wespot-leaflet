@@ -27,21 +27,30 @@ class Place < ActiveRecord::Base
   end
 
   def self.filter(option)
-    case option.to_sym
-    when :cost1
-      where(:cost_scale => '$')
-    when :cost2
-      where(:cost_scale => '$$')
-    when :cost3
-      where(:cost_scale => '$$$')
-    when :followers
-      joins(:followers).order("followers_count DESC")
-    else
-      scope
+    begin
+      case option.to_sym
+      when :price1
+        where(:cost_scale => '$')
+      when :price2
+        where(:cost_scale => '$$')
+      when :price3
+        where(:cost_scale => '$$$')
+      when :followers
+        joins(:followers).order("followers_count DESC")
+      when :recent
+        joins(:comments).order("created_at DESC")
+      when :relevant
+      else
+        scope
+      end
+    rescue
+      return all
     end
   end
 
-  scope :popular, all.sort { |a, b| a.followers.count <=> b.followers.count }
+  # def self.within_bounds(bounds)
+  #   where(:location.within => {"$box" => bounds })
+  # end
 
   geocoded_by :gmaps4rails_address
   def gmaps4rails_address

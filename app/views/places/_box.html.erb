@@ -3,7 +3,7 @@
 
       <div class="imageContainer">
         <div class="image">
-          <div class="info">
+          <div class="info" style="display:none;">
             <%= place.cost_scale %>
           </div>
 
@@ -26,11 +26,7 @@
       <div class="comments">
 
         <div class="fl">
-          <em>
-            <%= pluralize place.reputation_for(:votes).to_i, "vote" %>
-            | <%= link_to "up", vote_place_path(place, type: "up"), method: "post" %>
-            | <%= link_to "down", vote_place_path(place, type: "down"), method: "post" %>
-          </em>
+          <%= place.followers_count %>
         </div>
 
         <div class="fr">

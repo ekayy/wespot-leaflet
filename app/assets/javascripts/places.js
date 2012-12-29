@@ -122,12 +122,24 @@ $(document).ready(function(){
    $('.image').mouseover(function() {
     $(this).find('.info').show();
     }).mouseout(function() {
-    $(this).find('.info').hide();
+    $('.info').hide();
   });
+
 
 
 }); // ready
 
+// map redo search function
 
+
+function drawItems(theBounds) {
+    var url = '/places.json/?sw_y=' + theBounds.getSouthWest().lng() +
+                           '&sw_x=' + theBounds.getSouthWest().lat() +
+                           '&ne_y=' + theBounds.getNorthEast().lng() +
+                           '&ne_x=' + theBounds.getNorthEast().lat();
+    $.get(url, function(newItemData) {
+        Gmaps.map.replaceMarkers(newItemData);
+    });
+}
 
 

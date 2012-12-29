@@ -1,0 +1,5 @@
+<em>
+  <%= pluralize place.reputation_for(:votes).to_i, "vote" %>
+  | <%= link_to "up", vote_place_path(place, type: "up"), method: "post" %>
+  | <%= link_to "down", vote_place_path(place, type: "down"), method: "post" %>
+</em>

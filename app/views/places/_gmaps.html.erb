@@ -2,9 +2,9 @@
 <%= gmaps("map_options" => {
                        "auto_zoom" => true,
                        "auto_adjust" => true,
-                       "zoom" => 14},
-                        "markers" => { "data" => @json },
-                          "center_on_user" => true ) %>
+                       "zoom" => 14, "detect_location" => true,
+                       "center_on_user" => true},
+                        "markers" => { "data" => @json } ) %>
 
 <% content_for :scripts do %>
 <script>
@@ -28,8 +28,11 @@ Gmaps.map.infobox = function(boxText) {
     ,enableEventPropagation: false
  }};
 
- Gmaps.map.callback = function() {
-  //your code
+function gmaps4rails_callback() {
+    google.maps.event.addListener(Gmaps.map.map, 'idle', function () {
+        var bounds = Gmaps.map.map.getBounds();
+        drawItems(bounds);
+    });
 }
  </script>
  <% end %>

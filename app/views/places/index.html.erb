@@ -1,10 +1,25 @@
 <%= provide(:title, 'Search') %>
 
 <div class="container">
-	<%= link_to "$", :sort => "cost1" %>
-	<%= link_to "$$", :sort => "cost2" %>
-	<%= link_to "$$$", :sort => "cost3" %>
-	<%= link_to "Most Followed", :sort => "followers" %>
+
+<div class="navbar">
+  <div class="navbar-inner">
+		<ul class="nav">
+			<li><%= link_to("Most Buzz", {:query => params[:query], :query_location => params[:query_location], :sort => "#"}) %></li>
+			<li><%= link_to("Most Followed", {:query => params[:query], :query_location => params[:query_location], :sort => "followers"}) %></li>
+			<li><%= link_to("Most Recent", {:query => params[:query], :query_location => params[:query_location], :sort => "recent"}) %></li>
+
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Price <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><%= link_to("$", {:query => params[:query], :sort => "price1"}) %></li>
+					<li><%= link_to("$$", {:query => params[:query], :query_location => params[:query_location], :sort => "price2"}) %></li>
+					<li><%= link_to("$$$", {:query => params[:query], :query_location => params[:query_location], :sort => "price3"}) %></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
 	<div class="center">
 	<%= form_tag places_path, :method => 'get', :class =>  "form-inline form-search" do %>
 		<%= text_field_tag :query, params[:query], :placeholder => "Search", :class => "search-query" %>
@@ -12,9 +27,6 @@
 		<%= submit_tag "Search", :name => nil, :class => "btn" %>
 	<% end %>
 	</div>
-
-	<%# select('place', 'id',
-            Place.order('business_name ASC').all.map{ |c| [c.business_name, c.id] }) %>
 </div>
 
 

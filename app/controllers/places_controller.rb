@@ -3,36 +3,24 @@ class PlacesController < ApplicationController
   def index
 
     if params[:query].present?
-      @places = Place.near(params[:query_location], 4, :order => :distance).where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query])
-
+      @places = Place.near(params[:query_location], 4, :order => :distance).where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query]).filter(params[:sort])
     elsif params[:query_location].present?
-      @places = Place.near(params[:query_location], 1, :order => :distance).page(params[:page]).per(15)
+      @places = Place.near(params[:query_location], 1, :order => :distance).filter(params[:sort])
     else
-      if params[:sort].present?
-        @places = Place.filter(params[:sort])
 
-      else
-
-        @places = Place.near([37.7750, -122.4183])
-      end
-      # @places = Place.order("created_at ASC").page(params[:page]).per(15)
+      # distance =
+      # bounds = [ [params[:sw_x].to_f, params[:sw_y].to_f],
+      #             [params[:ne_x].to_f, params[:ne_y].to_f] ]
+      box = Geocoder::Calculations.bounding_box([37.7750, -122.4183], 1)
+      @places = Place.within_bounding_box(box)
+      # @places = Place.near([37.7750, -122.4183]).filter(params[:sort])
     end
     @places = Kaminari.paginate_array(@places).page(params[:page]).per(15)
-
-    # if params[:query].present?
-    #   @places = Place.near(params[:query_location], 4, :order => :distance).where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query])
-    # 	@places = Kaminari.paginate_array(@places).page(params[:page]).per(15)
-    # elsif params[:query_location].present?
-    #   @places = Place.near(params[:query_location], 1, :order => :distance).page(params[:page]).per(15)
-    # else
-    #   @places = Place.near([37.7750, -122.4183]).text_search(params[:query]).page(params[:page]).per(15)
-    #   # @places = Place.order("created_at ASC").page(params[:page]).per(15)
-    # end
-
     @json = @places.to_gmaps4rails do |place, marker|
       # marker.infowindow render_to_string(:partial => "/places/infowindow", :locals => { :object => place})
       marker.title   place.business_name
-      marker.json({id: place.id})
+      marker.json({:longitude => place.longitude,
+                     :latitude => place.latitude })
     end
   end
 
@@ -75,22 +63,6 @@ class PlacesController < ApplicationController
   #     @test = Comment.all(:order => order_by)
 
   #     @feeds = Place.popular[0..9]
-  # end
-
-  # def map
-  #   if params[:query].present?
-  #     @places = Place.near(params[:query_location], 4, :order => :distance).where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query])
-  #     @places = Kaminari.paginate_array(@places).page(params[:page]).per(10)
-  #   elsif params[:query_location].present?
-  #     @places = Place.near(params[:query_location], 1, :order => :distance).page(params[:page]).per(10)
-  #   else
-  #     @places = Place.near([37.7750, -122.4183]).page(params[:page]).per(10)
-  #   end
-  #   @json = @places.to_gmaps4rails do |place, marker|
-  #     marker.infowindow render_to_string(:partial => "/places/infowindow", :locals => { :object => place})
-  #     marker.title   place.business_name
-  #     marker.json({id: place.id})
-  #   end
   # end
 
   def lightbox
