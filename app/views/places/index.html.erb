@@ -1,34 +1,10 @@
 <%= provide(:title, 'Search') %>
 
-
-<div class="container">
-
-<div class="navbar">
+<% content_for :container do %>
+<div class="navbar" style="margin-top:-20px;">
   <div class="navbar-inner">
-		<ul class="nav">
-			<li><%= link_to("Most Buzz", {:query => params[:query], :query_location => params[:query_location], :sort => "#"}) %></li>
-			<li><%= link_to("Most Followed", {:query => params[:query], :query_location => params[:query_location], :sort => "followers"}) %></li>
-			<li><%= link_to("Most Recent", {:query => params[:query], :query_location => params[:query_location], :sort => "recent"}) %></li>
-
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Price <b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li><%= link_to("$", {:query => params[:query], :sort => "price1"}) %></li>
-					<li><%= link_to("$$", {:query => params[:query], :query_location => params[:query_location], :sort => "price2"}) %></li>
-					<li><%= link_to("$$$", {:query => params[:query], :query_location => params[:query_location], :sort => "price3"}) %></li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-</div>
-	<div class="center">
-	<%= form_tag places_path, :method => 'get', :class =>  "form-inline form-search" do %>
-		<%= text_field_tag :query, params[:query], :placeholder => "Search", :class => "search-query" %>
-		<%= text_field_tag :query_location, params[:query_location], :placeholder => "Location", :class => "search-query" %>
-		<%= submit_tag "Search", :name => nil, :class => "btn" %>
-	<% end %>
-	</div>
-
+    <%= render 'filters' %>
+  </div>
 </div>
 <% end %>
 
