@@ -51,6 +51,8 @@
           </div>
         </div>
 
+      <h4>Logos</h4>
+        <%= p.collection_check_boxes :logo_ids, Logo.all, :id, :name  %>
 
       <h4>Recommends</h4>
       <div class="control-group">

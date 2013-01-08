@@ -1,5 +1,9 @@
 <div id="bizContainer">
-  <h3>As seen on:</h3>
-  <div class="articleImage"><%= image_tag 'https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/logos/CHOW.png', :size => '-1x24' %>
+  <h3 style="color:#aaa;text-align:center;">FEATURED ON:</h3>
+
+  <div class="articleImageContainer">
+  <% @logo.each do |logo| %>
+    <img class="articleImage" src="<%= 'https://s3-us-west-1.amazonaws.com/wespot-photo-uploads/uploads/logos/' + "#{logo.name}" + ".png" %>" />
+    <% end %>
   </div>
 </div>

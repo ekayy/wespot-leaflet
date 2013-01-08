@@ -67,6 +67,8 @@ class PlacesController < ApplicationController
   	@comment = Comment.new
     @dishes = @place.dishes
     @twitter = Twitter.user_timeline(@place.twitterid, :count => 1, :include_entities => true)
+    @logo = Place.find(params[:id]).logos
+
     if @place.latitude.nil?
       @instagram  = Instagram.media_search(20, 32)
     else
