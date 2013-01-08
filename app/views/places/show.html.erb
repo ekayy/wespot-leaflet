@@ -10,42 +10,53 @@
     });
   </script>
 
+<% content_for :container do %>
+<div class="container-fluid">
 
-
-<div class="container">
-
+  <div class="row-fluid">
     <div class="span12">
-      <div class="coverphoto2"></div>
+      <!-- <div class="coverphoto2"></div> -->
       <%= render 'follow_form' if signed_in? %>
-        <h1><%= @place.business_name %></h1>
+        <h1 style="display:inline;"><%= @place.business_name %></h1>
 
-            <p><strong><%= @place.followers.count %></strong> followers</p>
+            <span><strong><%= @place.followers.count %></strong> followers</span>
     </div>
+  </div>
 
-
-    <div class="span9">
+  <div class="row-fluid">
+    <div class="span3">
 
 
         <div class="col1">
           <%= render 'twitter' %>
-          <%= render 'instagram' %>
-          <%= render 'highlights' %>
+          <%= render 'staticmap' %>
+          <%# render 'instagram' %>
+
         </div>
     </div>
 
-    <div class="span3">
+    <div class="span5">
       <div class="col2">
 
-        <%= render 'staticmap' %>
-        <%= render 'dishes' %>
+        <%= render 'logos' %>
+        <%= render 'recommends' %>
+        <%= render 'highlights' %>
+
 
       </div>
     </div>
 
-<!--       <div class="col3">
+    <div class="span4">
+      <div class="col3">
 
-      </div> -->
+        <%= render 'dishes' %>
+
+      </div>
+    </div>
+  </div>
+
 
 
   </div>
+  <% end %>
 

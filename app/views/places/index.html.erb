@@ -1,5 +1,6 @@
 <%= provide(:title, 'Search') %>
 
+
 <div class="container">
 
 <div class="navbar">
@@ -27,27 +28,39 @@
 		<%= submit_tag "Search", :name => nil, :class => "btn" %>
 	<% end %>
 	</div>
-</div>
 
+</div>
+<% end %>
+
+
+
+
+<% content_for :container do %>
+<div class="container-fluid">
 
 <div id="loading" class="center">
 	<img src="http://www.jesseyuen.com/loz/images/loading.gif" />
 </div>
 
-<% content_for :container do %>
-<div class="container-fluid">
-
 	<div class="gridWrapper">
-		<div id="container" style="display:none;" class="infinite-scrolling clearfix">
-			<%= paginate @places %>
-			<%= render 'box' %>
+
+		<div id="container" style="display:none;" class="infinite-scrolling clearfix grid">
+
+				<!-- <%# content_tag "div", id: "places", data: {url: Place.within_bounding_box(Geocoder::Calculations.bounding_box([params[:lat].to_f, params[:lng].to_f], 1)) } do %>
+					  Loading products...
+				<%#end %> -->
+
+				<!-- <ul id="markers_list">  </ul> -->
+
+				<%= render 'box' %>
+
 		</div>
 	</div>
 	<div class="mapWrapper">
 		<%= render 'gmaps' %>
 	</div>
 </div>
-
+	<%= paginate @places %>
 <% end %>
 
 

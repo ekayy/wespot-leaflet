@@ -17,17 +17,21 @@ body {
 //   margin-left: auto;
 // }
 .gridWrapper {
-    width:75%;
+    width:73%;
     display:inline-block;
 }
+.grid {
+  display:block;
+  position:relative;
+}
 .mapWrapper {
-  width:30%;
+  width:28%;
   display:inline;
 }
 #container {
-  margin: 0 auto;
+  // margin: 0 auto;
 }
-
+.container-fluid { margin:0 auto;}
 .container {
   width:980px;
 }
@@ -42,9 +46,10 @@ body {
 }
 
 .pagination {
-  position:absolute;
+  position:relative;
   // left: -9999px;
-  left:20px;
+  left:90px;
+  width:200px;
 }
 
 th .current {
@@ -59,48 +64,113 @@ th .asc {
 th .desc {
   background-image: url(/images/down_arrow.png);
 }
-
-.box {
-  width:200px;
-  float: left;
-  padding: 10px;
-  margin: 0 7px 15px;
-  font-size: 13px;
-  background: white;
-  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
-  line-height: 1.5;
-  h2 {
-    padding: 0;
-    font-size:13px;
-    line-height: 20px;
-  }
-  .comments {
-    color: $color;
-    padding: 5px 0 0 5px;
-    overflow: auto;
-    width: 100%
-  }
-  .chat {
+.grid {
+  .box {
+    width:200px;
+    float: left;
+    padding: 10px;
+    margin: 0 7px 15px;
+    font-size: 13px;
     background: white;
-    margin: 0 0px;
-  }
-  .chatbox {
-    border-top: 1px solid white;
-    border-bottom: 1px solid rgba(#000,.1);
-    padding: 5px 5px;
-    padding-left:10px;
-    // @include pie-clearfix;
-    &:last-child {
-      border-bottom: none;
+    box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+    line-height: 1.5;
+    h2 {
+      padding: 0;
+      font-size:13px;
+      line-height: 20px;
     }
-    &:first-child {
-    	color: #b29c9c;
-    	b {
-      	color: #8c7e7e;
-    	}
+    .comments {
+      color: $color;
+      padding: 5px 0 0 5px;
+      overflow: auto;
+      width: 100%
+    }
+    .chat {
+      background: white;
+      margin: 0 0px;
+    }
+    .chatbox {
+      border-top: 1px solid white;
+      border-bottom: 1px solid rgba(#000,.1);
+      padding: 5px 5px;
+      padding-left:10px;
+      // @include pie-clearfix;
+      &:last-child {
+        border-bottom: none;
+      }
+      &:first-child {
+      	color: #b29c9c;
+      	b {
+        	color: #8c7e7e;
+      	}
+      }
+    }
+  }
+  .moreInfo {
+    position:absolute;
+    width:100%;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .62);
+    text-align: center;
+    h2 a{
+      color:#999;
+      margin: 2px 0px;
     }
   }
 }
+.list {
+  .box {
+    width:40%;
+    background: white;
+    box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+    line-height: 1.5;
+    margin: 0 0 10px 0;
+  h2 {
+      padding: 0;
+      font-size:13px;
+      line-height: 20px;
+    }
+    .comments {
+      color: $color;
+      overflow: auto;
+      width: 100%;
+      display:inline;
+    }
+    .chat {
+      background: white;
+      margin: 0 0px;
+    }
+    .chatbox {
+      border-top: 1px solid white;
+      border-bottom: 1px solid rgba(#000,.1);
+      padding: 5px 5px;
+      padding-left:10px;
+      // @include pie-clearfix;
+      &:last-child {
+        border-bottom: none;
+      }
+      &:first-child {
+        color: #b29c9c;
+        b {
+          color: #8c7e7e;
+        }
+      }
+    }
+  }
+  .moreInfo {
+
+    h2 a{
+      color:#999;
+      margin: 2px 0px;
+    }
+  }
+  .listImage {
+    width:100px;
+    height:75px;
+  }
+}
+
+
 .blockContainer {
   background-color: white;
   padding: 5px 5px;
@@ -120,17 +190,7 @@ th .desc {
   // box-shadow: 3px 3px 3px #888888;
 }
 
-.moreInfo {
-  position:absolute;
-  width:100%;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, .62);
-  text-align: center;
-  h2 {
-    color:white;
-    margin: 2px 0px;
-  }
-}
+
 
 /**** Clearfix ****/
 
@@ -206,7 +266,6 @@ th .desc {
 }
 
 .col1 {
-  float: left;
   background:none;
   padding: 0;
   margin: 0 auto;
@@ -229,7 +288,7 @@ th .desc {
 
 .singlegram {
   float: left;
-  padding: 3px;
+  padding: 5px;
   margin: 0 5px 10px 5px;
   font-size: 13px;
   line-height: 1.5;
@@ -242,13 +301,45 @@ th .desc {
   padding: 5px;
   background: white;
   // color:white;
-  opacity: .85;
+  // opacity: .85;
   margin-bottom:10px;
+  display:relative;
+  bottom:2%;
 }
 #instagramContainer {
   overflow:hidden;
   margin-bottom:10px;
 }
+
+#dishesContainer {
+  margin: 0;
+  overflow:hidden;
+  margin-bottom:10px;
+}
+.dishItem {
+  // padding: 10px;
+  margin: 0 5px 10px 0;
+  font-size: 13px;
+  line-height: 1.5;
+  background:white;
+  list-style: none;
+  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  overflow:auto;
+  li {
+
+    margin: 0;
+  }
+}
+.showImage {
+      float:left;
+      margin-right: 10px;
+      height:100px;
+    }
+.dishText {
+  padding: 10px;
+
+}
+
 
 #bizInfo {
   padding:5px;
@@ -335,4 +426,10 @@ th .desc {
 .info {
   position: absolute;
   right: 10px;
+}
+
+
+
+.articleImage {
+  height:50px;
 }

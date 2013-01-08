@@ -56,39 +56,40 @@ $.Isotope.prototype._getCenteredMasonryColumns = function() {
         };
   };
 
-$(function(){
+function grid() {
+  $(function(){
+    var $container = $('#container');
 
-  var $container = $('#container');
-
-  $container.imagesLoaded( function(){
-    $('#container').show();
-    $('#loading').hide();
-    $container.isotope({
-      itemSelector : '.box'
-    });
-  });
-
-  $container.infinitescroll({
-    navSelector  : '.pagination',    // selector for the paged navigation
-    nextSelector : '.pagination a',  // selector for the NEXT link (to page 2)
-    itemSelector : '.box',     // selector for all items you'll retrieve
-    extraScrollPx:50,
-    loading: {
-
-
-        img: 'http://i.imgur.com/qkKy8.gif',
-
-      }
-    },
-    // call Isotope as a callback
-    function(newElements) {
-      var $newElems = $(newElements);
-      $newElems.imagesLoaded(function(){
-        $container.isotope('appended', $newElems );
+    $container.imagesLoaded( function(){
+      $('#container').show();
+      $('#loading').hide();
+      $container.isotope({
+        itemSelector : '.box'
       });
-    }
-  );
-});
+    });
+
+    // $container.infinitescroll({
+    //   navSelector  : '.pagination',    // selector for the paged navigation
+    //   nextSelector : '.pagination a',  // selector for the NEXT link (to page 2)
+    //   itemSelector : '.box',     // selector for all items you'll retrieve
+    //   extraScrollPx:50,
+    //   loading: {
+    //       img: 'http://i.imgur.com/qkKy8.gif',
+    //     }
+    //   },
+    //   // call Isotope as a callback
+    //   function(newElements) {
+    //     var $newElems = $(newElements);
+    //     $newElems.imagesLoaded(function(){
+    //       $container.isotope('appended', $newElems );
+    //     });
+    //   }
+    // );
+  });
+}
+
+// call isotope
+grid();
 
 
 // $(document).ready(function(){
@@ -125,9 +126,25 @@ $(document).ready(function(){
     $('.info').hide();
   });
 
+  $('button').click(function(e) {
+    var $container = $('#container');
+    if ($(this).hasClass('grid')) {
+        $container.removeClass('list').addClass('grid');
+        $('.mapWrapper').removeClass('list').addClass('grid');
+        grid();
+    }
+    else if($(this).hasClass('list')) {
+        $container.removeClass('grid').addClass('list');
+        $('.mapWrapper').removeClass('grid').addClass('list');
+        $('.mapContainer').show('slow', function() {
+          google.maps.event.trigger(map, 'resize');
+        });
+        $container.isotope('destroy');
+
 
 
 }); // ready
+
 
 // map redo search function
 
@@ -143,3 +160,40 @@ function drawItems(theBounds) {
 }
 
 
+function drawItems(theBounds) {
+    var url = '/places.json?lng=' + theBounds.lng() +
+                           '&lat=' + theBounds.lat();
+    $.get(url, function(newItemData) {
+        Gmaps.map.replaceMarkers(newItemData);
+    });
+    // location.href = url;
+}
+// function passItems(theBounds) {
+//     var uri = '/places?lng=' + theBounds.lng() +
+//                       '&lat=' + theBounds.lat();
+//     location.href = uri;
+// }
+
+function passItems(theBounds) {
+
+  var uri = '/places?lng=' + theBounds.lng() +
+                        '&lat=' + theBounds.lat();
+  // $.get('places', function(newItemData) {
+  //    location.href = uri;
+  //  });
+
+  $.ajax({
+            type: 'GET',
+            url: 'places',
+            dataType: 'json',
+            data: "lat=" + theBounds.lat() + "&lng=" + theBounds.lng(),
+            success: function (data) {
+              return console.log(data);
+            }
+          });
+  // $.getJSON("/places.json");
+}
+
+// $(function() {
+//   return console.log($('#places').data('url'));
+// });

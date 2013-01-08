@@ -19,6 +19,10 @@ Wespot::Application.routes.draw do
     resources :comments
   end
 
+  resources :dishes do
+    resources :comments
+  end
+
   root :to => "places#index"
   devise_for :users, :path => 'accounts', path_names: {sign_in: "login", sign_out: "logout"}, controllers: {omniauth_callbacks: "omniauth_callbacks", path: "accounts"}
   resources :users

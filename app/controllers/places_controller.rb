@@ -1,8 +1,10 @@
 class PlacesController < ApplicationController
+  helper_method :near_column
 
   def index
 
     if params[:query].present?
+
       @places = Place.near(params[:query_location], 4, :order => :distance).where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query]).filter(params[:sort])
     elsif params[:query_location].present?
       @places = Place.near(params[:query_location], 1, :order => :distance).filter(params[:sort])
@@ -21,7 +23,9 @@ class PlacesController < ApplicationController
       marker.title   place.business_name
       marker.json({:longitude => place.longitude,
                      :latitude => place.latitude })
+
     end
+
   end
 
   def show
@@ -29,6 +33,7 @@ class PlacesController < ApplicationController
   	@commentable = @place
   	@comments = @commentable.comments
   	@comment = Comment.new
+    @dishes = @place.dishes
     @twitter = Twitter.user_timeline(@place.twitterid, :count => 1, :include_entities => true)
     if @place.latitude.nil?
       @instagram  = Instagram.media_search(20, 32)
@@ -70,4 +75,13 @@ class PlacesController < ApplicationController
     @twitter = Twitter.user_timeline(@place.twitterid, :count => 1)
     render :layout => false
   end
+
+  private
+    def near_column
+      if params[:query_location].present?
+        params[:query_location]
+      else
+        "San Francisco"
+      end
+    end
 end
