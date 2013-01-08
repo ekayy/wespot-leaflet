@@ -1,5 +1,5 @@
 class Place < ActiveRecord::Base
-  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo, :twitterid, :instagramid, :cost_scale, :website, :hours_attributes, :dishes_attributes
+  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo, :twitterid, :instagramid, :cost_scale, :website, :hours_attributes, :dishes_attributes, :articles_attributes
 
   belongs_to :user
   has_many :comments, as: :commentable
@@ -13,6 +13,8 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :hours, allow_destroy: true
   has_many :dishes, dependent: :destroy
   accepts_nested_attributes_for :dishes, allow_destroy: true
+  has_many :articles, dependent: :destroy
+  accepts_nested_attributes_for :articles, allow_destroy: true
 
   acts_as_taggable
   acts_as_gmappable
@@ -27,21 +29,36 @@ class Place < ActiveRecord::Base
   end
 
   def self.filter(option)
-    case option.to_sym
-    when :cost1
-      where(:cost_scale => '$')
-    when :cost2
-      where(:cost_scale => '$$')
-    when :cost3
-      where(:cost_scale => '$$$')
-    when :followers
-      joins(:followers).order("followers_count DESC")
-    else
-      scope
+    begin
+      case option.to_sym
+      when :price1
+        where(:cost_scale => '$')
+      when :price2
+        where(:cost_scale => '$$')
+      when :price3
+        where(:cost_scale => '$$$')
+      when :followers
+        joins(:followers).order("followers_count DESC")
+      when :recent
+        joins(:comments).order("created_at DESC")
+      when :relevant
+      else
+        scope
+      end
+    rescue
+      return all
     end
   end
 
-  scope :popular, all.sort { |a, b| a.followers.count <=> b.followers.count }
+  # def self.within_bounds(bounds)
+  #   self.all :conditions => "ST_Contains(
+  #                            ST_SetSRID(
+  #                                ST_MakeBox2D(
+  #                                   ST_Point(0, 50),ST_Point(50,0)),
+  #                                   4326
+  #                                ),
+  #                            geom)"
+  # end
 
   geocoded_by :gmaps4rails_address
   def gmaps4rails_address
@@ -64,9 +81,9 @@ class Place < ActiveRecord::Base
   #     }
   # end
 
- #  def gmaps4rails_sidebar
-
- # end
+def gmaps4rails_sidebar
+  "<span>test</span>" #put whatever you want here
+end
 
   # private just uncomment
   #reprocess_image:

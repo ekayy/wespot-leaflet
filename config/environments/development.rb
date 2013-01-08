@@ -53,4 +53,5 @@ Wespot::Application.configure do
   config.assets.debug = true
 
   config.serve_static_assets = false
+
 end

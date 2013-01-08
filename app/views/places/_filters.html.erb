@@ -1,0 +1,35 @@
+
+<ul class="nav">
+  <li><%= link_to("Most Buzz", {:query => params[:query], :query_location => params[:query_location], :sort => "#"}) %></li>
+  <li><%= link_to("Most Followed", {:query => params[:query], :query_location => params[:query_location], :sort => "followers"}) %></li>
+  <li><%= link_to("Most Recent", {:query => params[:query], :query_location => params[:query_location], :sort => "recent"}) %></li>
+
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Price <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><%= link_to("$", {:query => params[:query], :sort => "price1"}) %></li>
+      <li><%= link_to("$$", {:query => params[:query], :query_location => params[:query_location], :sort => "price2"}) %></li>
+      <li><%= link_to("$$$", {:query => params[:query], :query_location => params[:query_location], :sort => "price3"}) %></li>
+    </ul>
+  </li>
+</ul>
+
+<ul class="nav">
+  <li id="search">
+    <%= form_tag places_path, :method => 'get', :class =>  "form-inline navbar-form" do %>
+      <%= text_field_tag :query, params[:query], :placeholder => "Search" %>
+      <%= text_field_tag :query_location, params[:query_location], :placeholder => "Location" %>
+
+      <%# text_field_tag :lat, params[:lat], :placeholder => "Latitude" %>
+      <%# text_field_tag :lng, params[:lng], :placeholder => "Longitude" %>
+
+      <%= submit_tag "Search", :name => nil, :class => "btn" %>
+    <% end %></li>
+
+</ul>
+
+<ul class="nav pull-right">
+  <li><button class="grid btn">Grid View</button></li>
+  <li><button class="list btn">List View</button></li>
+</ul>
+

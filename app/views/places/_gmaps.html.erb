@@ -1,10 +1,12 @@
 
+
 <%= gmaps("map_options" => {
-                       "auto_zoom" => true,
+        :container_class => "mapContainer",
+                       "auto_zoom" => false,
                        "auto_adjust" => true,
-                       "zoom" => 14},
-                        "markers" => { "data" => @json },
-                          "center_on_user" => true ) %>
+                       "zoom" => 13},
+                        "markers" => { "data" => @json } ) %>
+                        <!-- "options" => {"list_container" => "markers_list" } -->
 
 <% content_for :scripts do %>
 <script>
@@ -28,8 +30,25 @@ Gmaps.map.infobox = function(boxText) {
     ,enableEventPropagation: false
  }};
 
- Gmaps.map.callback = function() {
-  //your code
+Gmaps.map.callback = function() {
+  // google.maps.event.addListener(Gmaps.map.map, 'idle', function(){
+  //    //Map fully loaded here
+  //    var bounds = Gmaps.map.map.getCenter();
+  //       drawItems(bounds);
+  //   });
+  google.maps.event.addListener(Gmaps.map.map, 'dragend', function(){
+     //Map fully loaded here
+     var bounds = Gmaps.map.map.getCenter();
+        drawItems(bounds);
+        passItems(bounds);
+    });
+
+
+
+ //  google.maps.event.addListener(marker, 'mouseover', function() {
+ //    infowindow.open(map, this);
+ //  });
 }
+
  </script>
  <% end %>

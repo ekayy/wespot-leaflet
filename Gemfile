@@ -17,6 +17,7 @@ gem 'fog'
 # gem 'sidekiq'
 gem 'gmaps4rails'
 gem 'geocoder'
+# gem 'activerecord-postgis-adapter'
 gem 'kaminari'
 gem 'activerecord-reputation-system', require: 'reputation_system'
 

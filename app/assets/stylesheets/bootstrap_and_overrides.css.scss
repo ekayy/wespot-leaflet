@@ -1,12 +1,13 @@
 @import "bootstrap";
 body { padding-top: 60px; }
+//@import "bootstrap-responsive";
 
 
-.span9 {width:665px;}
-.span3 {width:255px;}
+.container-fluid {padding: 0 10%;}
+.control-label {font-weight:bold;}
+//.row-fluid [class*="span"] {margin-left:20px;}
+.row {margin-left:0;}
 
-
-// @media (min-width: 600px) { #wrapper { width: 615px;margin:0 auto;} }
-// @media (min-width: 900px) { #wrapper { width: 920px;margin:0 auto;} }
-// @media (min-width: 1200px) { #wrapper { width: 1225px;margin:0 auto;} }
-// @media (min-width: 1600px) { #wrapper { width: 1530px;margin:0 auto;} }
+// @media (min-width: 600px) { .container { width: 615px;margin:0 auto;} }
+// @media (min-width: 1200px) { .container { width: 1225px;margin:0 auto;} }
+// @media (min-width: 1600px) { .container { width: 1530px;margin:0 auto;} }

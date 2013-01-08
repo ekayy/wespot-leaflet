@@ -1,6 +1,38 @@
-<div id="bizContainer">
-<h3>Top Dishes</h3>
-  <ol>
+
+<!-- <h3>Top Dishes</h3> -->
+
+<!-- test -->
+  <ul id="dishesContainer">
+    <% cache "instagram#{Date.today}" do %>
+      <% for instagram in @instagram.data %>
+        <li class="dishItem">
+          <%= link_to image_tag(instagram.images.thumbnail.url,  class: 'showImage' ), "#{instagram.images.standard_resolution.url}" %>
+            <div class="dishText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in massa sem, tempor sodales nunc.  </div>
+            <%= link_to "Comments", '#', class: 'fr' %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <!-- <ul id="dishesContainer">
+    <% @dishes.each do |dish| %>
+
+        <li class="dishItem">
+            <%= link_to image_tag(dish.image_url(:medium)), "#{dish.image}", class: 'gram' %>
+          <p><%= dish.name %></p>
+        </li>
+
+    <% end %>
+       <li><div style="background:#888;width:150px;height:150px;"></div>
+        </li>
+        <li><div style="background:#888;width:150px;height:150px;"></div>
+        </li>
+        <li><div style="background:#888;width:150px;height:150px;"></div>
+        </li>
+  </ul> -->
+
+
+  <!-- <ol>
     <li>Fish <em>
         <%= link_to "up", vote_place_path(@place, type: "up"), method: "post" %>
         | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
@@ -31,6 +63,4 @@
         | <%= link_to "down", vote_place_path(@place, type: "down"), method: "post" %>
         | <%= pluralize @place.reputation_for(:votes).to_i, "vote" %>
       </em></li>
-  </ol>
-
-</div>
+  </ol> -->

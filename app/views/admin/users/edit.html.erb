@@ -3,10 +3,10 @@
 <h2>Edit <%= @user.name %></h2>
 
 <% @user.place ||= Place.new %>
-<% @place.hours.build %>
-<% @place.dishes.build %>
 
-<%= simple_form_for([:admin,@user], :html => {:multipart => true}) do |f| %>
+
+
+<%= simple_form_for([:admin,@user], :html => {:class => 'form-horizontal', :multipart => true}) do |f| %>
     <%= f.error_notification %>
 
     <%= f.input :name, :autofocus => true, :label => 'Username' %>
@@ -15,52 +15,60 @@
 
     <%= f.simple_fields_for :place do |p| %>
 
-    <p><%= p.label "Cover Photo" %>
-      <%= p.file_field :coverphoto %></p>
-
+<h4>Business info</h4>
+  <div class="row">
+    <div class="span6">
       <%= p.input :business_name %>
       <%= p.input :twitterid %>
       <%= p.input :instagramid %>
       <%= p.input :website %>
       <%= p.input :phone %>
-      <%= p.label 'Price' %>
-      <%= p.select :cost_scale, (['$','$$','$$$']) %>
-
-      <%= p.label 'Opening hours' %>
-      <%= p.simple_fields_for :hours do |p| %>
-
-      <fieldset>
-        <%= p.select :day, Date::DAYNAMES.zip((0..6).to_a) %>
-        <%= p.select :open_time, options_for_hours_select %>
-        <%= p.select :close_time, options_for_hours_select %>
-        <%= p.hidden_field :_destroy %>
-        <%= link_to "remove", '#', class: "remove_fields" %>
-        </fieldset>
-      <% end %>
-      <%= link_to_add_fields "Add Hours", p, :hours %>
-    </br>
-
+    </div>
+    <div class="span5">
       <%= p.input :street, :label => 'Address' %>
       <%= p.input :city %>
       <%= p.input :state %>
       <%= p.input :zip %>
-
-
       <%= p.input :tag_list, :label => "Tags (separated by commas)" %>
+    </div>
+  </div>
 
-   <h4>Dishes</h4>
-      <%= p.simple_fields_for :dishes do |p| %>
-        <fieldset>
-        <%= p.input :name, :label => 'Dish' %>
-        <%= p.hidden_field :_destroy %>
-        <%= link_to "remove", '#', class: "remove_fields" %>
-        </fieldset>
-      <% end %>
-      <p><%= link_to_add_fields "Add Dish", p, :dishes %></p>
+  <div class="row">
+    <div class="span12">
+      <%= p.label "Cover Photo" %>
+      <%= p.file_field :coverphoto %>
+        <div class="control-group">
+          <%= p.label 'Price' %>
+          <%= p.select :cost_scale, (['$','$$','$$$']) %>
+        </div>
+          <div class="control-group">
+          <%= p.label 'Opening hours' %>
+        </br></br>
+          <div class="control-group">
+            <div class="control-label">
+          <%= link_to_add_fields "Add Hours", p, :hours %>
+            </div>
+          </div>
+        </div>
 
+
+      <h4>Recommends</h4>
+      <div class="control-group">
+        <div class="control-label"><%= link_to_add_fields "Add Article", p, :articles %>
+        </div>
+      </div>
+
+      <h4>Dishes</h4>
+      <div class="control-group">
+        <div class="control-label">
+        <%= link_to_add_fields "Add Dish", p, :dishes %>
+      </div>
+      </div>
     <% end %>
 
     <%= f.button :submit, 'Update', :class => 'btn-primary' %>
   <% end %>
+  </div>
+</div>
 
   <%= link_to "Back", admin_users_path %>

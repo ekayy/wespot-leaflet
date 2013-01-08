@@ -1,0 +1,15 @@
+<fieldset>
+<%= f.input :url %>
+<%= f.input :title %>
+<%= f.input :snippet, :as => :text, :input_html => { :cols => 50, :rows => 5 } %>
+  <div class="control-group">
+    <%= f.label "Article Image" %>
+    <%= f.file_field :image %>
+  </div>
+  <div class="control-group">
+    <%= f.label :remote_image_url, "or image URL", :class => 'control-label' %>
+    <%= f.text_field :remote_image_url %>
+    <%= f.hidden_field :_destroy %>
+    <%= link_to "remove", '#', class: "remove_fields btn" %>
+    </div>
+</fieldset>
