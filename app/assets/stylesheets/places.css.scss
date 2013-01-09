@@ -8,14 +8,11 @@ $bg: #faf7f7;
 $color: #8c7e7e;
 
 body {
-  background-color:#EEE;
+  // background-color:#EEE;
+  font-size:13px;
 }
 .show {
 }
-// .container-fluid {
-//   margin-right: auto;
-//   margin-left: auto;
-// }
 .gridWrapper {
     width:73%;
     display:inline-block;
@@ -182,7 +179,7 @@ th .desc {
 .blockContainer {
   background-color: white;
   padding: 5px 5px;
-  box-shadow:  0 1px 3px rgba(34,25,25,0.5);
+  // box-shadow:  0 1px 3px rgba(34,25,25,0.5);
   position: relative;
 }
 
@@ -305,7 +302,7 @@ th .desc {
 }
 
 #bizContainer {
-  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   padding: 5px;
   background: white;
   // color:white;
@@ -331,7 +328,7 @@ th .desc {
   line-height: 1.5;
   background:white;
   list-style: none;
-  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   overflow:hidden;
   li {
 
@@ -341,7 +338,7 @@ th .desc {
 .showImage {
       float:left;
       margin-right: 10px;
-      height:100px;
+      height:75px;
     }
 .dishText {
   padding: 10px;
@@ -439,8 +436,9 @@ th .desc {
 
 .articleImageContainer {
   text-align:center;
+  opacity: .6;
 }
 .articleImage {
-  height:50px;
+  height:40px;
   margin: 0 15px 10px 15px;
 }
