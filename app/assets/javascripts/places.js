@@ -127,19 +127,19 @@ $(document).ready(function(){
   });
 
   $('button').click(function(e) {
-    var $container = $('#container');
+    var $container = $('.container-fluid');
     if ($(this).hasClass('grid')) {
         $container.removeClass('list').addClass('grid');
-        $('.mapWrapper').removeClass('list').addClass('grid');
+        $('.mapContainer').removeClass('fullmap').addClass('regmap');
         grid();
     }
     else if($(this).hasClass('list')) {
         $container.removeClass('grid').addClass('list');
-        $('.mapWrapper').removeClass('grid').addClass('list');
+        $('.mapContainer').removeClass('regmap').addClass('fullmap');
         $('.mapContainer').show('slow', function() {
           google.maps.event.trigger(map, 'resize');
         });
-        $container.isotope('destroy');
+        $('#container').isotope('destroy');
 
     }
   });

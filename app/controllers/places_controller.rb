@@ -30,7 +30,7 @@ class PlacesController < ApplicationController
       #   format.json { render :json => @places }
       # end
     end
-    @places = Kaminari.paginate_array(@places).page(params[:page]).per(15)
+    @places = Kaminari.paginate_array(@places).page(params[:page]).per(20)
 
 
     respond_to do |format|

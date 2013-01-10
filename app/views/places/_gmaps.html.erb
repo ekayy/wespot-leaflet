@@ -1,6 +1,6 @@
 
 
-<%= gmaps("map_options" => {
+<%= gmaps("map_options" => {:raw => "{styles: mapStyle}",
         :container_class => "mapContainer",
                        "auto_zoom" => false,
                        "auto_adjust" => true,
@@ -8,6 +8,30 @@
                         "markers" => { "data" => @json } ) %>
                         <!-- "options" => {"list_container" => "markers_list" } -->
 
+<script type="text/javascript" charset="utf-8">
+var mapStyle = [
+  {
+    featureType: "all",
+    stylers: [
+      { hue: "#00ffe6" },
+      { saturation: -20 }
+    ]
+  },{
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [
+      { lightness: 100 },
+      { visibility: "simplified" }
+    ]
+  },{
+    featureType: "road",
+    elementType: "labels",
+    stylers: [
+      { visibility: "off" }
+    ]
+  }
+];
+</script>
 <% content_for :scripts do %>
 <script>
 Gmaps.map.infobox = function(boxText) {
@@ -30,18 +54,18 @@ Gmaps.map.infobox = function(boxText) {
     ,enableEventPropagation: false
  }};
 
-Gmaps.map.callback = function() {
-  // google.maps.event.addListener(Gmaps.map.map, 'idle', function(){
-  //    //Map fully loaded here
-  //    var bounds = Gmaps.map.map.getCenter();
-  //       drawItems(bounds);
-  //   });
-  google.maps.event.addListener(Gmaps.map.map, 'dragend', function(){
-     //Map fully loaded here
-     var bounds = Gmaps.map.map.getCenter();
-        drawItems(bounds);
-        passItems(bounds);
-    });
+// Gmaps.map.callback = function() {
+//   // google.maps.event.addListener(Gmaps.map.map, 'idle', function(){
+//   //    //Map fully loaded here
+//   //    var bounds = Gmaps.map.map.getCenter();
+//   //       drawItems(bounds);
+//   //   });
+//   google.maps.event.addListener(Gmaps.map.map, 'dragend', function(){
+//      //Map fully loaded here
+//      var bounds = Gmaps.map.map.getCenter();
+//         drawItems(bounds);
+//         passItems(bounds);
+//     });
 
 
 

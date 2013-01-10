@@ -13,20 +13,9 @@ body {
 }
 .show {
 }
-.gridWrapper {
-    width:73%;
-    display:inline-block;
-}
-.grid {
-  display:block;
-  position:relative;
-}
-.mapWrapper {
-  width:28%;
-  display:inline;
-}
+
 #container {
-  // margin: 0 auto;
+  margin: 0 auto;
 }
 .container-fluid { margin:0 auto;}
 .container {
@@ -70,6 +59,14 @@ th .desc {
   background-image: url(/images/down_arrow.png);
 }
 .grid {
+  .mapWrapper {
+    width:25%;
+    float:left;
+  }
+  .gridWrapper {
+    width:73%;
+    float:left;
+  }
   .box {
     width:200px;
     float: left;
@@ -124,8 +121,24 @@ th .desc {
   }
 }
 .list {
+  .gridWrapper {
+    position:relative;
+    width: 300px;
+    float:left;
+    z-index:2;
+    overflow: visible !important;
+  }
+  .fullmap {
+    position:fixed !important;
+    top:80px;
+    width:100%;
+    height:100%;
+    right:0;
+    left:0;
+    z-index:1;
+  }
   .box {
-    width:40%;
+    width:400px;
     background: white;
     box-shadow:  0 1px 3px rgba(34,25,25,0.4);
     line-height: 1.5;

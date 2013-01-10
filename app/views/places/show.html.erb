@@ -11,7 +11,7 @@
   </script>
 
 <% content_for :container do %>
-<div class="container-fluid" style="padding: 0 8%;">
+<div class="container-fluid" style="padding: 0 10%;">
 
   <div class="row-fluid">
     <div class="span12" style="border-bottom:5px solid black;">
@@ -23,11 +23,12 @@
     </div>
   </div>
 
-  <div class="row-fluid" style="padding-top:10px;">
+  <div class="row-fluid" style="padding-top:30px;">
     <div class="span3">
 
 
         <div class="col1">
+          <%= render 'logos' %>
           <%= render 'twitter' %>
           <%= render 'staticmap' %>
           <%# render 'instagram' %>
@@ -38,7 +39,7 @@
     <div class="span5">
       <div class="col2">
 
-        <%= render 'logos' %>
+
         <%= render 'recommends' %>
         <%= render 'highlights' %>
 
@@ -48,6 +49,7 @@
 
     <div class="span4">
       <div class="col3">
+
 
         <%= render 'dishes' %>
 
