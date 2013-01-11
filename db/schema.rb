@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106001450) do
+ActiveRecord::Schema.define(:version => 20130108071119) do
 
   create_table "articles", :force => true do |t|
     t.integer  "place_id"
@@ -52,6 +52,22 @@ ActiveRecord::Schema.define(:version => 20130106001450) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "logos", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "place_logos", :force => true do |t|
+    t.integer  "place_id"
+    t.integer  "logo_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "place_logos", ["place_id", "logo_id"], :name => "index_place_logos_on_place_id_and_logo_id"
 
   create_table "places", :force => true do |t|
     t.integer  "user_id"

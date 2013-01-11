@@ -1,5 +1,5 @@
 class Place < ActiveRecord::Base
-  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo, :twitterid, :instagramid, :cost_scale, :website, :hours_attributes, :dishes_attributes, :articles_attributes
+  attr_accessible :business_name, :street, :city, :zip, :state, :country, :phone, :latitude, :longitude, :tag_list, :coverphoto, :comment_attributes, :promo, :twitterid, :instagramid, :cost_scale, :website, :hours_attributes, :dishes_attributes, :articles_attributes, :logos_attributes, :logo_ids
 
   belongs_to :user
   has_many :comments, as: :commentable
@@ -16,8 +16,11 @@ class Place < ActiveRecord::Base
   has_many :articles, dependent: :destroy
   accepts_nested_attributes_for :articles, allow_destroy: true
 
+  has_many :place_logos
+  has_many :logos, through: :place_logos
+  accepts_nested_attributes_for :logos
+
   acts_as_taggable
-  acts_as_gmappable
   mount_uploader :coverphoto, CoverphotoUploader
 
   def self.text_search(query)
@@ -49,6 +52,8 @@ class Place < ActiveRecord::Base
       return all
     end
   end
+
+
 
   # def self.within_bounds(bounds)
 

@@ -1,44 +1,194 @@
 <%= provide(:title, 'Search') %>
 
-<% content_for :container do %>
-<div class="navbar" style="margin-top:-20px;">
+<% content_for :filters do %>
+<div class="navbar navbar-fixed-top" style="top:40px;">
   <div class="navbar-inner">
     <%= render 'filters' %>
   </div>
 </div>
 <% end %>
 
-
-
+<div id="map"></div>
 
 <% content_for :container do %>
-<div class="container-fluid">
+<div class="container-fluid grid">
 
-<div id="loading" class="center">
-	<img src="http://www.jesseyuen.com/loz/images/loading.gif" />
-</div>
+	<div id="loading" class="center">
+		<img src="http://www.jesseyuen.com/loz/images/loading.gif" />
+	</div>
 
-	<div class="gridWrapper">
-
-		<div id="container" style="display:none;" class="infinite-scrolling clearfix grid">
-
-				<!-- <%# content_tag "div", id: "places", data: {url: Place.within_bounding_box(Geocoder::Calculations.bounding_box([params[:lat].to_f, params[:lng].to_f], 1)) } do %>
-					  Loading products...
-				<%#end %> -->
-
-				<!-- <ul id="markers_list">  </ul> -->
-
-				<%= render 'box' %>
-
+	<div class="gridWrapper grid">
+		<div id="container" class="infinite-scrolling clearfix">
+			<%= render 'box' %>
 		</div>
 	</div>
+
 	<div class="mapWrapper">
-		<%= render 'gmaps' %>
+		<%# render 'gmaps' %>
 	</div>
+
 </div>
-	<%= paginate @places %>
+<%# paginate @places %>
+
+<!-- <div class="container-fluid grid">
+
+	<div class="gridWrapper grid">
+		<div id="container" class="infinite-scrolling clearfix">
+		<ul></ul>
+		</div>
+		<%# content_tag "div", id: "container", data: {url: @places } do %>
+
+		<%# end %>
+	</div>
+
+</div> -->
 <% end %>
 
+
+<% content_for :scripts do %>
+<script>
+	var map, tileLayer, firstLoad;
+  firstLoad = true;
+  tileLayer = new L.tileLayer('http://{s}.tile.cloudmade.com/e7b61e61295a44a5b319ca0bd3150890/998/256/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; [...]'
+  });
+  places = new L.LayerGroup();
+  map = new L.map('map', {
+		scrollWheelZoom:false,
+		center:[37.7750, -122.4483],
+		zoom:14,
+		layers: [tileLayer, places],
+		zoomControl: false,
+    keyboard: false
+	});
+	var zoomControl = new L.Control.Zoom({position: 'topright'}).addTo(map);
+
+$(document).ready(function(){
+	// $.ajaxSetup({cache:false});
+//initialize markers
+  getPlaces();
+  map.on('dragend', function(){
+    var bounds = map.getCenter();
+	  replacePlaces(bounds);
+  });
+});
+
+function getPlaces() {
+	var url = '/places.json?utf8=✓&query=&query_location=san+francisco';
+  drawPlaces(url);
+}
+
+function replacePlaces(theBounds) {
+	places.clearLayers();
+  var url = '/places?lng=' + theBounds.lng +
+                         '&lat=' + theBounds.lat;
+                         drawPlaces(url);
+
+  $.ajax({
+      type: 'GET',
+      url: 'places',
+      dataType: 'json',
+      data: "lat=" + theBounds.lat + "&lng=" + theBounds.lng,
+      success: function (data) {
+        // $('#container').html('<%= escape_javascript(render 'index.js') %>');
+      	console.log(data);
+      }
+    });
+  drawPlaces(url);
+  // location.href = url;
+}
+
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+console.log(getURLParameter(name));
+
+function drawPlaces(u) {
+	$.getJSON(u, function (data) {
+    for (var i = 0; i < data.length; i++) {
+      var location = new L.LatLng(data[i].latitude, data[i].longitude);
+      var name = data[i].business_name;
+      var marker = new L.marker(location);
+      places.addLayer(marker);
+    }
+   	$.each(data, function(i) {
+		    // console.log(data[i].business_name);
+		    // return(data[i].business_name);
+    });
+
+  });
+
+
+}
+
+
+/* WITHOUT REFRESH
+$(document).ready(function(){
+	$.ajaxSetup({cache:false});
+//initialize markers
+	var bounds = map.getCenter();
+  getPlaces(bounds);
+  map.on('dragend', function(){
+    var bounds = map.getCenter();
+	  replacePlaces(bounds);
+  });
+});
+
+function getPlaces(theBounds) {
+	var url = '/places.json?utf8=✓&query=&query_location=san+francisco';
+  drawPlaces(url);
+}
+
+function replacePlaces(theBounds) {
+	places.clearLayers();
+  var url = '/places?lng=' + theBounds.lng +
+                         '&lat=' + theBounds.lat;
+                         drawPlaces(url);
+
+  $.ajax({
+      type: 'GET',
+      url: 'places.json',
+      dataType: 'text',
+      data: "lat=" + theBounds.lat + "&lng=" + theBounds.lng,
+      success: function (data) {
+      	console.log(data);
+     //  	for (var i=0;i<data.length;i++) {
+				 //    alert(data[i].business_name);
+				 // }
+
+			$('#container').html("<ul/>");
+				$.each(data, function() {
+					$.each(this, function(key, value) {
+
+					   // $('#container ul').append(key + ": " + value);
+					});
+				});
+
+      }
+    });
+}
+function drawPlaces(u) {
+	$.getJSON(u, function (data) {
+    for (var i = 0; i < data.length; i++) {
+      var location = new L.LatLng(data[i].latitude, data[i].longitude);
+      var name = data[i].business_name;
+      var marker = new L.marker(location);
+      places.addLayer(marker);
+    }
+   	$.each(data, function(i) {
+		    // console.log(data[i].business_name);
+		    // return(data[i].business_name);
+    });
+
+  });
+
+
+}
+*/
+</script>
+<% end %>
 
 
 
