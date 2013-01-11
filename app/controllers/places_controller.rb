@@ -2,6 +2,25 @@ class PlacesController < ApplicationController
   helper_method :near_column
 
   def index
+    if params[:query_location].present?
+      @places = Place.near(params[:query_location], 0.5, :order => :distance)
+    # if params[:query_location].present?
+
+    elsif params[:query].present?
+      @places = Place.where("business_name @@ :q", q: params[:query])
+    else
+      center_point = [params[:lat].to_f, params[:lng].to_f]
+      box = Geocoder::Calculations.bounding_box(center_point, 1)
+      @places = Place.within_bounding_box(box).limit(10)
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @places }
+      format.js { render :template => 'index.js.erb' }
+    end
+  end
+=begin
+  def index
 
     if params[:query].present?
       @places = Place.near(near_column, 4, :order => :distance).where("business_name @@ :q", q: params[:query]) | Place.tagged_with(params[:query]).filter(params[:sort])
@@ -33,32 +52,34 @@ class PlacesController < ApplicationController
     @places = Kaminari.paginate_array(@places).page(params[:page]).per(20)
 
 
-    respond_to do |format|
-        format.html {
-          @json = @places.to_gmaps4rails do |place, marker|
-            marker.title   place.business_name
-            marker.json({:longitude => place.longitude,
-                             :latitude => place.latitude,
-                             :id => place.id })
-          end
+    # respond_to do |format|
+    #     format.html {
+    #       @json = @places.to_gmaps4rails do |place, marker|
+    #         marker.title   place.business_name
+    #         marker.json({:longitude => place.longitude,
+    #                          :latitude => place.latitude,
+    #                          :id => place.id })
+    #       end
 
-        }
-        format.json {
-          @json = @places.to_gmaps4rails do |place, marker|
-            # marker.infowindow render_to_string(:partial => "/places/infowindow", :locals => { :object => place})
-            marker.title   place.business_name
-            marker.json({:longitude => place.longitude,
-                             :latitude => place.latitude,
-                             :id => place.id })
-          end
-          render :json => @json
-          # @places = Kaminari.paginate_array(@json)
-          # @places = @json.page(params[:page]).per(15)
-        }
+    #     }
+    #     format.json {
+    #       @json = @places.to_gmaps4rails do |place, marker|
+    #         # marker.infowindow render_to_string(:partial => "/places/infowindow", :locals => { :object => place})
+    #         marker.title   place.business_name
+    #         marker.json({:longitude => place.longitude,
+    #                          :latitude => place.latitude,
+    #                          :id => place.id })
+    #       end
+    #       render :json => @json
+    #       # @places = Kaminari.paginate_array(@json)
+    #       # @places = @json.page(params[:page]).per(15)
+    #     }
 
-    end
+    # end
 
   end
+=end
+
 
   def show
   	@place = Place.find(params[:id])

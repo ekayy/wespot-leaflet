@@ -21,7 +21,6 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :logos
 
   acts_as_taggable
-  acts_as_gmappable
   mount_uploader :coverphoto, CoverphotoUploader
 
   def self.text_search(query)

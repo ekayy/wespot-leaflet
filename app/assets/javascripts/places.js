@@ -91,16 +91,6 @@ function grid() {
 // call isotope
 grid();
 
-
-// $(document).ready(function(){
-//   $('button').click(function(){
-//     $('#container').hide();
-//     $('.map_container').show('slow', function() {
-//       google.maps.event.trigger(map, 'resize');
-//     });
-//   });
-// });
-
 $(document).ready(function(){
 
    $(".various").fancybox({
@@ -140,58 +130,6 @@ $(document).ready(function(){
           google.maps.event.trigger(map, 'resize');
         });
         $('#container').isotope('destroy');
-
     }
   });
-
-
-}); // ready
-
-// function drawItems(theBounds) {
-//     var url = '/places.json/?sw_y=' + theBounds.getSouthWest().lng() +
-//                            '&sw_x=' + theBounds.getSouthWest().lat() +
-//                            '&ne_y=' + theBounds.getNorthEast().lng() +
-//                            '&ne_x=' + theBounds.getNorthEast().lat();
-//     $.get(url, function(newItemData) {
-//         Gmaps.map.replaceMarkers(newItemData);
-//     });
-// }
-
-
-function drawItems(theBounds) {
-    var url = '/places.json?lng=' + theBounds.lng() +
-                           '&lat=' + theBounds.lat();
-    $.get(url, function(newItemData) {
-        Gmaps.map.replaceMarkers(newItemData);
-    });
-    // location.href = url;
-}
-// function passItems(theBounds) {
-//     var uri = '/places?lng=' + theBounds.lng() +
-//                       '&lat=' + theBounds.lat();
-//     location.href = uri;
-// }
-
-function passItems(theBounds) {
-
-  var uri = '/places?lng=' + theBounds.lng() +
-                        '&lat=' + theBounds.lat();
-  // $.get('places', function(newItemData) {
-  //    location.href = uri;
-  //  });
-
-  $.ajax({
-            type: 'GET',
-            url: 'places',
-            dataType: 'json',
-            data: "lat=" + theBounds.lat() + "&lng=" + theBounds.lng(),
-            success: function (data) {
-              return console.log(data);
-            }
-          });
-  // $.getJSON("/places.json");
-}
-
-// $(function() {
-//   return console.log($('#places').data('url'));
-// });
+});

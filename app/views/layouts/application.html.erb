@@ -4,11 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Wespot" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Wespot" %>">
-    <%= stylesheet_link_tag "application", :media => "all" %>
+    <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+    <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
+    <![endif]-->
   </head>
+
+
   <body class="<%= controller_name %> <%= action_name %>">
     <header class="navbar navbar-inverse navbar-fixed-top">
       <nav class="navbar-inner">
@@ -25,15 +32,13 @@
 
           <%# debug(params) if Rails.env.development? %>
 
-      <footer>
-      </footer>
-
-      </div> <!--! end of .container -->
+      </div>
         <%= yield :container %>
 
-    </div> <!--! end of #main -->
+    </div>
   </body>
   <footer>
     <%= yield :scripts %>
+
   </footer>
 </html>

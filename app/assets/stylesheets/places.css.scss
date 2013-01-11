@@ -7,20 +7,11 @@
 $bg: #faf7f7;
 $color: #8c7e7e;
 
-body {
-  // background-color:#EEE;
-  font-size:13px;
-}
-.show {
-}
-
-#container {
-  margin: 0 auto;
-}
+html { height: 100% }
+body { font-size:13px;}
+#map { position:fixed; left:0; right:0; top:80px; height:100%; }
+#container { top:40px; }
 .container-fluid { margin:0 auto;}
-.container {
-  width:980px;
-}
 
 .collection_check_boxes {
   float: none;
@@ -64,7 +55,7 @@ th .desc {
     float:left;
   }
   .gridWrapper {
-    width:73%;
+    width:40%;
     float:left;
   }
   .box {
