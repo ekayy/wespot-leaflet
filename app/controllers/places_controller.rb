@@ -16,7 +16,6 @@ class PlacesController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @places }
-      format.js { render :template => 'index.js.erb' }
     end
   end
 =begin

@@ -1,7 +1,7 @@
 <%= provide(:title, 'Search') %>
 
 <% content_for :filters do %>
-<div class="navbar navbar-fixed-top" style="top:40px;">
+<div class="navbar" id="filters">
   <div class="navbar-inner">
     <%= render 'filters' %>
   </div>
@@ -90,7 +90,6 @@ function replacePlaces(theBounds) {
       dataType: 'json',
       data: "lat=" + theBounds.lat + "&lng=" + theBounds.lng,
       success: function (data) {
-        // $('#container').html('<%= escape_javascript(render 'index.js') %>');
       	console.log(data);
       }
     });
