@@ -7,5 +7,5 @@ class Article < ActiveRecord::Base
   validates_presence_of :snippet
   validates_presence_of :title
   validates_presence_of :url
-  validates_length_of :snippet, :maximum => 200
+  # validates_length_of :snippet, :maximum => 200
 end

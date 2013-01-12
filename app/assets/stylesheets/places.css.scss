@@ -305,7 +305,7 @@ th .desc {
   box-shadow:  0 1px 3px rgba(34,25,25,0.4);
 }
 
-#bizContainer {
+.bizContainer {
   // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   padding: 5px;
   background: white;
@@ -315,6 +315,18 @@ th .desc {
   display:relative;
   bottom:2%;
 }
+#logoContainer {
+  float:right;
+}
+
+.articleImageContainer {
+  opacity: .6;
+}
+.articleImage {
+  height:40px;
+  margin: 0 0px 10px 0px;
+}
+
 #instagramContainer {
   overflow:hidden;
   margin-bottom:10px;
@@ -342,7 +354,6 @@ th .desc {
 .showImage {
       float:left;
       margin-right: 10px;
-      height:75px;
     }
 .dishText {
   padding: 10px;
@@ -437,12 +448,3 @@ th .desc {
   right: 10px;
 }
 
-
-.articleImageContainer {
-  text-align:center;
-  opacity: .6;
-}
-.articleImage {
-  height:40px;
-  margin: 0 15px 10px 15px;
-}

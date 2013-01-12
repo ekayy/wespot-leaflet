@@ -1,5 +1,14 @@
 <h1>Listing users</h1>
 
+<%= form_tag admin_users_path, :method => 'get', :class =>  "form-inline navbar-form" do %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <p>
+    <%= text_field_tag :search, params[:search]  %>
+    <%= submit_tag "Search", :name => nil, :class => 'btn' %>
+  </p>
+<% end %>
+
 <div class="span8">
   <table class="table table-condensed table-striped">
     <thead>
@@ -19,7 +28,7 @@
 
     <% @users.each do |user| %>
     <tr>
-      <td><%= link_to user.name, user %></td>
+      <td><%= link_to user.place.business_name, place_path(user.place.id) %></td>
       <td><%= user.email %></td>
       <td><%= user.created_at.to_date %></td>
       <td><%= user.place.city unless user.place.nil? %></td>

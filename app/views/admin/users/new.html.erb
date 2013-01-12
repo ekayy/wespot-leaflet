@@ -5,17 +5,7 @@
  <% @user.place ||= Place.new %>
 
   <%= simple_form_for([:admin,@user], :html => {:class => 'form-horizontal', :multipart => true}) do |f| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-        <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= f.error_notification %>
 
     <%= f.input :name, :autofocus => true, :label => 'Username' %>
     <%= f.input :email, :required => true %>
@@ -61,15 +51,44 @@
         </div>
 
       <h4>Logos</h4>
-        <%= p.collection_check_boxes :logo_ids, Logo.all, :id, :name %>
+        <%= p.collection_check_boxes :logo_ids, Logo.all, :id, :name  %>
 
       <h4>Recommends</h4>
+      <ol>
+      <% if @articles.present? %>
+      <li>
+      <ul>
+        <% @articles.each do |article| %>
+        <li><b>Article Url:</b><%= article.url %></li>
+          <li><b>Title:</b><%= article.title %></li>
+          <li><b>Snippet:</b><%= article.snippet %></li>
+          <%= link_to "remove", article, :confirm => 'Are you sure?', :method => :delete %>
+        <% end %>
+      <% end %>
+    </ul>
+  </li>
+  </ol>
       <div class="control-group">
         <div class="control-label"><%= link_to_add_fields "Add Article", p, :articles %>
         </div>
       </div>
 
       <h4>Dishes</h4>
+      <ol>
+      <% if @dishes.present? %>
+      <li>
+      <ul>
+        <% @dishes.each do |dish| %>
+          <li><b>Dish Pic:</b><%= dish.image_url(:medium).to_s %></li>
+          <li><b>Name:</b><%= dish.name %></li>
+          <li><b>Description:</b><%= dish.description %></li>
+          <%= link_to "remove", dish, :confirm => 'Are you sure?', :method => :delete %>
+        <% end %>
+      <% end %>
+      </ul>
+  </li>
+  </ol>
+
       <div class="control-group">
         <div class="control-label">
         <%= link_to_add_fields "Add Dish", p, :dishes %>

@@ -1,0 +1,12 @@
+<h3>Logos</h3>
+
+<% @logos.each do |logo| %>
+  <ul>
+  <li>
+    <%= logo.name %>
+    <%= link_to "remove", [:admin,logo], :confirm => 'Are you sure?', :method => :delete %>
+  </li>
+</ul>
+<% end %>
+
+<p><%= link_to "New Logo", new_admin_logo_path %></p>

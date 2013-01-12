@@ -15,11 +15,16 @@
 
   <div class="row-fluid">
     <div class="span12" style="border-bottom:5px solid black;">
+
       <!-- <div class="coverphoto2"></div> -->
       <%# render 'follow_form' if signed_in? %>
         <h1 style="display:inline;text-transform:uppercase;font:bold 36px sans-serif;"><%= @place.business_name %></h1>
-
+        <% if can? :manage, @place %>
+          <%= link_to 'edit', edit_admin_user_path(@place.user_id) %>
+          <% end %>
+        <%= render 'logos' %>
             <!-- <span><strong><%= @place.followers.count %></strong> followers</span> -->
+
     </div>
   </div>
 
@@ -28,7 +33,6 @@
 
 
         <div class="col1">
-          <%= render 'logos' %>
           <%= render 'twitter' %>
           <%= render 'staticmap' %>
           <%# render 'instagram' %>
@@ -36,7 +40,7 @@
         </div>
     </div>
 
-    <div class="span5">
+    <div class="span6">
       <div class="col2">
 
 
@@ -47,9 +51,8 @@
       </div>
     </div>
 
-    <div class="span4">
+    <div class="span3">
       <div class="col3">
-
 
         <%= render 'dishes' %>
 

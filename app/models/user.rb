@@ -16,6 +16,15 @@ class User < ActiveRecord::Base
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_places, through: :relationships, source: :followed
 
+  # admin user search
+  def self.search(search)
+    if search
+      joins(:place).where("business_name @@ :q", q: search)
+    else
+      scoped
+    end
+  end
+
 
   # Feed functionality
   def following?(place)

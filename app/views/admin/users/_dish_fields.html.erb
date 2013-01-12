@@ -1,5 +1,6 @@
 <fieldset>
 <%= f.input :name %>
+<%= f.input :description, :as => :text, :input_html => { :cols => 50, :rows => 4 } %>
   <div class="control-group">
     <%= f.label "Dish Image" %>
     <%= f.file_field :image %>

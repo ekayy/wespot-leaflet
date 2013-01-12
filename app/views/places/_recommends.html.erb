@@ -1,13 +1,26 @@
-<ul id="dishesContainer">
+<div id="dishesContainer">
+  <% @place.articles.each do |article| %>
+    <article class="dishItem">
+    <%= link_to image_tag(article.image_url), article.image_url %>
+    <div class="dishText"><p><%= article.snippet %> <%= link_to 'More', article.url %></p></div></article>
+  <% end %>
+</div>
 
-<li class="dishItem">
+
+
+
+
+<!-- <div id="dishesContainer">
+
+<article class="dishItem">
 <%= link_to image_tag('http://ww2.hdnux.com/photos/12/02/64/2633009/9/628x471.jpg'), "'http://ww2.hdnux.com/photos/12/02/64/2633009/9/628x471.jpg'" %>
-<div class="dishText"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in massa sem, tempor sodales nunc. In vel nisl eu ligula vulputate ornare at ac arcu. Curab75%itur sed metus eget orci pharetra volutpat auctor nec neque. In hac habitasse platea dictumst. <%= link_to 'More', '#' %></p></div></li>
-<li class="dishItem">
+<div class="dishText"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in massa sem, tempor sodales nunc. In vel nisl eu ligula vulputate ornare at ac arcu. Curab75%itur sed metus eget orci pharetra volutpat auctor nec neque. In hac habitasse platea dictumst. <%= link_to 'More', '#' %></p></div></article>
+<article class="dishItem">
   <%= link_to image_tag('http://ww4.hdnux.com/photos/12/02/64/2633011/11/628x471.jpg'), "'http://ww4.hdnux.com/photos/12/02/64/2633011/11/628x471.jpg'" %>
 
-<div class="dishText"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in massa sem, tempor sodales nunc. In vel nisl eu ligula vulputate ornare at ac arcu. Curabitur sed metus eget orci pharetra volutpat auctor nec neque. In hac habitasse platea dictumst. <%= link_to 'More', '#' %></p></div></li>
-<li class="dishItem">
+<div class="dishText"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in massa sem, tempor sodales nunc. In vel nisl eu ligula vulputate ornare at ac arcu. Curabitur sed metus eget orci pharetra volutpat auctor nec neque. In hac habitasse platea dictumst. <%= link_to 'More', '#' %></p></div></article>
+<article class="dishItem">
   <%= link_to image_tag('http://ww4.hdnux.com/photos/12/05/43/2644211/9/628x471.jpg'), "'http://ww4.hdnux.com/photos/12/05/43/2644211/9/628x471.jpg'" %>
-<div class="dishText"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in massa sem, tempor sodales nunc. In vel nisl eu ligula vulputate ornare at ac arcu. Curabitur sed metus eget orci pharetra volutpat auctor nec neque. In hac habitasse platea dictumst. <%= link_to 'More', '#' %></p></div></li>
-</ul>
+<div class="dishText"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in massa sem, tempor sodales nunc. In vel nisl eu ligula vulputate ornare at ac arcu. Curabitur sed metus eget orci pharetra volutpat auctor nec neque. In hac habitasse platea dictumst. <%= link_to 'More', '#' %></p></div></article>
+</div>
+ -->

@@ -1,7 +1,24 @@
+<ul id="dishesContainer">
+    <% @dishes.each do |dish| %>
 
+        <li class="dishItem">
+            <%= link_to image_tag(dish.image_url(:medium)), "#{dish.image}", class: 'showImage' %>
+            <%= dish.name %>
+            <div class="dishText"><%= dish.description %></div>
+            <%= link_to "Comments", '#', class: 'fr' %>
+        </li>
 
+      <% end %>
+  </ul>
+  <% 5.times do %>
+  <li class="dishItem">
+    <div class="showImage" style="background:#888;width:100px;height:100px;"></div>
+    <div class="dishText">Dish description here.</div>
+    <%= link_to "Comments", '#', class: 'fr' %>
+  </li>
+  <% end %>
 
-  <ul id="dishesContainer">
+  <!-- <ul id="dishesContainer">
     <%# @dishes.each do |dish| %>
     <% 5.times do %>
         <li class="dishItem">
@@ -12,19 +29,6 @@
             <%= link_to "Comments", '#', class: 'fr' %>
         </li>
       <% end %>
-  </ul>
-
-<!-- test -->
-  <!-- <ul id="dishesContainer">
-    <% cache "instagram#{Date.today}" do %>
-      <% for instagram in @instagram.data %>
-        <li class="dishItem">
-          <%= link_to image_tag(instagram.images.thumbnail.url,  class: 'showImage' ), "#{instagram.images.standard_resolution.url}" %>
-            <div class="dishText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in massa sem, tempor sodales nunc.  </div>
-            <%= link_to "Comments", '#', class: 'fr' %>
-        </li>
-      <% end %>
-    <% end %>
   </ul> -->
 
   <!-- <ul id="dishesContainer">

@@ -36,7 +36,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  process :resize_to_limit => [-1,250]
+  process :resize_to_limit => [-1,500]
   process :convert => 'jpg'
 
   version :medium do

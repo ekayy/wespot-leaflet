@@ -1,6 +1,6 @@
 <% provide(:title, 'Edit Account Settings') %>
 
-<h2>Edit <%= @user.name %></h2>
+<h2>Edit <%= link_to @user.place.business_name, place_path(@user.place.id) %></h2>
 
 <% @user.place ||= Place.new %>
 
@@ -55,12 +55,41 @@
         <%= p.collection_check_boxes :logo_ids, Logo.all, :id, :name  %>
 
       <h4>Recommends</h4>
+      <ol>
+      <% if @articles.present? %>
+      <li>
+      <ul>
+        <% @articles.each do |article| %>
+        <li><b>Article Url:</b><%= article.url %></li>
+          <li><b>Title:</b><%= article.title %></li>
+          <li><b>Snippet:</b><%= article.snippet %></li>
+          <%= link_to "remove", article, :confirm => 'Are you sure?', :method => :delete %>
+        <% end %>
+      <% end %>
+    </ul>
+  </li>
+  </ol>
       <div class="control-group">
         <div class="control-label"><%= link_to_add_fields "Add Article", p, :articles %>
         </div>
       </div>
 
       <h4>Dishes</h4>
+      <ol>
+      <% if @dishes.present? %>
+      <li>
+      <ul>
+        <% @dishes.each do |dish| %>
+          <li><b>Dish Pic:</b><%= dish.image_url(:medium).to_s %></li>
+          <li><b>Name:</b><%= dish.name %></li>
+          <li><b>Description:</b><%= dish.description %></li>
+          <%= link_to "remove", dish, :confirm => 'Are you sure?', :method => :delete %>
+        <% end %>
+      <% end %>
+      </ul>
+  </li>
+  </ol>
+
       <div class="control-group">
         <div class="control-label">
         <%= link_to_add_fields "Add Dish", p, :dishes %>
@@ -74,3 +103,4 @@
 </div>
 
   <%= link_to "Back", admin_users_path %>
+  <%= link_to "View Place", place_path(@user.place.id) %>

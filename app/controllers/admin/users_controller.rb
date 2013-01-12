@@ -3,7 +3,11 @@ class Admin::UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-  	@users = User.order(sort_column + ' ' + sort_direction).page(params[:page]).per(30)
+    if params[:search].present?
+  	@users = User.search(params[:search]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(30)
+    else
+      @users = User.order(sort_column + ' ' + sort_direction).page(params[:page]).per(30)
+    end
   end
 
   def new
@@ -28,6 +32,8 @@ class Admin::UsersController < ApplicationController
   def edit
   	@user = User.find(params[:id])
   	@place = @user.place
+    @dishes = @user.place.dishes
+    @articles = @user.place.articles
   end
 
   def update

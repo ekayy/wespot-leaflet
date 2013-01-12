@@ -1,14 +1,11 @@
-class DishesController < ApplicationController
+class ArticlesController < ApplicationController
 
   def show
-    @dish = Dish.find(params[:id])
-    @commentable = @dish
-    @comments = @commentable.comments
-    @comment = Comment.new
+    @article = Article.find(params[:id])
   end
 
   def destroy
-    Dish.find(params[:id]).destroy
+    Article.find(params[:id]).destroy
     flash[:success] = "Dish destroyed."
     redirect_to(:back)
   end
