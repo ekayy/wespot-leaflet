@@ -1,8 +1,17 @@
+<h3>HEADLINES</h3>
+
 <div id="dishesContainer">
   <% @place.articles.each do |article| %>
     <article class="dishItem">
     <%= link_to image_tag(article.image_url), article.image_url %>
     <div class="dishText"><p><%= article.snippet %> <%= link_to 'More', article.url %></p></div></article>
+  <% end %>
+
+  <% 1.times do %>
+  <article class="dishItem">
+    <div style="background:#888;width:500px;height:300px;"></div>
+    <div class="dishText">Article description here.</div>
+  </article>
   <% end %>
 </div>
 

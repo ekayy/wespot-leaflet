@@ -1,23 +1,12 @@
-<div id="bizContainer">
+<div id="mapContainer">
 <div id="bizInfo">
-
-
-
-  <div class="wrap">
-    <%= @place.street %>
-    <p>(415) 487-1600</p>
-    <p><a href="#">Website</a></p>
-
-    <p><b>Category:</b> Italian<p>
-    <p><b>Price:</b> $$</p>
-    <p><b>Hours:</b> Tuesday to Saturday<br/>
-    5:30pm to 12:30am</p>
-  </div>
 
   <div class="map">
     <%= image_tag "http://maps.google.com/maps/api/staticmap?size=350x233&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}" %>
   </div>
-
+  <p><a href="#">Website</a></p>
+  <p><%= @place.address_1 %></p>
+    <p>(415) 487-1600</p>
 
 </div>
 </div>

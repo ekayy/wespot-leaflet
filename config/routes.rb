@@ -1,7 +1,7 @@
 Wespot::Application.routes.draw do
 
   authenticated :user do
-    root :to => "admin/users#index"
+    root :to => "admin/dashboard#index"
   end
 
   resources :relationships, only: [:create, :destroy]
@@ -30,6 +30,7 @@ Wespot::Application.routes.draw do
   namespace :admin do
   	get '', to: 'dashboard#index', as: '/'
   	resources :users
+    resources :places
     resources :logos
 	end
 

@@ -4,11 +4,13 @@ class CreatePlaces < ActiveRecord::Migration
     	t.integer :user_id
 
     	t.string :business_name
-      t.string :street
+      t.string :address_1
+      t.string :address_2
+      t.string :address_3
       t.string :city
-      t.string :zip
-      t.string :state
-      t.string :country
+      t.string :state_code
+      t.string :postal_code
+      t.string :country_code
       t.string :phone
 
       t.timestamps

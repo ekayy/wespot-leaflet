@@ -8,11 +8,11 @@ $bg: #faf7f7;
 $color: #8c7e7e;
 
 html { height: 100% }
-body { font-size:13px;}
+body { font-size:13px;background:#eee;}
 #map { position:fixed; left:0; right:0; top:80px; height:100%; }
 #container { top:40px; }
 .container-fluid { margin:0 auto;}
-#filters {top:40px;left:0;right:0;position:fixed;}
+#filters {top:40px;left:0;right:0;position:fixed;z-index:3;}
 .collection_check_boxes {
   float: none;
   margin: 0;
@@ -268,16 +268,17 @@ th .desc {
   padding: 5px;
 }
 
-.coverphoto2 {
+#coverphoto {
   box-shadow:  0 1px 3px rgba(34,25,25,0.4);
-  display:block;
-  height:100px;
+  height:200px;
+  margin-top:-30px;
+  margin-bottom:20px;
 }
 
 .col1 {
   background:none;
   padding: 0;
-  margin: 0 auto;
+  margin: 15px auto 0 auto;
   line-height: 1.5;
   // background: black;
   // color:white;
@@ -288,7 +289,10 @@ th .desc {
 .col2 {
   // margin: 0 auto;
   overflow:auto;
-  background:none
+  // background:white;
+  padding:0 20px;
+  border-left:  2px solid #DDD;
+  border-right: 2px solid #DDD;
 }
 
 .col3 {
@@ -307,8 +311,9 @@ th .desc {
 
 .bizContainer {
   // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  border-bottom: 2px solid #DDD;
   padding: 5px;
-  background: white;
+  // background: white;
   // color:white;
   // opacity: .85;
   margin-bottom:10px;
@@ -318,20 +323,16 @@ th .desc {
 #logoContainer {
   float:right;
 }
-
-.articleImageContainer {
+.logoImage {
+  height:30px;
   opacity: .6;
+  display:inline-block;
+  margin: 10px 0 10px 30px;
 }
-.articleImage {
-  height:40px;
-  margin: 0 0px 10px 0px;
-}
-
 #instagramContainer {
   overflow:hidden;
   margin-bottom:10px;
 }
-
 #dishesContainer {
   margin: 0;
   overflow:hidden;
@@ -342,10 +343,11 @@ th .desc {
   margin: 0 5px 10px 0;
   font-size: 13px;
   line-height: 1.5;
-  background:white;
+  // background:white;
   list-style: none;
   // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   overflow:hidden;
+  border-bottom: 2px solid #DDD;
   li {
 
     margin: 0;
@@ -353,7 +355,7 @@ th .desc {
 }
 .showImage {
       float:left;
-      margin-right: 10px;
+      margin:10px;
     }
 .dishText {
   padding: 10px;
@@ -368,7 +370,7 @@ th .desc {
     display: inline;
     float: left;
     overflow: hidden;
-    width:200px;
+    width:150px;
   }
   .map {
     float:right;

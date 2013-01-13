@@ -163,6 +163,7 @@ GEM
       net-ssh (>= 1.99.1)
     net-ssh (2.6.2)
     nokogiri (1.5.5)
+    oauth (0.4.7)
     oauth2 (0.8.0)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -305,6 +306,7 @@ DEPENDENCIES
   launchy (>= 2.1.2)
   libnotify (>= 0.5.9)
   mini_magick
+  oauth
   omniauth-facebook (= 1.4.0)
   pg
   quiet_assets (>= 1.0.1)

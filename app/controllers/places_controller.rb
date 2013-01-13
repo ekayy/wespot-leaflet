@@ -73,7 +73,7 @@ class PlacesController < ApplicationController
   	@comments = @commentable.comments
   	@comment = Comment.new
     @dishes = @place.dishes
-    @twitter = Twitter.user_timeline(@place.twitterid, :count => 1, :include_entities => true)
+    @twitter = Twitter.user_timeline(@place.twitter_id, :count => 1, :include_entities => true)
     @logo = Place.find(params[:id]).logos
 
     if @place.latitude.nil?
@@ -81,7 +81,7 @@ class PlacesController < ApplicationController
     else
       begin
       # @instagram = Instagram.media_search(@place.latitude, @place.longitude, { :distance => 10 })
-      @instagram = Instagram.tag_recent_media(@place.instagramid)
+      @instagram = Instagram.tag_recent_media(@place.instagram_id)
       rescue
         @instagram = Instagram.tag_recent_media('wespot')
       end

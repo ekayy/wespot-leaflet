@@ -110,11 +110,11 @@ $(document).ready(function(){
 
 // grid hover effect
 
-   $('.image').mouseover(function() {
-    $(this).find('.info').show();
-    }).mouseout(function() {
-    $('.info').hide();
-  });
+  //  $('.image').mouseover(function() {
+  //   $(this).find('.info').show();
+  //   }).mouseout(function() {
+  //   $('.info').hide();
+  // });
 
   $('button').click(function(e) {
     var $container = $('.container-fluid');

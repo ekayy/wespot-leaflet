@@ -1,5 +1,8 @@
 <h1>Listing users</h1>
 
+<%= link_to 'New User', new_admin_user_path, class: 'btn' %>
+<%= link_to 'Back', admin_path %>
+
 <%= form_tag admin_users_path, :method => 'get', :class =>  "form-inline navbar-form" do %>
   <%= hidden_field_tag :direction, params[:direction] %>
   <%= hidden_field_tag :sort, params[:sort] %>
@@ -46,5 +49,5 @@
 
   <br />
 
-  <%= link_to 'New User', new_admin_user_path %>
+
 </div>

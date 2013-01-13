@@ -3,6 +3,7 @@ gem 'rails', '3.2.8'
 gem 'thin'
 
 gem 'devise'
+gem'oauth'
 gem 'omniauth-facebook', '1.4.0'
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"

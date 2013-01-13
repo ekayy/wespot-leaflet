@@ -1,0 +1,11 @@
+<%= simple_form_for @place, :html => {:multipart => true} do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :gallery_id %>
+  <p>
+    <%= f.input :name %>
+  </p>
+  <p>
+    <%= f.file_field :image %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

@@ -1,4 +1,5 @@
-<ul id="dishesContainer">
+<h3>DISHES</h3>
+
     <% @dishes.each do |dish| %>
 
         <li class="dishItem">
@@ -9,10 +10,10 @@
         </li>
 
       <% end %>
-  </ul>
+
   <% 5.times do %>
   <li class="dishItem">
-    <div class="showImage" style="background:#888;width:100px;height:100px;"></div>
+    <div class="showImage" style="background:#888;width:75px;height:75px;"></div>
     <div class="dishText">Dish description here.</div>
     <%= link_to "Comments", '#', class: 'fr' %>
   </li>

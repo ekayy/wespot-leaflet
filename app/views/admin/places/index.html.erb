@@ -1,0 +1,47 @@
+<h1>Listing places</h1>
+
+<%= link_to 'New Place', new_admin_place_path, class: 'btn' %>
+
+<%= form_tag admin_places_path, :method => 'get', :class =>  "form-inline navbar-form" do %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <p>
+    <%= text_field_tag :search, params[:search]  %>
+    <%= submit_tag "Search", :name => nil, :class => 'btn' %>
+  </p>
+<% end %>
+
+<div class="span8">
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable 'business_name', 'Name' %></th>
+        <th><%= sortable 'created_at', 'Date Created' %></th>
+        <th>City</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+  <tbody>
+
+<%= paginate @places %>
+
+    <% @places.each do |place| %>
+    <tr>
+      <td>
+      <%= link_to place.business_name, place_path(place) %>
+      </td>
+      <td><%= place.created_at.to_date %></td>
+      <td><%= place.city %></td>
+      <td><%= link_to 'Edit', edit_admin_place_path(place), class: 'btn btn-mini' %></td>
+      <td><%= link_to 'Delete', [:admin,place], method: :delete,  data: { confirm: "You sure?" }, class: 'btn btn-mini' %></td>
+    </tr>
+
+      <% end %>
+      </tbody>
+  </table>
+
+  <br />
+
+
+</div>

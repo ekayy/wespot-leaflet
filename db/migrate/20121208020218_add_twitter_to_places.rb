@@ -1,5 +1,5 @@
 class AddTwitterToPlaces < ActiveRecord::Migration
   def change
-    add_column :places, :twitterid, :string
+    add_column :places, :twitter_id, :string
   end
 end

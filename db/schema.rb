@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108071119) do
+ActiveRecord::Schema.define(:version => 20130112212139) do
 
   create_table "articles", :force => true do |t|
     t.integer  "place_id"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(:version => 20130108071119) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "categories", :force => true do |t|
+    t.string   "display_name"
+    t.string   "key"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "categories", ["key"], :name => "index_categories_on_key", :unique => true
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -72,11 +81,13 @@ ActiveRecord::Schema.define(:version => 20130108071119) do
   create_table "places", :force => true do |t|
     t.integer  "user_id"
     t.string   "business_name"
-    t.string   "street"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "address_3"
     t.string   "city"
-    t.string   "zip"
-    t.string   "state"
-    t.string   "country"
+    t.string   "state_code"
+    t.string   "postal_code"
+    t.string   "country_code"
     t.string   "phone"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
@@ -84,16 +95,28 @@ ActiveRecord::Schema.define(:version => 20130108071119) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "gmaps"
-    t.text     "promo"
     t.string   "slug"
-    t.string   "twitterid"
+    t.string   "twitter_id"
+    t.string   "yelp_id"
+    t.string   "yelp_url"
+    t.decimal  "rating"
+    t.string   "rating_img_url"
+    t.integer  "review_count"
     t.string   "cost_scale"
-    t.string   "website"
-    t.string   "instagramid"
+    t.string   "website_url"
+    t.string   "instagram_id"
     t.integer  "followers_count"
+    t.string   "image_url"
   end
 
   add_index "places", ["slug"], :name => "index_places_on_slug"
+
+  create_table "places_categories", :id => false, :force => true do |t|
+    t.integer "place_id"
+    t.integer "category_id"
+  end
+
+  add_index "places_categories", ["place_id", "category_id"], :name => "index_places_categories_on_place_id_and_category_id"
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"

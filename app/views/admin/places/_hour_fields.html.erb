@@ -1,0 +1,9 @@
+
+<fieldset style="width:970px;">
+        <%= f.select :day, Date::DAYNAMES.zip((0..6).to_a) %>
+        <%= f.select :open_time, options_for_hours_select %>
+        <%= f.select :close_time, options_for_hours_select %>
+        <%= f.hidden_field :_destroy %>
+        <%= link_to "remove", '#', class: "remove_fields btn" %>
+
+</fieldset>

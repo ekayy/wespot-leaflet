@@ -2,7 +2,7 @@ module ApplicationHelper
   include Twitter::Autolink
 
 	def show_user_bg
-    "background:transparent url(#{@place.coverphoto.url}) no-repeat fixed center center;
+    "background:transparent url(#{@place.coverphoto.url}) no-repeat center;
     -webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;

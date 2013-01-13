@@ -1,58 +1,48 @@
+<% provide(:title, 'New Account Settings') %>
 
+ <h1>New place</h1>
 
- <h1>New user</h1>
-
- <% @user.place ||= Place.new %>
-
-  <%= simple_form_for([:admin,@user], :html => {:class => 'form-horizontal', :multipart => true}) do |f| %>
-    <%= f.error_notification %>
-
-    <%= f.input :name, :autofocus => true, :label => 'Username' %>
-    <%= f.input :email, :required => true %>
-    <%= f.input :password, :required => true %>
-    <%= f.input :password_confirmation, :required => true %>
-
-    <%= f.simple_fields_for :place do |p| %>
+ <%= simple_form_for([:admin,@place], :html => {:class => 'form-horizontal', :multipart => true}) do |f| %>
 
 <h4>Business info</h4>
   <div class="row">
     <div class="span6">
-      <%= p.input :business_name %>
-      <%= p.input :yelp_id %>
-      <%= p.input :twitter_id %>
-      <%= p.input :instagram_id %>
-      <%= p.input :website_url %>
-      <%= p.input :phone %>
+      <%= f.input :business_name %>
+      <%= f.input :yelp_id %>
+      <%= f.input :twitter_id %>
+      <%= f.input :instagram_id %>
+      <%= f.input :website_url %>
+      <%= f.input :phone %>
     </div>
     <div class="span5">
-      <%= p.input :address_1, :label => 'Address' %>
-      <%= p.input :city %>
-      <%= p.input :state_code, :label => 'State' %>
-      <%= p.input :postal_code, :label => 'Zip Code' %>
-      <%= p.input :tag_list, :label => "Tags (separated by commas)" %>
+      <%= f.input :address_1, :label => 'Address' %>
+      <%= f.input :city %>
+      <%= f.input :state_code, :label => 'State' %>
+      <%= f.input :postal_code, :label => 'Zip Code' %>
+      <%= f.input :tag_list, :label => "Tags (separated by commas)" %>
     </div>
   </div>
 
-      <div class="row">
+  <div class="row">
     <div class="span12">
-      <%= p.label "Cover Photo" %>
-      <%= p.file_field :coverphoto %>
+      <%= f.label "Cover Photo" %>
+      <%= f.file_field :coverphoto %>
         <div class="control-group">
-          <%= p.label 'Price' %>
-          <%= p.select :cost_scale, (['$','$$','$$$']) %>
+          <%= f.label 'Price' %>
+          <%= f.select :cost_scale, (['$','$$','$$$']) %>
         </div>
-        <div class="control-group">
-          <%= p.label 'Opening hours' %>
+          <div class="control-group">
+          <%= f.label 'Opening hours' %>
         </br></br>
           <div class="control-group">
             <div class="control-label">
-          <%= link_to_add_fields "Add Hours", p, :hours %>
-        </div>
+          <%= link_to_add_fields "Add Hours", f, :hours %>
+            </div>
           </div>
         </div>
 
       <h4>Logos</h4>
-        <%= p.collection_check_boxes :logo_ids, Logo.all, :id, :name  %>
+        <%= f.collection_check_boxes :logo_ids, Logo.all, :id, :name  %>
 
       <h4>Recommends</h4>
       <ol>
@@ -70,7 +60,7 @@
   </li>
   </ol>
       <div class="control-group">
-        <div class="control-label"><%= link_to_add_fields "Add Article", p, :articles %>
+        <div class="control-label"><%= link_to_add_fields "Add Article", f, :articles %>
         </div>
       </div>
 
@@ -90,12 +80,13 @@
   </li>
   </ol>
 
+
       <div class="control-group">
         <div class="control-label">
-        <%= link_to_add_fields "Add Dish", p, :dishes %>
+        <%= link_to_add_fields "Add Dish", f, :dishes %>
       </div>
       </div>
-    <% end %>
+
 
     <%= f.button :submit, 'Sign up', :class => 'btn-primary' %>
   <% end %>
