@@ -1,0 +1,7 @@
+<h2>Add Logo</h2>
+
+<%= simple_form_for [:admin,@logo], :html => {:multipart => true} do |f| %>
+  <%= f.error_notification %>
+    <%= f.input :name %>
+  <p><%= f.submit %></p>
+<% end %>
