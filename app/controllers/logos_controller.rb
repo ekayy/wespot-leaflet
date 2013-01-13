@@ -1,4 +1,4 @@
-class LogosController < ApplicationController
+class Admin::LogosController < ApplicationController
   before_filter :authenticate_user!
 
   def index
