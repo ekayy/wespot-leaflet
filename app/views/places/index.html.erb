@@ -28,7 +28,7 @@
 	</div>
 
 </div>
-<%# paginate @places %>
+<%= paginate @places %>
 
 <!-- <div class="container-fluid grid">
 
@@ -47,80 +47,114 @@
 
 <% content_for :scripts do %>
 <script>
-	var map, tileLayer, firstLoad;
-  firstLoad = true;
-  tileLayer = new L.tileLayer('http://{s}.tile.cloudmade.com/e7b61e61295a44a5b319ca0bd3150890/998/256/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; [...]'
-  });
-  places = new L.LayerGroup();
-  map = new L.map('map', {
-		scrollWheelZoom:false,
-		center:[37.7750, -122.4483],
-		zoom:14,
-		layers: [tileLayer, places],
-		zoomControl: false,
-    keyboard: false
-	});
-	var zoomControl = new L.Control.Zoom({position: 'topright'}).addTo(map);
 
-$(document).ready(function(){
-	// $.ajaxSetup({cache:false});
-//initialize markers
-  getPlaces();
-  map.on('dragend', function(){
-    var bounds = map.getCenter();
-	  replacePlaces(bounds);
-  });
+// Set up the map
+var map, tileLayer, firstLoad, localSearch, searchForm;
+var currentResults = [];
+firstLoad = true;
+
+// Initialize the map with default UI.
+tileLayer = new L.tileLayer('http://{s}.tile.cloudmade.com/e7b61e61295a44a5b319ca0bd3150890/998/256/{z}/{x}/{y}.png', {
+  attribution: 'Map data &copy; [...]'
 });
+places = new L.LayerGroup();
+map = new L.map('map', {
+	scrollWheelZoom:false,
+	center:[37.7750, -122.4483],
+	zoom:14,
+	layers: [tileLayer, places],
+	zoomControl: false,
+  keyboard: false
+});
+var zoomControl = new L.Control.Zoom({position: 'topright'}).addTo(map);
 
-function getPlaces() {
-	var url = '/places.json?utf8=✓&query=&query_location=san+francisco';
-  drawPlaces(url);
-}
 
-function replacePlaces(theBounds) {
-	places.clearLayers();
-  var url = '/places?lng=' + theBounds.lng +
-                         '&lat=' + theBounds.lat;
-                         drawPlaces(url);
+function searchByAjax(text) { //definition of callback for syncronous ajax serching
+
+  var resultsraw = {},
+    results = {};
 
   $.ajax({
-      type: 'GET',
-      url: 'places',
-      dataType: 'json',
-      data: "lat=" + theBounds.lat + "&lng=" + theBounds.lng,
-      success: function (data) {
-      	console.log(data);
-      }
-    });
-  drawPlaces(url);
-  // location.href = url;
-}
-
-function getURLParameter(name) {
-    return decodeURI(
-        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
-    );
-}
-console.log(getURLParameter(name));
-
-function drawPlaces(u) {
-	$.getJSON(u, function (data) {
-    for (var i = 0; i < data.length; i++) {
-      var location = new L.LatLng(data[i].latitude, data[i].longitude);
-      var name = data[i].business_name;
-      var marker = new L.marker(location);
-      places.addLayer(marker);
+    url: 'places',  //read comments in search.php for more information usage
+    async: false,   //must be syncronous request! or not return ajax results
+    type: 'GET',
+    data: {q : text},
+    dataType: 'json',
+    success: function(json) {
+      if(json)
+        resultsraw = json;
+      console.log(resultsraw);
     }
-   	$.each(data, function(i) {
-		    // console.log(data[i].business_name);
-		    // return(data[i].business_name);
-    });
-
   });
 
+  for(i in resultsraw)  //reformatting results in key,value
+    results[ resultsraw[i].title ] = resultsraw[i].loc;
+
+  return results;
 
 }
+$(document).ready(function(){
+map.addControl( new L.Control.Search({searchCall: searchByAjax, text:'Color...'}) );
+});
+
+// $(document).ready(function(){
+// 	// $.ajaxSetup({cache:false});
+// //initialize markers
+//   getPlaces();
+//   map.on('dragend', function(){
+//     var bounds = map.getCenter();
+// 	  replacePlaces(bounds);
+//   });
+// });
+
+// function getPlaces() {
+// 	var url = '/places.json?utf8=✓&query=&query_location=san+francisco';
+//   drawPlaces(url);
+// }
+
+// function replacePlaces(theBounds) {
+// 	places.clearLayers();
+//   var url = '/places?lng=' + theBounds.lng +
+//                          '&lat=' + theBounds.lat;
+//                          drawPlaces(url);
+
+//   $.ajax({
+//       type: 'GET',
+//       url: 'places',
+//       dataType: 'json',
+//       data: "lat=" + theBounds.lat + "&lng=" + theBounds.lng,
+//       success: function (data) {
+//       	console.log(data);
+//       }
+//     });
+//   drawPlaces(url);
+//   // location.href = url;
+// }
+
+// function getURLParameter(name) {
+//     return decodeURI(
+//         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+//     );
+// }
+// console.log(getURLParameter(name));
+
+// function drawPlaces(u) {
+// 	$.getJSON(u, function (data) {
+//     for (var i = 0; i < data.length; i++) {
+//       var location = new L.LatLng(data[i].latitude, data[i].longitude);
+//       var name = data[i].business_name;
+//       var marker = new L.marker(location);
+//       places.addLayer(marker);
+//     }
+//    	$.each(data, function(i) {
+// 		    // console.log(data[i].business_name);
+// 		    // return(data[i].business_name);
+//     });
+
+//   });
+
+
+// }
 
 
 /* WITHOUT REFRESH

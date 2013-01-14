@@ -9,10 +9,12 @@ class PlacesController < ApplicationController
     elsif params[:query].present?
       @places = Place.where("business_name @@ :q", q: params[:query])
     else
-      center_point = [params[:lat].to_f, params[:lng].to_f]
-      box = Geocoder::Calculations.bounding_box(center_point, 1)
-      @places = Place.within_bounding_box(box).limit(10)
+      # center_point = [params[:lat].to_f, params[:lng].to_f]
+      # box = Geocoder::Calculations.bounding_box(center_point, 1)
+      # @places = Place.within_bounding_box(box).limit(10)
+      @places = Place.all
     end
+    @places = Kaminari.paginate_array(@places).page(params[:page]).per(20)
     respond_to do |format|
       format.html
       format.json { render json: @places }

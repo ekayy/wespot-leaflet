@@ -3,9 +3,6 @@ class Article < ActiveRecord::Base
   belongs_to :place
   mount_uploader :image, ArticleimageUploader
 
-  validates_presence_of :image
-  validates_presence_of :snippet
   validates_presence_of :title
-  validates_presence_of :url
   # validates_length_of :snippet, :maximum => 200
 end
