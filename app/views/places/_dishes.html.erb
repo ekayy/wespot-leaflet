@@ -3,7 +3,11 @@
     <% @dishes.each do |dish| %>
 
         <li class="dishItem">
+          <% if dish.image_url.present? %>
             <%= link_to image_tag(dish.image_url(:medium)), "#{dish.image}", class: 'showImage' %>
+            <% else %>
+            <div class="showImage" style="background:#888;width:75px;height:75px;"></div>
+            <% end %>
             <%= dish.name %>
             <div class="dishText"><%= dish.description %></div>
             <%= link_to "Comments", '#', class: 'fr' %>
@@ -21,33 +25,17 @@
 
   <!-- <ul id="dishesContainer">
     <%# @dishes.each do |dish| %>
-    <% 5.times do %>
+    <%# 5.times do %>
         <li class="dishItem">
             <%# link_to image_tag(dish.image_url(:medium)), "#{dish.image}", class: 'gram' %>
             <div class="showImage" style="background:#888;width:75px;height:75px;"></div>
           <%# dish.name %>
             <div class="dishText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in massa sem, tempor sodales nunc.  </div>
-            <%= link_to "Comments", '#', class: 'fr' %>
+            <%# link_to "Comments", '#', class: 'fr' %>
         </li>
-      <% end %>
+      <%# end %>
   </ul> -->
 
-  <!-- <ul id="dishesContainer">
-    <% @dishes.each do |dish| %>
-
-        <li class="dishItem">
-            <%= link_to image_tag(dish.image_url(:medium)), "#{dish.image}", class: 'gram' %>
-          <p><%= dish.name %></p>
-        </li>
-
-    <% end %>
-       <li><div style="background:#888;width:150px;height:150px;"></div>
-        </li>
-        <li><div style="background:#888;width:150px;height:150px;"></div>
-        </li>
-        <li><div style="background:#888;width:150px;height:150px;"></div>
-        </li>
-  </ul> -->
 
 
   <!-- <ol>

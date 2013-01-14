@@ -3,7 +3,11 @@
 <div id="dishesContainer">
   <% @place.articles.each do |article| %>
     <article class="dishItem">
+      <% if article.image_url.present? %>
     <%= link_to image_tag(article.image_url), article.image_url %>
+      <% else %>
+      <div style="background:#888;width:500px;height:300px;"></div>
+      <% end %>
     <div class="dishText"><p><%= article.snippet %> <%= link_to 'More', article.url %></p></div></article>
   <% end %>
 
