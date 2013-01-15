@@ -18,17 +18,14 @@
 	</div>
 
 	<div class="gridWrapper grid">
-		<div id="container" class="infinite-scrolling clearfix">
+		<div id="container" dispaly:none; class="infinite-scrolling clearfix">
 			<%= render 'box' %>
 		</div>
+    <div id="paginator">
+      <%= paginate @places %>
+    </div>
 	</div>
-
-	<div class="mapWrapper">
-		<%# render 'gmaps' %>
-	</div>
-
 </div>
-<%= paginate @places %>
 
 <!-- <div class="container-fluid grid">
 
@@ -57,79 +54,8 @@ firstLoad = true;
 tileLayer = new L.tileLayer('http://{s}.tile.cloudmade.com/e7b61e61295a44a5b319ca0bd3150890/998/256/{z}/{x}/{y}.png', {
   attribution: 'Map data &copy; [...]'
 });
-places = new L.LayerGroup();
-map = new L.map('map', {
-	scrollWheelZoom:false,
-	center:[37.7750, -122.4483],
-	zoom:14,
-	layers: [tileLayer, places],
-	zoomControl: false,
-  keyboard: false
-});
-var zoomControl = new L.Control.Zoom({position: 'topright'}).addTo(map);
+var places = new L.FeatureGroup();
 
-
-function searchByAjax(text) { //definition of callback for syncronous ajax serching
-
-  var resultsraw = {},
-    results = {};
-
-  $.ajax({
-    url: 'places',  //read comments in search.php for more information usage
-    async: false,   //must be syncronous request! or not return ajax results
-    type: 'GET',
-    data: {q : text},
-    dataType: 'json',
-    success: function(json) {
-      if(json)
-        resultsraw = json;
-      console.log(resultsraw);
-    }
-  });
-
-  for(i in resultsraw)  //reformatting results in key,value
-    results[ resultsraw[i].title ] = resultsraw[i].loc;
-
-  return results;
-
-}
-$(document).ready(function(){
-map.addControl( new L.Control.Search({searchCall: searchByAjax, text:'Color...'}) );
-});
-
-// $(document).ready(function(){
-// 	// $.ajaxSetup({cache:false});
-// //initialize markers
-//   getPlaces();
-//   map.on('dragend', function(){
-//     var bounds = map.getCenter();
-// 	  replacePlaces(bounds);
-//   });
-// });
-
-// function getPlaces() {
-// 	var url = '/places.json?utf8=✓&query=&query_location=san+francisco';
-//   drawPlaces(url);
-// }
-
-// function replacePlaces(theBounds) {
-// 	places.clearLayers();
-//   var url = '/places?lng=' + theBounds.lng +
-//                          '&lat=' + theBounds.lat;
-//                          drawPlaces(url);
-
-//   $.ajax({
-//       type: 'GET',
-//       url: 'places',
-//       dataType: 'json',
-//       data: "lat=" + theBounds.lat + "&lng=" + theBounds.lng,
-//       success: function (data) {
-//       	console.log(data);
-//       }
-//     });
-//   drawPlaces(url);
-//   // location.href = url;
-// }
 
 // function getURLParameter(name) {
 //     return decodeURI(
@@ -138,23 +64,181 @@ map.addControl( new L.Control.Search({searchCall: searchByAjax, text:'Color...'}
 // }
 // console.log(getURLParameter(name));
 
-// function drawPlaces(u) {
-// 	$.getJSON(u, function (data) {
+
+// function getParameter(paramName) {
+//   var searchString = window.location.search.substring(1),
+//       i, val, params = searchString.split("&");
+
+//   for (i=0;i<params.length;i++) {
+//     val = params[i].split("=");
+//     if (val[0] == paramName) {
+//       return unescape(val[1]);
+//     }
+//   }
+//   return null;
+// }
+// var placeLat = getParameter('lat');
+// var placeLng = getParameter('lng');
+
+
+map = L.map('map', {
+	scrollWheelZoom:false,
+	layers: [tileLayer, places],
+	zoomControl: false,
+  maxZoom: 16,
+  keyboard: false
+}).setView([37.7750, -122.4183], 14);
+var zoomControl = new L.Control.Zoom({position: 'topright'}).addTo(map);
+
+function markerFromDB() {
+<% @places.each do |place| %>
+    var lat = <%= place.latitude %>;
+    var lng = <%= place.longitude %>;
+       addMarker(lat, lng);
+<% end %>
+}
+
+function addMarker(lat, lng) {
+  var location = new L.LatLng(lat, lng);
+  var marker = new L.marker(location);
+  places.addLayer(marker);
+}
+$(document).ready(function() {
+  markerFromDB();
+  var sw_x = places.getBounds().getSouthWest().lat  -.01;
+  var sw_y = places.getBounds().getSouthWest().lng -.01;
+  var ne_x = places.getBounds().getNorthEast().lat;
+  var ne_y = places.getBounds().getNorthEast().lng  -.01;
+  map.fitBounds([[sw_x, sw_y], [ne_x, ne_y]]);
+});
+
+// function drawItems(theBounds) {
+//   var url = '/places.json/?lat=' + theBounds.lat +
+//                          '&lng=' + theBounds.lng;
+//   places.clearLayers();
+//   $.get(url, function(data) {
+//       console.log(data);
+//       for (var i = 0; i < data.length; i++) {
+//         var location = new L.LatLng(data[i].latitude, data[i].longitude);
+//         var marker = new L.marker(location);
+//         places.addLayer(marker);
+//       }
+//   });
+
+// }
+// $(document).ready(function() {
+//   map.on('dragend', function(){
+//     var bounds = map.getCenter();
+//     drawItems(bounds);
+//   });
+// });
+
+
+// $(document).ready(function(){
+//  // $.ajaxSetup({cache:false});
+// //initialize markers
+// var bounds = map.getCenter();
+//   // getPlaces(bounds);
+//   markerFromDB();
+//   map.on('dragend', function(){
+//    replacePlaces();
+//   });
+// });
+
+// function getPlaces(theBounds) {
+//  var url = "/places?lat=" + theBounds.lat + "&lng=" + theBounds.lng;
+//   $.getJSON(url, function (data) {
 //     for (var i = 0; i < data.length; i++) {
 //       var location = new L.LatLng(data[i].latitude, data[i].longitude);
 //       var name = data[i].business_name;
 //       var marker = new L.marker(location);
 //       places.addLayer(marker);
 //     }
-//    	$.each(data, function(i) {
-// 		    // console.log(data[i].business_name);
-// 		    // return(data[i].business_name);
+//      $.each(data, function(i) {
+//        // console.log(data[i].business_name);
+//        // return(data[i].business_name);
 //     });
+//   });
+// }
 
+// function markerFromDB() {
+// <% @places.each do |place| %>
+//     var lat = <%= place.latitude %>;
+//     var lng = <%= place.longitude %>;
+//     addMarker(lat, lng);
+// <% end %>
+// }
+
+// function addMarker(lat, lng) {
+//   var location = new L.LatLng(lat, lng);
+//   var marker = new L.marker(location);
+//   places.addLayer(marker);
+// }
+
+// function replacePlaces() {
+//    var theBounds = map.getCenter();
+//   places.clearLayers();
+
+// // //   // // var url = '/places?' + $('form').serialize();
+//   var url = "/places?lat=" + theBounds.lat + "&lng=" + theBounds.lng;
+// // //   var uri = "/places.json?lat=" + theBounds.lat + "&lng=" + theBounds.lng;
+// //   $.ajax({
+
+// //       type: 'GET',
+// //       url: 'places',
+// //       dataType: 'json',
+// //       data: "lat=" + theBounds.lat + "&lng=" + theBounds.lng,
+// //       success: function (data) {
+// //       console.log(data);
+// //       }
+// //     });
+// //   $.getJSON(url, function (data) {
+// //     for (var i = 0; i < data.length; i++) {
+// //       var location = new L.LatLng(data[i].latitude, data[i].longitude);
+// //       var name = data[i].business_name;
+// //       var marker = new L.marker(location);
+// //       places.addLayer(marker);
+// //     }
+// //      $.each(data, function(i) {
+// //        // console.log(data[i].business_name);
+// //        // return(data[i].business_name);
+// //     });
+
+// //   });
+//   location.href = url;
+// }
+
+
+
+/* Leaflet-Ajax-Search */
+
+// function searchByAjax(text) { //definition of callback for syncronous ajax serching
+
+//   var resultsraw = {},
+//     results = {};
+
+//   $.ajax({
+//     url: 'places',  //read comments in search.php for more information usage
+//     async: false,   //must be syncronous request! or not return ajax results
+//     type: 'GET',
+//     data: {q : text},
+//     dataType: 'json',
+//     success: function(json) {
+//       if(json)
+//         resultsraw = json;
+//     }
 //   });
 
+//   for(i in resultsraw)  //reformatting results in key,value
+//     results[ resultsraw[i].business_name ] = [resultsraw[i].latitude, resultsraw[i].longitude] ;
 
+//   return results;
 // }
+// $(document).ready(function(){
+// map.addControl( new L.Control.Search({searchCall: searchByAjax, text:'Place...'}) );
+// });
+
+
 
 
 /* WITHOUT REFRESH
@@ -220,6 +304,158 @@ function drawPlaces(u) {
 
 }
 */
+
+
+    // var gLocalSearch;
+    // var gInfoWindow;
+    // var gSelectedResults = [];
+    // var gCurrentResults = [];
+    // var gSearchForm;
+
+    // // Create our "tiny" marker icon
+    // var gYellowIcon = new L.icon({
+    //   iconUrl: "http://labs.google.com/ridefinder/images/mm_20_yellow.png"});
+    // var gRedIcon = new L.icon({
+    //   iconUrl:"http://labs.google.com/ridefinder/images/mm_20_red.png"});
+
+    //  // Set up the map and the local searcher.
+    // function OnLoad() {
+
+    //   // Initialize the local searcher
+    //   gLocalSearch = new GlocalSearch();
+    //   gLocalSearch.setSearchCompleteCallback(null, OnLocalSearch);
+    // }
+
+    // function unselectMarkers() {
+    //   for (var i = 0; i < gCurrentResults.length; i++) {
+    //     gCurrentResults[i].unselect();
+    //   }
+    // }
+
+    // function doSearch() {
+    //   var query = document.getElementById("queryInput").value;
+    //   gLocalSearch.setView(map.getCenter());
+    //   gLocalSearch.execute(query);
+    // }
+
+    // // Called when Local Search results are returned, we clear the old
+    // // results and load the new ones.
+    // function OnLocalSearch() {
+    //   if (!gLocalSearch.results) return;
+    //   var searchWell = document.getElementById("searchwell");
+
+    //   // Clear the map and the old search well
+    //   searchWell.innerHTML = "";
+    //   for (var i = 0; i < gCurrentResults.length; i++) {
+    //     gCurrentResults[i].marker().setMap(null);
+    //   }
+    //   // Close the infowindow
+    //   gInfoWindow.close();
+
+    //   gCurrentResults = [];
+    //   for (var i = 0; i < gLocalSearch.results.length; i++) {
+    //     gCurrentResults.push(new LocalResult(gLocalSearch.results[i]));
+    //   }
+
+    //   var attribution = gLocalSearch.getAttribution();
+    //   if (attribution) {
+    //     document.getElementById("searchwell").appendChild(attribution);
+    //   }
+
+    //   // Move the map to the first result
+    //   var first = gLocalSearch.results[0];
+    //   map.setView(new map.LatLng(parseFloat(first.latitude),
+    //                                         parseFloat(first.longitude)));
+
+    // }
+
+    // // Cancel the form submission, executing an AJAX Search API search.
+    // function CaptureForm(searchForm) {
+    //   gLocalSearch.execute(searchForm.input.value);
+    //   return false;
+    // }
+
+
+
+    // // A class representing a single Local Search result returned by the
+    // // Google AJAX Search API.
+    // function LocalResult(result) {
+    //   var me = this;
+    //   me.result_ = result;
+    //   me.resultNode_ = me.node();
+    //   me.marker_ = me.marker();
+    //   google.maps.event.addDomListener(me.resultNode_, 'mouseover', function() {
+    //     // Highlight the marker and result icon when the result is
+    //     // mouseovered.  Do not remove any other highlighting at this time.
+    //     me.highlight(true);
+    //   });
+    //   google.maps.event.addDomListener(me.resultNode_, 'mouseout', function() {
+    //     // Remove highlighting unless this marker is selected (the info
+    //     // window is open).
+    //     if (!me.selected_) me.highlight(false);
+    //   });
+    //   google.maps.event.addDomListener(me.resultNode_, 'click', function() {
+    //     me.select();
+    //   });
+    //   document.getElementById("searchwell").appendChild(me.resultNode_);
+    // }
+
+    // LocalResult.prototype.node = function() {
+    //   if (this.resultNode_) return this.resultNode_;
+    //   return this.html();
+    // };
+
+    // // Returns the GMap marker for this result, creating it with the given
+    // // icon if it has not already been created.
+    // LocalResult.prototype.marker = function() {
+    //   var me = this;
+    //   if (me.marker_) return me.marker_;
+    //   var marker = me.marker_ = new google.maps.Marker({
+    //     position: new google.maps.LatLng(parseFloat(me.result_.lat),
+    //                                      parseFloat(me.result_.lng)),
+    //     icon: gYellowIcon, shadow: gSmallShadow, map: gMap});
+    //   google.maps.event.addListener(marker, "click", function() {
+    //     me.select();
+    //   });
+    //   return marker;
+    // };
+
+    // // Unselect any selected markers and then highlight this result and
+    // // display the info window on it.
+    // LocalResult.prototype.select = function() {
+    //   unselectMarkers();
+    //   this.selected_ = true;
+    //   this.highlight(true);
+    //   gInfoWindow.setContent(this.html(true));
+    //   gInfoWindow.open(gMap, this.marker());
+    // };
+
+    // LocalResult.prototype.isSelected = function() {
+    //   return this.selected_;
+    // };
+
+    // // Remove any highlighting on this result.
+    // LocalResult.prototype.unselect = function() {
+    //   this.selected_ = false;
+    //   this.highlight(false);
+    // };
+
+    // // Returns the HTML we display for a result before it has been "saved"
+    // LocalResult.prototype.html = function() {
+    //   var me = this;
+    //   var container = document.createElement("div");
+    //   container.className = "unselected";
+    //   container.appendChild(me.result_.html.cloneNode(true));
+    //   return container;
+    // }
+
+    // LocalResult.prototype.highlight = function(highlight) {
+    //   this.marker().setOptions({icon: highlight ? gRedIcon : gYellowIcon});
+    //   this.node().className = "unselected" + (highlight ? " red" : "");
+    // }
+
+    // GSearch.setOnLoadCallback(OnLoad);
+
 </script>
 <% end %>
 

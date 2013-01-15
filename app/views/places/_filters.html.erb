@@ -1,7 +1,7 @@
 
 <ul class="nav">
-  <li><%= link_to("Most Buzz", {:query => params[:query], :query_location => params[:query_location], :sort => "#"}) %></li>
-  <li><%= link_to("Most Followed", {:query => params[:query], :query_location => params[:query_location], :sort => "followers"}) %></li>
+  <li><%# link_to("Most Buzz", {:query => params[:query], :query_location => params[:query_location], :sort => "#"}) %></li>
+  <li><%# link_to("Most Followed", {:query => params[:query], :query_location => params[:query_location], :sort => "followers"}) %></li>
   <li><%= link_to("Most Recent", {:query => params[:query], :query_location => params[:query_location], :sort => "recent"}) %></li>
 
   <li class="dropdown">
@@ -23,13 +23,16 @@
       <%# text_field_tag :lat, params[:lat], :placeholder => "Latitude" %>
       <%# text_field_tag :lng, params[:lng], :placeholder => "Longitude" %>
 
-      <%= submit_tag "Search", :name => nil, :class => "btn" %>
+      <button type="submit" class="btn">
+        <i class="icon-search"></i>
+      </button>
     <% end %></li>
 
 </ul>
 
 <ul class="nav pull-right">
-  <li><button class="grid btn">Grid View</button></li>
-  <li><button class="list btn">List View</button></li>
+  <li><button class="btn" id="mapSearch">Search Area</button></li>
+  <li><button class="grid btn"><i class="icon-th"></i></button></li>
+  <li><button class="list btn"><i class="icon-align-justify"></i></button></li>
 </ul>
 

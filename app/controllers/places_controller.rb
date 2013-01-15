@@ -3,21 +3,23 @@ class PlacesController < ApplicationController
 
   def index
     if params[:query_location].present?
-      @places = Place.near(params[:query_location], 0.5, :order => :distance)
+      @places = Place.near(params[:query_location], 1, :order => :distance)
     # if params[:query_location].present?
-
     elsif params[:query].present?
       @places = Place.where("business_name @@ :q", q: params[:query])
     else
+      # bounds = [params[:sw_x].to_f, params[:sw_y].to_f, params[:ne_x].to_f, params[:ne_y].to_f]
       # center_point = [params[:lat].to_f, params[:lng].to_f]
       # box = Geocoder::Calculations.bounding_box(center_point, 1)
-      # @places = Place.within_bounding_box(box).limit(10)
+      # @places = Place.within_bounding_box(box).limit(40)
       @places = Place.all
+
     end
-    @places = Kaminari.paginate_array(@places).page(params[:page]).per(20)
+      @places = Kaminari.paginate_array(@places).page(params[:page]).per(12)
     respond_to do |format|
       format.html
       format.json { render json: @places }
+      format.js
     end
   end
 =begin

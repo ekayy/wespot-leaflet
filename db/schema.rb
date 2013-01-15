@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130112212139) do
+ActiveRecord::Schema.define(:version => 20130112212140) do
 
   create_table "articles", :force => true do |t|
     t.integer  "place_id"
     t.string   "url"
     t.string   "title"
-    t.string   "snippet"
+    t.text     "snippet"
     t.string   "image"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20130112212139) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "gmaps"
+    t.text     "promo"
     t.string   "slug"
     t.string   "twitter_id"
     t.string   "yelp_id"

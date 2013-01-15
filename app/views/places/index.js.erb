@@ -1,0 +1,6 @@
+
+
+$('#container').html('<%= escape_javascript render("box") %>');
+$('#paginator').html('<%= escape_javascript(paginate(@places, :remote => true).to_s) %>');
+
+

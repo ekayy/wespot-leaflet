@@ -1,9 +1,9 @@
 Wespot::Application.routes.draw do
 
+
   authenticated :user do
     root :to => "admin/dashboard#index"
   end
-  root :to => "places#index"
 
   resources :relationships, only: [:create, :destroy]
 
@@ -33,8 +33,5 @@ Wespot::Application.routes.draw do
     resources :places
     resources :logos
 	end
-
-
-
-
+  root :to => "places#index"
 end

@@ -21,6 +21,21 @@ body { font-size:13px;background:#eee;}
   padding-right:13px;
 }
 
+#paginator {
+  position:relative;
+  bottom: -30px;
+  float: left;
+  margin-bottom: 40px;
+  left: 40px;
+}
+.pagination {
+  // left: -9999px;
+ background-color: #fff;
+ box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+ padding: 4px 12px;
+}
+
+
 /* miscellaneous */
 
 .debug_dump {
@@ -28,13 +43,6 @@ body { font-size:13px;background:#eee;}
   float: left;
   width: 100%;
   margin-top: 45px;
-}
-
-.pagination {
-  position:relative;
-  // left: -9999px;
-  left:90px;
-  width:200px;
 }
 
 th .current {
@@ -290,9 +298,9 @@ th .desc {
   // margin: 0 auto;
   overflow:auto;
   // background:white;
-  padding:0 20px;
-  border-left:  2px solid #DDD;
-  border-right: 2px solid #DDD;
+  padding:0 10px;
+  // border-left:  2px solid #DDD;
+  // border-right: 2px solid #DDD;
 }
 
 .col3 {
@@ -338,20 +346,30 @@ th .desc {
   overflow:hidden;
   margin-bottom:10px;
 }
-.dishItem {
+.spanContainer {
+  background:white;
+  border-radius:15px;
+  box-shadow:  0 1px 3px rgba(34,25,25,0.4);
+  padding: 10px;
+}
+.dishList {
   // padding: 10px;
-  margin: 0 5px 10px 0;
-  font-size: 13px;
-  line-height: 1.5;
+
   // background:white;
-  list-style: none;
+    margin: 0 5px 10px 0;
   // box-shadow:  0 1px 3px rgba(34,25,25,0.4);
   overflow:hidden;
-  border-bottom: 2px solid #DDD;
+
   li {
 
+  font-size: 13px;
+  line-height: 1.5;
+    list-style: none;
+    overflow:hidden;
+    border-bottom: 2px solid rgba(0,0,0,.1);
     margin: 0;
   }
+  li:last-child{ border-bottom:none;}
 }
 .showImage {
       float:left;
@@ -450,3 +468,15 @@ th .desc {
   right: 10px;
 }
 
+.leaflet-div-icon {
+  background: transparent;
+  border: none;
+}
+
+.leaflet-marker-icon .number{
+  position: relative;
+  top: -37px;
+  font-size: 12px;
+  width: 25px;
+  text-align: center;
+}
